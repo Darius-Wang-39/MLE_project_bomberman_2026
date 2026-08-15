@@ -1,0 +1,25 @@
+{
+  "agent": "dueling_ddqn_agent",
+  "checkpoint": "experiments/checkpoints/day3_ddqn_coin_2539_updates.pt",
+  "curriculum": "coin-heaven",
+  "training": {
+    "initial_smoke_rounds": 3,
+    "initial_smoke_seed": 2101,
+    "rounds": 30,
+    "seed": 2102,
+    "environment_steps": 12160,
+    "learner_updates": 2539
+  },
+  "evaluation": {
+    "scenario": "coin-heaven",
+    "seed": 8102,
+    "rounds": 20,
+    "mean_score": 50.0,
+    "coins_per_round": 50.0,
+    "mean_steps": 125.5,
+    "suicides_per_round": 0.0,
+    "invalid_actions_per_round": 0.0,
+    "mean_action_ms": 2.572634115637061
+  },
+  "notes": "First locked-seed DDQN check after the coin-heaven curriculum; all 20 rounds collected every coin."
+}

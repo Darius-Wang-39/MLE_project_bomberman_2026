@@ -29,7 +29,9 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    are recorded for Task 2; multi-seed confirmation remains.
 3. Implement the Dueling Double DQN, five-step prioritized replay, Double-DQN
    target updates, symmetry augmentation, and unit tests. The complete callback,
-   checkpoint, and reload path has passed a three-round smoke training run.
+   checkpoint, and reload path has passed a three-round smoke training run. A
+   subsequent 30-round `coin-heaven` curriculum collected all 50 coins in every
+   round of a 20-round locked-seed evaluation with zero invalid actions.
 4. Train the DDQN curriculum and compare against uniform one-step replay.
 5. Generate rule-agent demonstrations and test behaviour-cloning/replay warm
    starts.
