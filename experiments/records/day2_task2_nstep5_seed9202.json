@@ -1,0 +1,26 @@
+{
+  "date": "2026-08-15",
+  "agent": "linear_q_agent",
+  "variant": "five_step_q_learning",
+  "model_updates": 61973,
+  "training": {
+    "scenario": "classic",
+    "seed": 1203,
+    "rounds": 100,
+    "coins_per_round": 2.89,
+    "crates_per_round": 41.4,
+    "suicides_per_round": 0.0
+  },
+  "evaluation": {
+    "scenario": "classic",
+    "seed": 9202,
+    "rounds": 20,
+    "coins_per_round": 3.4,
+    "crates_per_round": 42.85,
+    "bombs_per_round": 20.25,
+    "suicides_per_round": 0.0,
+    "invalid_actions_per_round": 0.0,
+    "mean_action_ms": 1.9244449734687805
+  },
+  "interpretation": "Five-step returns fixed the greedy no-bomb collapse on this held-out seed and propagated delayed crate/coin rewards to bomb placement. More seeds are required before treating this as a stable estimate."
+}

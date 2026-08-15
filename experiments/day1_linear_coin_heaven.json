@@ -1,0 +1,8 @@
+{
+  "agent": "linear_q_agent",
+  "scenario": "coin-heaven",
+  "training_rounds": 1000,
+  "training_seeds": [1101, 1102, 1103],
+  "evaluation_seeds": [9101, 9102, 9103, 9104, 9105],
+  "notes": "Day 1 smoke-test configuration; extend after the training loop is validated."
+}

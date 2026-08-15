@@ -1,0 +1,23 @@
+{
+  "date": "2026-08-15",
+  "agent": "linear_q_agent",
+  "variant": "one_step_q_learning",
+  "model_updates": 61973,
+  "training": {
+    "scenario": "classic",
+    "seed": 1202,
+    "rounds": 100,
+    "coins_per_round": 1.83,
+    "crates_per_round": 24.13,
+    "suicides_per_round": 0.0
+  },
+  "evaluation": {
+    "scenario": "classic",
+    "seed": 9201,
+    "rounds": 20,
+    "coins_per_round": 0.0,
+    "crates_per_round": 0.0,
+    "suicides_per_round": 0.0
+  },
+  "interpretation": "The exploratory training policy dropped bombs, but the greedy policy collapsed to never bombing. One-step credit assignment did not connect delayed explosion rewards to BOMB strongly enough."
+}
