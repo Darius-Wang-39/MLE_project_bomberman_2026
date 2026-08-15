@@ -1,0 +1,26 @@
+{
+  "agent": "dueling_ddqn_agent",
+  "checkpoint": "experiments/checkpoints/day4_ddqn_classic_5296_updates.pt",
+  "curriculum": "classic_single_agent",
+  "training": {
+    "rounds": 30,
+    "seed": 2201,
+    "starting_checkpoint": "experiments/checkpoints/day3_ddqn_coin_2539_updates.pt",
+    "environment_steps": 24190,
+    "learner_updates": 5296
+  },
+  "evaluation": {
+    "scenario": "classic",
+    "seed": 8201,
+    "rounds": 20,
+    "mean_score": 8.65,
+    "coins_per_round": 8.65,
+    "crates_per_round": 119.5,
+    "bombs_per_round": 47.8,
+    "mean_steps": 393.2,
+    "suicides_per_round": 0.0,
+    "invalid_actions_per_round": 0.0,
+    "mean_action_ms": 1.5881372007445669
+  },
+  "notes": "Greedy policy transferred from coin collection to bomb placement and escape without collapsing; round completion efficiency remains a target."
+}

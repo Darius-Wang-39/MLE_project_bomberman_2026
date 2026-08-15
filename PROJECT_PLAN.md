@@ -32,7 +32,10 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    checkpoint, and reload path has passed a three-round smoke training run. A
    subsequent 30-round `coin-heaven` curriculum collected all 50 coins in every
    round of a 20-round locked-seed evaluation with zero invalid actions.
-4. Train the DDQN curriculum and compare against uniform one-step replay.
+4. Train the DDQN curriculum and compare against uniform one-step replay. The
+   first 30-round single-agent `classic` stage averaged 119.5 destroyed crates
+   and 8.65 coins on a 20-round held-out seed, with zero suicides and invalid
+   actions; opponent pressure and round efficiency remain untested.
 5. Generate rule-agent demonstrations and test behaviour-cloning/replay warm
    starts.
 6. Train the bomb-and-escape curriculum against `peaceful_agent` and
