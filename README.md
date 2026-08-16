@@ -3,6 +3,10 @@
 Team repository for the Heidelberg MLE project and competition, based on the
 official `bomberman_rl` framework.
 
+All team members must record meaningful updates in
+[CHANGELOG.md](CHANGELOG.md) using the date/change/method/result format before
+pushing or merging them.
+
 ## Agents
 
 - `linear_q_agent`: fast, interpretable linear Q-learning baseline with exact
