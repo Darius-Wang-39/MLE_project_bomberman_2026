@@ -14,6 +14,23 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 11 — endgame anti-stall candidate (in progress)
+
+- **Change:** Started a separate candidate from the exact Day 7 checkpoint,
+  added opponent pursuit to target-free endgame shaping, strengthened the wait
+  penalty, and added a safe endgame revisit penalty. The frozen submission
+  checkpoint remains available as `frozen_ddqn_day7` for fair comparisons.
+- **Method:** Positive closeness potentials preserve the coin-then-crate
+  curriculum and activate opponent distance only when both objectives are gone.
+  Revisit penalties use an eight-position training history and are disabled
+  while bombs or explosions require evasive movement. Added focused unit tests
+  and a two-stage, seed-separated endgame/retention curriculum configuration.
+- **Result:** All 16 tests pass. The baseline adapter and Day 7 checkpoint both
+  have SHA-256 `FAC0332C3E3737B25AB2706726A734B88FD6C592677A9C6C75305D39BBF31760`.
+  Training and locked evaluation are in progress; the submission archive has
+  not been replaced.
+- **Commit:** this commit
+
 ### Local Docker preparation and visual match launcher
 
 - **Change:** Downloaded the official Docker Desktop installer to the D drive,

@@ -1,0 +1,26 @@
+{
+  "experiment": "day11_endgame_curriculum",
+  "starting_checkpoint": "experiments/checkpoints/day7_ddqn_checkpoint_pool.pt",
+  "stages": [
+    {
+      "name": "empty_hunt",
+      "seed": 6501,
+      "rounds": 60,
+      "scenario": "empty",
+      "opponents": ["peaceful_agent", "rule_based_agent", "rule_based_agent"]
+    },
+    {
+      "name": "classic_retention",
+      "seed": 6502,
+      "rounds": 60,
+      "scenario": "classic",
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"]
+    }
+  ],
+  "evaluation": {
+    "seed": 9501,
+    "rounds_per_candidate": 30,
+    "scenario": "classic",
+    "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"]
+  }
+}

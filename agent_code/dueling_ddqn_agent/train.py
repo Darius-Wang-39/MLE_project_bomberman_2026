@@ -31,6 +31,8 @@ TRAIN_EVERY = 4
 LEARNING_RATE = 3e-4
 TAU = 0.005
 SHAPING_SCALE = 0.5
+HUNT_REVISIT_PENALTY = -0.12
+HUNT_HISTORY_LENGTH = 8
 PRIORITY_BETA_START = 0.4
 PRIORITY_BETA_STEPS = 250_000
 
@@ -39,7 +41,7 @@ EVENT_REWARDS = {
     e.MOVED_RIGHT: -0.02,
     e.MOVED_UP: -0.02,
     e.MOVED_DOWN: -0.02,
-    e.WAITED: -0.05,
+    e.WAITED: -0.15,
     e.INVALID_ACTION: -2.0,
     e.BOMB_DROPPED: -0.02,
     e.CRATE_DESTROYED: 0.8,
@@ -64,6 +66,37 @@ def setup_training(self):
     self.replay = PrioritizedReplayBuffer(REPLAY_CAPACITY)
     self.n_step_buffer = deque()
     self.replay_rng = np.random.default_rng()
+    self.position_history = deque(maxlen=HUNT_HISTORY_LENGTH)
+    self.history_round = None
+
+
+def _hunt_stall_penalty(self, old_game_state, new_game_state) -> float:
+    """Penalize repeated safe positions only after coins and crates are gone."""
+    if new_game_state is None:
+        return 0.0
+
+    round_id = old_game_state["round"]
+    old_position = tuple(old_game_state["self"][-1])
+    new_position = tuple(new_game_state["self"][-1])
+    if self.history_round != round_id:
+        self.position_history.clear()
+        self.position_history.append(old_position)
+        self.history_round = round_id
+
+    hunt_phase = (
+        not old_game_state["coins"]
+        and not np.any(old_game_state["field"] == 1)
+        and bool(old_game_state["others"])
+    )
+    in_danger = (
+        bool(old_game_state["bombs"])
+        or old_game_state["explosion_map"][old_position] > 0
+    )
+    visits = list(self.position_history).count(new_position)
+    self.position_history.append(new_position)
+    if not hunt_phase or in_danger or visits == 0:
+        return 0.0
+    return HUNT_REVISIT_PENALTY * min(visits, 3)
 
 
 def _reward(self, old_game_state, new_game_state, events: List[str]) -> float:
@@ -72,7 +105,7 @@ def _reward(self, old_game_state, new_game_state, events: List[str]) -> float:
         GAMMA * self.feature_extractor.state_potential(new_game_state)
         - self.feature_extractor.state_potential(old_game_state)
     )
-    return event_reward + shaping
+    return event_reward + shaping + _hunt_stall_penalty(self, old_game_state, new_game_state)
 
 
 def _emit_n_step(self, count: int):
@@ -207,4 +240,3 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     temporary = Path(MODEL_FILE + ".tmp")
     torch.save(checkpoint, temporary)
     temporary.replace(MODEL_FILE)
-

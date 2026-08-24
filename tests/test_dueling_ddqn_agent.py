@@ -1,14 +1,17 @@
 import unittest
+from collections import deque
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 
 import numpy as np
 import torch
 
 from agent_code.dueling_ddqn_agent.callbacks import INPUT_DIM
-from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES
+from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES, FeatureExtractor
 from agent_code.dueling_ddqn_agent.model import DuelingQNetwork
 from agent_code.dueling_ddqn_agent.replay import PrioritizedReplayBuffer, Transition
+from agent_code.dueling_ddqn_agent.train import HUNT_REVISIT_PENALTY, _hunt_stall_penalty
 from agent_code.dueling_ddqn_agent.symmetry import (
     D4_TRANSFORMS,
     transform_action_features,
@@ -18,7 +21,59 @@ from agent_code.dueling_ddqn_agent.symmetry import (
 from tools.pretrain_behavior_clone import load_demonstrations, split_rounds
 
 
+def sample_state():
+    field = np.zeros((17, 17), dtype=int)
+    field[[0, -1], :] = -1
+    field[:, [0, -1]] = -1
+    return {
+        "round": 1,
+        "step": 1,
+        "field": field,
+        "self": ("me", 0, True, (2, 2)),
+        "others": [],
+        "bombs": [],
+        "coins": [],
+        "explosion_map": np.zeros_like(field, dtype=float),
+    }
+
+
 class DuelingDDQNTests(unittest.TestCase):
+    def test_endgame_potential_rewards_opponent_progress(self):
+        extractor = FeatureExtractor()
+        old_state = sample_state()
+        old_state["field"] = np.zeros((17, 17), dtype=int)
+        old_state["field"][[0, -1], :] = -1
+        old_state["field"][:, [0, -1]] = -1
+        old_state["coins"] = []
+        old_state["self"] = ("me", 0, True, (2, 2))
+        old_state["others"] = [("enemy", 0, True, (8, 2))]
+        new_state = dict(old_state)
+        new_state["self"] = ("me", 0, True, (3, 2))
+
+        self.assertGreater(extractor.state_potential(new_state), extractor.state_potential(old_state))
+
+    def test_hunt_stall_penalty_only_applies_to_recent_safe_revisit(self):
+        extractor = FeatureExtractor()
+        trainer = SimpleNamespace(
+            position_history=deque(maxlen=8),
+            history_round=None,
+            feature_extractor=extractor,
+        )
+        old_state = sample_state()
+        old_state["field"] = np.zeros((17, 17), dtype=int)
+        old_state["field"][[0, -1], :] = -1
+        old_state["field"][:, [0, -1]] = -1
+        old_state["coins"] = []
+        old_state["self"] = ("me", 0, True, (2, 2))
+        old_state["others"] = [("enemy", 0, True, (8, 2))]
+        new_state = dict(old_state)
+        new_state["self"] = ("me", 0, True, (3, 2))
+
+        self.assertEqual(_hunt_stall_penalty(trainer, old_state, new_state), 0.0)
+        back_state = dict(old_state)
+        back_state["self"] = ("me", 0, True, (2, 2))
+        self.assertEqual(_hunt_stall_penalty(trainer, new_state, back_state), HUNT_REVISIT_PENALTY)
+
     def test_network_output_shape(self):
         network = DuelingQNetwork(INPUT_DIM, len(ACTIONS))
         output = network(torch.zeros(3, INPUT_DIM))

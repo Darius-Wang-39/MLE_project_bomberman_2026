@@ -282,11 +282,33 @@ class FeatureExtractor:
         """State-only potential used for policy-invariant dense shaping."""
         if game_state is None:
             return 0.0
-        coin_map, crate_map, _ = self._target_maps(game_state)
+        coin_map, crate_map, opponent_map = self._target_maps(game_state)
         position = tuple(game_state["self"][-1])
-        coin_distance = coin_map[position]
-        crate_distance = crate_map[position]
-        target_distance = coin_distance if np.isfinite(coin_distance) else crate_distance
-        distance_term = 0.0 if not np.isfinite(target_distance) else -min(float(target_distance), 20.0) / 20.0
+
+        # Use a positive closeness potential so merely waiting at a target does
+        # not receive a positive shaping reward under gamma < 1. Coins remain
+        # the first objective, then crates, and opponents become the explicit
+        # objective only in the otherwise target-free endgame.
+        if game_state["coins"]:
+            target_distance = coin_map[position]
+            distance_scale = 20.0
+            target_weight = 1.0
+        elif np.any(game_state["field"] == 1):
+            target_distance = crate_map[position]
+            distance_scale = 20.0
+            target_weight = 1.0
+        elif game_state["others"]:
+            target_distance = opponent_map[position]
+            distance_scale = 30.0
+            target_weight = 2.0
+        else:
+            target_distance = np.inf
+            distance_scale = 1.0
+            target_weight = 0.0
+
+        distance_term = 0.0
+        if np.isfinite(target_distance):
+            closeness = 1.0 - min(float(target_distance), distance_scale) / distance_scale
+            distance_term = target_weight * closeness
         danger_term = -self._danger_score(game_state, position)
         return distance_term + danger_term
