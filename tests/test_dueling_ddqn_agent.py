@@ -7,7 +7,7 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 
-from agent_code.dueling_ddqn_agent.callbacks import INPUT_DIM
+from agent_code.dueling_ddqn_agent.callbacks import INPUT_DIM, migrate_policy_input
 from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES, FeatureExtractor
 from agent_code.dueling_ddqn_agent.model import DuelingQNetwork
 from agent_code.dueling_ddqn_agent.replay import PrioritizedReplayBuffer, Transition
@@ -38,6 +38,42 @@ def sample_state():
 
 
 class DuelingDDQNTests(unittest.TestCase):
+    def test_appended_center_feature_checkpoint_migration(self):
+        target = DuelingQNetwork(INPUT_DIM, len(ACTIONS)).state_dict()
+        new_feature_count = len(FEATURE_NAMES)
+        old_feature_count = new_feature_count - 1
+        old_width = len(ACTIONS) * old_feature_count
+        old = {key: value.clone() for key, value in target.items()}
+        old_weight = torch.arange(
+            target["encoder.0.weight"].shape[0] * old_width,
+            dtype=target["encoder.0.weight"].dtype,
+        ).reshape(target["encoder.0.weight"].shape[0], old_width)
+        old["encoder.0.weight"] = old_weight
+
+        migrated, changed = migrate_policy_input(old, target)
+
+        self.assertTrue(changed)
+        for action_index in range(len(ACTIONS)):
+            old_start = action_index * old_feature_count
+            new_start = action_index * new_feature_count
+            torch.testing.assert_close(
+                migrated["encoder.0.weight"][:, new_start : new_start + old_feature_count],
+                old_weight[:, old_start : old_start + old_feature_count],
+            )
+
+    def test_hunt_center_progress_prefers_entering_central_box(self):
+        extractor = FeatureExtractor()
+        state = sample_state()
+        state["self"] = ("me", 0, True, (2, 8))
+        state["others"] = [("enemy", 0, True, (8, 8))]
+        features = extractor.action_features(state)
+        center_index = FEATURE_NAMES.index("hunt_center_progress")
+
+        self.assertEqual(extractor.center_box_distance((2, 8)), 1)
+        self.assertEqual(extractor.center_box_distance((3, 8)), 0)
+        self.assertEqual(features[ACTIONS.index("RIGHT"), center_index], 1.0)
+        self.assertEqual(features[ACTIONS.index("LEFT"), center_index], -1.0)
+
     def test_endgame_potential_rewards_opponent_progress(self):
         extractor = FeatureExtractor()
         old_state = sample_state()

@@ -14,6 +14,22 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 12 — soft central 11x11 endgame preference (in progress)
+
+- **Change:** Added a tunable soft preference for the inclusive central box
+  `x,y in [3,13]`, active only after coins and crates are gone while opponents
+  remain. Frozen the promoted Day 11 checkpoint for paired comparison.
+- **Method:** Appended one D4-invariant action feature measuring progress toward
+  the central box and added a `0.20` center-closeness term to the endgame state
+  potential. Added automatic 17-to-18 feature checkpoint migration that copies
+  every old input weight into its corresponding action row and initializes only
+  the six new feature columns. Escape remains controlled by the six-step safety
+  mask; the center preference is not a hard movement restriction.
+- **Result:** All 18 tests pass, including exact old-weight migration and center
+  progress tests. Training and seed-separated evaluation are in progress; the
+  Day 11 submission remains recoverable and has not yet been replaced.
+- **Commit:** this commit
+
 ### Day 11 — endgame anti-stall candidate
 
 - **Change:** Started a separate candidate from the exact Day 7 checkpoint,

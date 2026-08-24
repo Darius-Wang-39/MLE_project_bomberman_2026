@@ -1,0 +1,32 @@
+{
+  "experiment": "day12_center_hunt",
+  "starting_checkpoint": "experiments/checkpoints/day11_endgame_candidate.pt",
+  "center_box": {
+    "min_coordinate": 3,
+    "max_coordinate": 13,
+    "width": 11,
+    "potential_weight": 0.2
+  },
+  "stages": [
+    {
+      "name": "empty_center_hunt",
+      "seed": 6601,
+      "rounds": 40,
+      "scenario": "empty",
+      "opponents": ["peaceful_agent", "rule_based_agent", "rule_based_agent"]
+    },
+    {
+      "name": "classic_center_retention",
+      "seed": 6602,
+      "rounds": 40,
+      "scenario": "classic",
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"]
+    }
+  ],
+  "evaluation": {
+    "seed": 9601,
+    "rounds_per_candidate": 30,
+    "scenario": "classic",
+    "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"]
+  }
+}

@@ -18,6 +18,9 @@ MOVE_DELTAS = {
     "BOMB": (0, 0),
 }
 CARDINAL_DELTAS = tuple(MOVE_DELTAS[action] for action in ACTIONS[:4])
+HUNT_CENTER_MIN = 3
+HUNT_CENTER_MAX = 13
+HUNT_CENTER_WEIGHT = 0.20
 
 FEATURE_NAMES = (
     "bias",
@@ -37,6 +40,7 @@ FEATURE_NAMES = (
     "local_freedom",
     "wait_in_danger",
     "late_round_bomb",
+    "hunt_center_progress",
 )
 
 
@@ -51,11 +55,23 @@ class FeatureExtractor:
     absolute direction or directly returns a hand-written best action.
     """
 
-    def __init__(self, bomb_power: int = 3, bomb_timer: int = 4, explosion_duration: int = 2, horizon: int = 6):
+    def __init__(
+        self,
+        bomb_power: int = 3,
+        bomb_timer: int = 4,
+        explosion_duration: int = 2,
+        horizon: int = 6,
+        hunt_center_min: int = HUNT_CENTER_MIN,
+        hunt_center_max: int = HUNT_CENTER_MAX,
+        hunt_center_weight: float = HUNT_CENTER_WEIGHT,
+    ):
         self.bomb_power = bomb_power
         self.bomb_timer = bomb_timer
         self.explosion_duration = explosion_duration
         self.horizon = horizon
+        self.hunt_center_min = hunt_center_min
+        self.hunt_center_max = hunt_center_max
+        self.hunt_center_weight = hunt_center_weight
 
     @property
     def feature_count(self) -> int:
@@ -237,6 +253,20 @@ class FeatureExtractor:
         )
         return free / 4.0
 
+    def _hunt_phase(self, game_state: Dict) -> bool:
+        return (
+            not game_state["coins"]
+            and not np.any(game_state["field"] == 1)
+            and bool(game_state["others"])
+        )
+
+    def center_box_distance(self, position: Tuple[int, int]) -> int:
+        """Manhattan distance to the inclusive central 11x11 box."""
+        x, y = position
+        dx = max(self.hunt_center_min - x, 0, x - self.hunt_center_max)
+        dy = max(self.hunt_center_min - y, 0, y - self.hunt_center_max)
+        return int(dx + dy)
+
     def action_features(self, game_state: Dict) -> np.ndarray:
         legal = self.legal_action_mask(game_state)
         survival = np.array(
@@ -248,6 +278,8 @@ class FeatureExtractor:
         current = tuple(game_state["self"][-1])
         current_danger = self._danger_score(game_state, current)
         late_round = min(float(game_state.get("step", 1)) / 400.0, 1.0)
+        hunt_phase = self._hunt_phase(game_state)
+        current_center_distance = self.center_box_distance(current)
         features = np.zeros((len(ACTIONS), self.feature_count), dtype=np.float64)
 
         blast = self.blast_tiles(field, current)
@@ -276,6 +308,11 @@ class FeatureExtractor:
             row[14] = self._local_freedom(game_state, target) if legal[index] else 0.0
             row[15] = float(action == "WAIT") * current_danger
             row[16] = float(action == "BOMB") * late_round
+            row[17] = (
+                float(current_center_distance - self.center_box_distance(target))
+                if legal[index] and hunt_phase
+                else 0.0
+            )
         return features
 
     def state_potential(self, game_state: Dict | None) -> float:
@@ -289,6 +326,7 @@ class FeatureExtractor:
         # not receive a positive shaping reward under gamma < 1. Coins remain
         # the first objective, then crates, and opponents become the explicit
         # objective only in the otherwise target-free endgame.
+        hunt_phase = self._hunt_phase(game_state)
         if game_state["coins"]:
             target_distance = coin_map[position]
             distance_scale = 20.0
@@ -297,7 +335,7 @@ class FeatureExtractor:
             target_distance = crate_map[position]
             distance_scale = 20.0
             target_weight = 1.0
-        elif game_state["others"]:
+        elif hunt_phase:
             target_distance = opponent_map[position]
             distance_scale = 30.0
             target_weight = 2.0
@@ -310,5 +348,16 @@ class FeatureExtractor:
         if np.isfinite(target_distance):
             closeness = 1.0 - min(float(target_distance), distance_scale) / distance_scale
             distance_term = target_weight * closeness
+        center_term = 0.0
+        if hunt_phase:
+            playable_max_x = game_state["field"].shape[0] - 2
+            playable_max_y = game_state["field"].shape[1] - 2
+            max_dx = max(self.hunt_center_min - 1, playable_max_x - self.hunt_center_max)
+            max_dy = max(self.hunt_center_min - 1, playable_max_y - self.hunt_center_max)
+            max_center_distance = max(max_dx + max_dy, 1)
+            center_closeness = 1.0 - min(
+                self.center_box_distance(position), max_center_distance
+            ) / float(max_center_distance)
+            center_term = self.hunt_center_weight * center_closeness
         danger_term = -self._danger_score(game_state, position)
-        return distance_term + danger_term
+        return distance_term + center_term + danger_term
