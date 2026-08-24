@@ -14,6 +14,25 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 8 — locked built-in-opponent evaluation suite
+
+- **Change:** Added a configurable, resumable locked-suite runner and evaluated
+  the Day 7 candidate for 20 rounds each against peaceful, coin-collector,
+  rule-based, random, fail, and mixed lineups. Raw stats and the aggregate report
+  are committed.
+- **Method:** Each lineup has its own fixed seed and output file. The runner
+  builds explicit framework commands, validates three opponents, resumes only
+  completed outputs, and aggregates with the same metric implementation used by
+  earlier experiments. Only the intentionally crashing `fail_agent` lineup uses
+  `--silence-errors`.
+- **Result:** Across 120 rounds the candidate averaged 5.38 score, 3.8 coins,
+  0.317 kills, 0.267 suicides, and 0.175 invalid actions per round at 2.72 ms per
+  action. The mixed (0.7 suicides) and rule-based (0.5) lineups are weakest. The
+  first runner attempt exposed a relative-path bug; resume support fixed it. The
+  fail lineup then confirmed its supplied agent deliberately raises, so error
+  fallback was scoped to that lineup. All 13 tests pass.
+- **Commit:** this commit
+
 ### Day 7 — frozen checkpoint pool and self-play
 
 - **Change:** Added three independent frozen DDQN adapters for the Day 4

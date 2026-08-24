@@ -4,9 +4,15 @@ import unittest
 from pathlib import Path
 
 from evaluation.summarize_stats import summarize
+from evaluation.run_locked_suite import build_command
 
 
 class SummaryTests(unittest.TestCase):
+    def test_locked_suite_requires_three_opponents(self):
+        lineup = {"opponents": ["random_agent"], "rounds": 2, "seed": 3}
+        with self.assertRaises(ValueError):
+            build_command("candidate", lineup, Path("out.json"))
+
     def test_weighted_summary(self):
         payload = {
             "by_agent": {
@@ -32,4 +38,3 @@ class SummaryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

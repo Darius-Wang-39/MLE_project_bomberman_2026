@@ -53,7 +53,10 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    kills from 0.05 to 0.15 on an identical 20-round ablation lineup, while
    suicides remained equal and invalid actions fell from 3.45 to 0.4.
 8. Tune on training seeds and evaluate on a locked seed suite against all
-   supplied agents.
+   supplied agents. Completed over six fixed lineups and 120 rounds: 5.38 mean
+   score, 0.317 kills, 0.267 suicides, 0.175 invalid actions per round, and 2.72
+   ms mean action time. Mixed and rule-based lineups have the highest suicide
+   rates and remain the primary weaknesses.
 9. Run ablations, timing tests, and long tournament-style matches.
 10. Freeze candidates, run Docker/pre-submission checks, and package only the
     selected agent directory.
