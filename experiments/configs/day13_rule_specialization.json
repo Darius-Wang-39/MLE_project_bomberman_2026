@@ -1,0 +1,29 @@
+{
+  "experiment": "day13_rule_based_specialization",
+  "starting_checkpoint": "experiments/checkpoints/day13_pre_tactical.pt",
+  "training": [
+    {
+      "stage": "rule_specialization",
+      "scenario": "classic",
+      "seed": 6601,
+      "rounds": 150,
+      "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"],
+      "output_checkpoint": "experiments/checkpoints/day13_rule_specialized.pt"
+    },
+    {
+      "stage": "mixed_retention",
+      "scenario": "classic",
+      "seed": 6602,
+      "rounds": 75,
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"],
+      "output_checkpoint": "experiments/checkpoints/day13_tactical_candidate.pt"
+    }
+  ],
+  "evaluation": {
+    "scenario": "classic",
+    "seed": 8501,
+    "rounds": 100,
+    "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"],
+    "promotion_rule": "Promote only if held-out candidate score exceeds the pre-training candidate without a material suicide regression."
+  }
+}

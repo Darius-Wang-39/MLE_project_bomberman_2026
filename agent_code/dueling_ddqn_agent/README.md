@@ -13,9 +13,12 @@ Implemented components:
 - Huber loss and gradient clipping;
 - soft target-network updates;
 - one randomly selected D4 symmetry per sampled transition;
-- safety and legality masks during exploration, training targets, and inference.
+- safety and legality masks during exploration, training targets, and inference;
 - a soft `0.08` Q-value bias toward the central inclusive 11x11 box during the
-  target-free opponent-hunting endgame.
+  target-free opponent-hunting endgame;
+- opponent escape-pressure and armed-opponent threat features;
+- a contextual training penalty for bombs with neither resource yield nor
+  meaningful opponent pressure.
 
 Training example:
 

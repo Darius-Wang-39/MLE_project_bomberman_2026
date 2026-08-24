@@ -1,0 +1,105 @@
+{
+  "experiment": "day13_rule_based_specialization",
+  "date": "2026-08-24",
+  "features": {
+    "old_count_per_action": 18,
+    "new_count_per_action": 20,
+    "added": [
+      "bomb_trap_pressure",
+      "armed_opponent_threat"
+    ],
+    "checkpoint_migration": "Old action-row weights are copied exactly; the two appended columns per action are initialized to zero."
+  },
+  "reward": {
+    "low_value_bomb_penalty": -0.25,
+    "trap_pressure_threshold": 0.15,
+    "condition": "Applied only when BOMB has no crate yield, no opponent currently in blast, and less than threshold trap pressure."
+  },
+  "checkpoints": {
+    "baseline": {
+      "path": "experiments/checkpoints/day13_pre_tactical.pt",
+      "sha256": "0432F84F320649F2872904F9AA0F5636F51CC1B26B71DC2B1B539B26A1861DFE"
+    },
+    "rule_specialized": {
+      "path": "experiments/checkpoints/day13_rule_specialized.pt",
+      "sha256": "F142A7B8F6F62F39EF3FE934C759853DF223B247693348C9B19D0AD42A4444BB"
+    },
+    "promoted": {
+      "path": "experiments/checkpoints/day13_tactical_candidate.pt",
+      "sha256": "C624C7573256886FCA58C930E813AC2B0BEE34E7399F411031E3F93F2A78D2F5",
+      "environment_steps": 165950,
+      "learner_updates": 38982,
+      "network_input_width": 120
+    }
+  },
+  "training": [
+    {
+      "stage": "rule_specialization",
+      "seed": 6601,
+      "rounds": 150,
+      "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"],
+      "record": "experiments/records/day13_rule_specialization_train_raw.json"
+    },
+    {
+      "stage": "mixed_retention",
+      "seed": 6602,
+      "rounds": 75,
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"],
+      "record": "experiments/records/day13_mixed_retention_train_raw.json"
+    }
+  ],
+  "held_out_rule_evaluation": {
+    "seed": 8501,
+    "rounds_per_candidate": 100,
+    "baseline": {
+      "total_score": 360,
+      "mean_score": 3.60,
+      "coins_per_round": 2.75,
+      "kills_per_round": 0.17,
+      "suicides_per_round": 0.61,
+      "bombs_per_round": 25.69,
+      "invalid_per_round": 1.06,
+      "rule_agent_scores": [308, 302, 263]
+    },
+    "candidate": {
+      "total_score": 397,
+      "mean_score": 3.97,
+      "coins_per_round": 3.27,
+      "kills_per_round": 0.14,
+      "suicides_per_round": 0.63,
+      "bombs_per_round": 27.44,
+      "invalid_per_round": 0.93,
+      "rule_agent_scores": [268, 265, 244],
+      "mean_action_ms": 2.40
+    }
+  },
+  "locked_suite": {
+    "report": "experiments/records/day13_tactical_locked_suite.json",
+    "rounds": 120,
+    "mean_score": 7.766666666666667,
+    "coins_per_round": 5.433333333333334,
+    "crates_per_round": 70.76666666666667,
+    "kills_per_round": 0.4666666666666667,
+    "suicides_per_round": 0.35,
+    "invalid_per_round": 0.3333333333333333,
+    "mean_action_ms": 2.161945105906323,
+    "day12_mean_score": 6.533333333333333
+  },
+  "submission_verification": {
+    "archive": "submission/dueling_ddqn_agent.zip",
+    "archive_bytes": 281896,
+    "archive_sha256": "2863004CD7EFC08D84499386C795367F5B5DE6A817CC72A77C509A5211A07060",
+    "files": 8,
+    "unit_tests_passed": 20,
+    "zip_crc": "passed",
+    "python_syntax": "passed",
+    "isolated_rounds": 10,
+    "isolated_seed": 8601,
+    "isolated_mean_score": 4.3,
+    "isolated_kills_per_round": 0.2,
+    "isolated_suicides_per_round": 0.4,
+    "isolated_invalid_per_round": 1.0,
+    "isolated_mean_action_ms": 2.66182356502411
+  },
+  "decision": "Promote. The candidate beats all three rule-based agents in the held-out 100-round match, improves paired score by 10.3%, and raises the six-lineup locked-suite score by 18.9%. The small paired suicide increase of 0.02 is accepted; the larger locked-suite suicide increase is documented."
+}

@@ -1,0 +1,66 @@
+{
+  "experiment": "day13_rule_based_specialization_baseline",
+  "date": "2026-08-24",
+  "scenario": "classic",
+  "seed": 8401,
+  "rounds": 100,
+  "lineup": [
+    "dueling_ddqn_agent",
+    "rule_based_agent",
+    "rule_based_agent",
+    "rule_based_agent"
+  ],
+  "raw_stats": "experiments/records/day13_rule100_baseline_raw.json",
+  "ranking": [
+    {
+      "agent": "rule_based_agent_2",
+      "score": 334,
+      "score_per_round": 3.34,
+      "coins_per_round": 2.19,
+      "kills_per_round": 0.23,
+      "suicides_per_round": 0.38,
+      "bombs_per_round": 18.11
+    },
+    {
+      "agent": "dueling_ddqn_agent",
+      "score": 329,
+      "score_per_round": 3.29,
+      "coins_per_round": 2.79,
+      "kills_per_round": 0.10,
+      "suicides_per_round": 0.48,
+      "bombs_per_round": 30.50,
+      "crates_per_round": 35.57,
+      "invalid_per_round": 1.04
+    },
+    {
+      "agent": "rule_based_agent_0",
+      "score": 274,
+      "score_per_round": 2.74,
+      "coins_per_round": 2.04,
+      "kills_per_round": 0.14,
+      "suicides_per_round": 0.39,
+      "bombs_per_round": 17.38
+    },
+    {
+      "agent": "rule_based_agent_1",
+      "score": 261,
+      "score_per_round": 2.61,
+      "coins_per_round": 1.96,
+      "kills_per_round": 0.13,
+      "suicides_per_round": 0.46,
+      "bombs_per_round": 18.33
+    }
+  ],
+  "diagnosis": {
+    "score_gap_to_first": 5,
+    "candidate_rank": 2,
+    "candidate_won_against_rule_agents": 2,
+    "candidate_lost_against_rule_agents": 1,
+    "primary_weaknesses": [
+      "low kill conversion",
+      "excessive bomb frequency",
+      "high suicide rate"
+    ]
+  },
+  "decision": "Do not increase the center bias. Prioritize opponent-aware bomb quality features, contextual low-yield bomb penalties, and a rule-based specialization curriculum with separate held-out seeds."
+}

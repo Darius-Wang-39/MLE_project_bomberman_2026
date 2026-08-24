@@ -33,6 +33,8 @@ TAU = 0.005
 SHAPING_SCALE = 0.5
 HUNT_REVISIT_PENALTY = -0.12
 HUNT_HISTORY_LENGTH = 8
+LOW_VALUE_BOMB_PENALTY = -0.25
+TRAP_PRESSURE_THRESHOLD = 0.15
 PRIORITY_BETA_START = 0.4
 PRIORITY_BETA_STEPS = 250_000
 
@@ -99,13 +101,31 @@ def _hunt_stall_penalty(self, old_game_state, new_game_state) -> float:
     return HUNT_REVISIT_PENALTY * min(visits, 3)
 
 
-def _reward(self, old_game_state, new_game_state, events: List[str]) -> float:
+def _bomb_quality_penalty(self, old_game_state, action: str) -> float:
+    """Discourage bombs that neither farm resources nor restrict an opponent."""
+    if action != "BOMB":
+        return 0.0
+    bomb_row = self.feature_extractor.action_features(old_game_state)[ACTIONS.index("BOMB")]
+    crate_yield = bomb_row[self.feature_extractor.feature_names.index("bomb_crate_yield")]
+    opponent_yield = bomb_row[self.feature_extractor.feature_names.index("bomb_opponent_yield")]
+    trap_pressure = bomb_row[self.feature_extractor.feature_names.index("bomb_trap_pressure")]
+    if crate_yield > 0.0 or opponent_yield > 0.0 or trap_pressure >= TRAP_PRESSURE_THRESHOLD:
+        return 0.0
+    return LOW_VALUE_BOMB_PENALTY
+
+
+def _reward(self, old_game_state, action: str, new_game_state, events: List[str]) -> float:
     event_reward = float(sum(EVENT_REWARDS.get(event, 0.0) for event in events))
     shaping = SHAPING_SCALE * (
         GAMMA * self.feature_extractor.state_potential(new_game_state)
         - self.feature_extractor.state_potential(old_game_state)
     )
-    return event_reward + shaping + _hunt_stall_penalty(self, old_game_state, new_game_state)
+    return (
+        event_reward
+        + shaping
+        + _hunt_stall_penalty(self, old_game_state, new_game_state)
+        + _bomb_quality_penalty(self, old_game_state, action)
+    )
 
 
 def _emit_n_step(self, count: int):
@@ -142,7 +162,7 @@ def _record(self, old_game_state, action: str, new_game_state, events: List[str]
     raw = Transition(
         state=state,
         action=ACTIONS.index(action),
-        reward=_reward(self, old_game_state, new_game_state, events),
+        reward=_reward(self, old_game_state, action, new_game_state, events),
         next_state=next_state,
         next_mask=next_mask,
         done=new_game_state is None,

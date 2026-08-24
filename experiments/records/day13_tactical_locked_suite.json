@@ -1,0 +1,279 @@
+{
+  "suite": "day8_locked_builtin_opponents",
+  "candidate": "dueling_ddqn_agent",
+  "lineups": [
+    {
+      "name": "peaceful",
+      "opponents": [
+        "peaceful_agent",
+        "peaceful_agent",
+        "peaceful_agent"
+      ],
+      "scenario": "classic",
+      "rounds": 20,
+      "seed": 8301,
+      "raw_stats": "experiments/records/day13_tactical_locked_suite_raw/peaceful.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "dueling_ddqn_agent",
+        "peaceful_agent",
+        "peaceful_agent",
+        "peaceful_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "8301",
+        "--save-stats",
+        "D:\\study_HD\\uni-heidelberg\\2026ss\\MLE_Lecture\\final\\bomberman_rl\\experiments\\records\\day13_tactical_locked_suite_raw\\peaceful.json"
+      ],
+      "metrics": {
+        "agent": "dueling_ddqn_agent",
+        "files": 1,
+        "rounds": 20,
+        "mean_score": 15.45,
+        "coins_per_round": 7.95,
+        "crates_per_round": 108.25,
+        "kills_per_round": 1.5,
+        "suicides_per_round": 0.25,
+        "invalid_per_round": 0.0,
+        "mean_action_ms": 1.978027052119907,
+        "total_steps": 7384
+      }
+    },
+    {
+      "name": "coin_collectors",
+      "opponents": [
+        "coin_collector_agent",
+        "coin_collector_agent",
+        "coin_collector_agent"
+      ],
+      "scenario": "classic",
+      "rounds": 20,
+      "seed": 8302,
+      "raw_stats": "experiments/records/day13_tactical_locked_suite_raw/coin_collectors.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "dueling_ddqn_agent",
+        "coin_collector_agent",
+        "coin_collector_agent",
+        "coin_collector_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "8302",
+        "--save-stats",
+        "D:\\study_HD\\uni-heidelberg\\2026ss\\MLE_Lecture\\final\\bomberman_rl\\experiments\\records\\day13_tactical_locked_suite_raw\\coin_collectors.json"
+      ],
+      "metrics": {
+        "agent": "dueling_ddqn_agent",
+        "files": 1,
+        "rounds": 20,
+        "mean_score": 3.2,
+        "coins_per_round": 2.95,
+        "crates_per_round": 31.0,
+        "kills_per_round": 0.05,
+        "suicides_per_round": 0.35,
+        "invalid_per_round": 0.5,
+        "mean_action_ms": 2.6211231574726344,
+        "total_steps": 6005
+      }
+    },
+    {
+      "name": "rule_based",
+      "opponents": [
+        "rule_based_agent",
+        "rule_based_agent",
+        "rule_based_agent"
+      ],
+      "scenario": "classic",
+      "rounds": 20,
+      "seed": 8303,
+      "raw_stats": "experiments/records/day13_tactical_locked_suite_raw/rule_based.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "dueling_ddqn_agent",
+        "rule_based_agent",
+        "rule_based_agent",
+        "rule_based_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "8303",
+        "--save-stats",
+        "D:\\study_HD\\uni-heidelberg\\2026ss\\MLE_Lecture\\final\\bomberman_rl\\experiments\\records\\day13_tactical_locked_suite_raw\\rule_based.json"
+      ],
+      "metrics": {
+        "agent": "dueling_ddqn_agent",
+        "files": 1,
+        "rounds": 20,
+        "mean_score": 4.3,
+        "coins_per_round": 3.55,
+        "crates_per_round": 40.15,
+        "kills_per_round": 0.15,
+        "suicides_per_round": 0.6,
+        "invalid_per_round": 0.7,
+        "mean_action_ms": 2.4145379755946816,
+        "total_steps": 5263
+      }
+    },
+    {
+      "name": "random",
+      "opponents": [
+        "random_agent",
+        "random_agent",
+        "random_agent"
+      ],
+      "scenario": "classic",
+      "rounds": 20,
+      "seed": 8304,
+      "raw_stats": "experiments/records/day13_tactical_locked_suite_raw/random.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "dueling_ddqn_agent",
+        "random_agent",
+        "random_agent",
+        "random_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "8304",
+        "--save-stats",
+        "D:\\study_HD\\uni-heidelberg\\2026ss\\MLE_Lecture\\final\\bomberman_rl\\experiments\\records\\day13_tactical_locked_suite_raw\\random.json"
+      ],
+      "metrics": {
+        "agent": "dueling_ddqn_agent",
+        "files": 1,
+        "rounds": 20,
+        "mean_score": 8.2,
+        "coins_per_round": 8.2,
+        "crates_per_round": 102.3,
+        "kills_per_round": 0.0,
+        "suicides_per_round": 0.0,
+        "invalid_per_round": 0.0,
+        "mean_action_ms": 1.7993230660614747,
+        "total_steps": 7853
+      }
+    },
+    {
+      "name": "fail",
+      "opponents": [
+        "fail_agent",
+        "fail_agent",
+        "fail_agent"
+      ],
+      "scenario": "classic",
+      "rounds": 20,
+      "seed": 8305,
+      "silence_errors": true,
+      "raw_stats": "experiments/records/day13_tactical_locked_suite_raw/fail.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "dueling_ddqn_agent",
+        "fail_agent",
+        "fail_agent",
+        "fail_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "8305",
+        "--save-stats",
+        "D:\\study_HD\\uni-heidelberg\\2026ss\\MLE_Lecture\\final\\bomberman_rl\\experiments\\records\\day13_tactical_locked_suite_raw\\fail.json",
+        "--silence-errors"
+      ],
+      "metrics": {
+        "agent": "dueling_ddqn_agent",
+        "files": 1,
+        "rounds": 20,
+        "mean_score": 10.6,
+        "coins_per_round": 6.6,
+        "crates_per_round": 99.65,
+        "kills_per_round": 0.8,
+        "suicides_per_round": 0.25,
+        "invalid_per_round": 0.0,
+        "mean_action_ms": 2.0353378368025066,
+        "total_steps": 6664
+      }
+    },
+    {
+      "name": "mixed",
+      "opponents": [
+        "peaceful_agent",
+        "coin_collector_agent",
+        "rule_based_agent"
+      ],
+      "scenario": "classic",
+      "rounds": 20,
+      "seed": 8306,
+      "raw_stats": "experiments/records/day13_tactical_locked_suite_raw/mixed.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "dueling_ddqn_agent",
+        "peaceful_agent",
+        "coin_collector_agent",
+        "rule_based_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "8306",
+        "--save-stats",
+        "D:\\study_HD\\uni-heidelberg\\2026ss\\MLE_Lecture\\final\\bomberman_rl\\experiments\\records\\day13_tactical_locked_suite_raw\\mixed.json"
+      ],
+      "metrics": {
+        "agent": "dueling_ddqn_agent",
+        "files": 1,
+        "rounds": 20,
+        "mean_score": 4.85,
+        "coins_per_round": 3.35,
+        "crates_per_round": 43.25,
+        "kills_per_round": 0.3,
+        "suicides_per_round": 0.65,
+        "invalid_per_round": 0.8,
+        "mean_action_ms": 2.3496370841755367,
+        "total_steps": 5129
+      }
+    }
+  ],
+  "aggregate": {
+    "agent": "dueling_ddqn_agent",
+    "files": 6,
+    "rounds": 120,
+    "mean_score": 7.766666666666667,
+    "coins_per_round": 5.433333333333334,
+    "crates_per_round": 70.76666666666667,
+    "kills_per_round": 0.4666666666666667,
+    "suicides_per_round": 0.35,
+    "invalid_per_round": 0.3333333333333333,
+    "mean_action_ms": 2.161945105906323,
+    "total_steps": 38298
+  }
+}

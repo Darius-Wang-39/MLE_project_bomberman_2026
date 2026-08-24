@@ -11,7 +11,12 @@ from agent_code.dueling_ddqn_agent.callbacks import HUNT_CENTER_Q_BIAS, INPUT_DI
 from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES, FeatureExtractor
 from agent_code.dueling_ddqn_agent.model import DuelingQNetwork
 from agent_code.dueling_ddqn_agent.replay import PrioritizedReplayBuffer, Transition
-from agent_code.dueling_ddqn_agent.train import HUNT_REVISIT_PENALTY, _hunt_stall_penalty
+from agent_code.dueling_ddqn_agent.train import (
+    HUNT_REVISIT_PENALTY,
+    LOW_VALUE_BOMB_PENALTY,
+    _bomb_quality_penalty,
+    _hunt_stall_penalty,
+)
 from agent_code.dueling_ddqn_agent.symmetry import (
     D4_TRANSFORMS,
     transform_action_features,
@@ -41,7 +46,7 @@ class DuelingDDQNTests(unittest.TestCase):
     def test_appended_center_feature_checkpoint_migration(self):
         target = DuelingQNetwork(INPUT_DIM, len(ACTIONS)).state_dict()
         new_feature_count = len(FEATURE_NAMES)
-        old_feature_count = new_feature_count - 1
+        old_feature_count = new_feature_count - 2
         old_width = len(ACTIONS) * old_feature_count
         old = {key: value.clone() for key, value in target.items()}
         old_weight = torch.arange(
@@ -62,10 +67,43 @@ class DuelingDDQNTests(unittest.TestCase):
             )
             self.assertEqual(
                 torch.count_nonzero(
-                    migrated["encoder.0.weight"][:, new_start + old_feature_count]
+                    migrated["encoder.0.weight"][
+                        :, new_start + old_feature_count : new_start + new_feature_count
+                    ]
                 ).item(),
                 0,
             )
+
+    def test_tactical_features_detect_trap_pressure_and_armed_threat(self):
+        extractor = FeatureExtractor()
+        state = sample_state()
+        state["self"] = ("me", 0, True, (3, 2))
+        state["others"] = [("enemy", 0, True, (2, 2))]
+        state["field"][1, 2] = -1
+        state["field"][2, 1] = -1
+        state["field"][2, 3] = -1
+        features = extractor.action_features(state)
+
+        self.assertGreater(
+            features[ACTIONS.index("BOMB"), FEATURE_NAMES.index("bomb_trap_pressure")],
+            0.0,
+        )
+        self.assertGreater(
+            features[ACTIONS.index("WAIT"), FEATURE_NAMES.index("armed_opponent_threat")],
+            0.0,
+        )
+
+    def test_low_value_bomb_penalty_spares_productive_bombs(self):
+        extractor = FeatureExtractor()
+        trainer = SimpleNamespace(feature_extractor=extractor)
+        empty = sample_state()
+        self.assertEqual(
+            _bomb_quality_penalty(trainer, empty, "BOMB"), LOW_VALUE_BOMB_PENALTY
+        )
+
+        productive = sample_state()
+        productive["field"][3, 2] = 1
+        self.assertEqual(_bomb_quality_penalty(trainer, productive, "BOMB"), 0.0)
 
     def test_hunt_center_progress_prefers_entering_central_box(self):
         extractor = FeatureExtractor()

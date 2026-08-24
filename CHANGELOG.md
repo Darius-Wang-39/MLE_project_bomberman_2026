@@ -14,6 +14,35 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 13 — rule-based tactical specialization
+
+- **Change:** Diagnosed a fresh 100-round three-rule baseline, appended tactical
+  bomb-pressure and armed-opponent-threat features, added a contextual penalty
+  for bombs with no resource or tactical value, trained a 150-round rule-agent
+  stage plus a 75-round mixed retention stage, and promoted the held-out winner.
+- **Method:** The opponent-pressure feature compares each opponent's reachable
+  positions at bomb detonation with and without a candidate bomb. Old 18-feature
+  checkpoints migrate exactly to 20 features with only the appended columns
+  zero-initialized. The `-0.25` low-value penalty applies only when a bomb has no
+  crate yield, no opponent in its current blast, and less than `0.15` escape
+  pressure. Promotion used a new 100-round seed against three rule-based agents,
+  followed by the original six-lineup 120-round locked suite.
+- **Result:** The initial baseline scored 329 versus rule-agent totals 334, 274,
+  and 261. On held-out seed `8501`, the old model scored 360 and the new model
+  scored 397 (+10.3%); the candidate beat all rule agents (268, 265, 244),
+  raised coins from 2.75 to 3.27, reduced invalid actions from 1.06 to 0.93, and
+  changed suicides from 0.61 to 0.63 per round. Across the 120-round locked
+  suite, mean score rose from 6.53 to 7.77, kills from 0.40 to 0.467, and invalid
+  actions fell from 0.442 to 0.333; suicides increased from 0.242 to 0.35 and
+  are explicitly retained as the next weakness. All 20 tests pass and mean
+  inference latency is 2.16 ms. The promoted model SHA-256 is
+  `C624C7573256886FCA58C930E813AC2B0BEE34E7399F411031E3F93F2A78D2F5`.
+  The deterministic 281,896-byte submission ZIP has SHA-256
+  `2863004CD7EFC08D84499386C795367F5B5DE6A817CC72A77C509A5211A07060`;
+  its isolated ten-round extraction test averaged 4.3 points, 0.2 kills, 0.4
+  suicides, and 2.66 ms per action.
+- **Commit:** this commit
+
 ### Day 12 — soft central 11x11 endgame preference
 
 - **Change:** Added a tunable soft preference for the inclusive central box

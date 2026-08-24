@@ -67,7 +67,20 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
     14 tests pass, and a deterministic 259,433-byte agent-only ZIP passed CRC,
     syntax, cache exclusion, and a five-round isolated extraction test. Docker
     could not be executed because it is not installed on this machine; the
-    official Dockerfile statically includes NumPy and PyTorch.
+   official Dockerfile statically includes NumPy and PyTorch.
+11. Remove endgame stalling with opponent-pursuit potential, a stronger wait
+   penalty, and a safe revisit penalty. Completed with a 120-round locked-suite
+   gain from 5.38 to 6.41 mean score and a wait-rate reduction from 33.9% to
+   3.9% on the paired endgame evaluation.
+12. Add and ablate a soft central 11x11 endgame preference. The trained shaping
+   version was rejected; the lightweight `0.08` inference bias was promoted
+   after raising central occupancy from 28.8% to 88.2% and locked-suite score
+   from 6.41 to 6.53.
+13. Diagnose and specialize against three rule-based agents. Added opponent
+   escape-pressure and armed-opponent threat features, trained 150 rule-agent
+   plus 75 mixed-retention rounds, and promoted the candidate after it scored
+   397 versus the rule agents' 268/265/244 on 100 held-out rounds. The final
+   120-round locked-suite score is 7.77; suicide reduction remains future work.
 
 ## Evaluation rules
 

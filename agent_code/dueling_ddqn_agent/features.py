@@ -41,6 +41,8 @@ FEATURE_NAMES = (
     "wait_in_danger",
     "late_round_bomb",
     "hunt_center_progress",
+    "bomb_trap_pressure",
+    "armed_opponent_threat",
 )
 
 
@@ -76,6 +78,10 @@ class FeatureExtractor:
     @property
     def feature_count(self) -> int:
         return len(FEATURE_NAMES)
+
+    @property
+    def feature_names(self):
+        return FEATURE_NAMES
 
     def blast_tiles(self, field: np.ndarray, origin: Tuple[int, int]) -> Set[Tuple[int, int]]:
         """Match the supplied framework: stone walls stop blasts; crates do not."""
@@ -167,6 +173,66 @@ class FeatureExtractor:
             if not positions:
                 return 0
         return len(positions)
+
+    def _reachable_positions(
+        self,
+        game_state: Dict,
+        start: Tuple[int, int],
+        schedule: Sequence[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]],
+        horizon: int,
+    ) -> Set[Tuple[int, int]]:
+        """Return positions an opponent could occupy after ``horizon`` steps."""
+        field = game_state["field"]
+        explosion_map = game_state["explosion_map"]
+        positions = {start}
+        for time_step in range(1, horizon + 1):
+            next_positions: Set[Tuple[int, int]] = set()
+            for position in positions:
+                for delta in CARDINAL_DELTAS + ((0, 0),):
+                    target = _add(position, delta)
+                    if field[target] != 0:
+                        continue
+                    if self._bomb_blocks(target, time_step, schedule):
+                        continue
+                    if self._is_dangerous(target, time_step, schedule, explosion_map):
+                        continue
+                    next_positions.add(target)
+            positions = next_positions
+            if not positions:
+                break
+        return positions
+
+    def bomb_trap_pressure(self, game_state: Dict) -> float:
+        """Estimate how much a new bomb reduces opponents' escape options."""
+        if not game_state["others"] or not game_state["self"][2]:
+            return 0.0
+        baseline = self._bomb_schedule(game_state, add_own_bomb=False)
+        candidate = self._bomb_schedule(game_state, add_own_bomb=True)
+        pressure = 0.0
+        for other in game_state["others"]:
+            start = tuple(other[-1])
+            without_bomb = self._reachable_positions(
+                game_state, start, baseline, self.bomb_timer + 1
+            )
+            if not without_bomb:
+                continue
+            with_bomb = self._reachable_positions(
+                game_state, start, candidate, self.bomb_timer + 1
+            )
+            reduction = 1.0 - min(len(with_bomb) / float(len(without_bomb)), 1.0)
+            pressure = max(pressure, reduction)
+        return float(np.clip(pressure, 0.0, 1.0))
+
+    def armed_opponent_threat(
+        self, game_state: Dict, position: Tuple[int, int]
+    ) -> float:
+        """Measure exposure to a hypothetical bomb from an armed opponent."""
+        field = game_state["field"]
+        threats = sum(
+            bool(other[2]) and position in self.blast_tiles(field, tuple(other[-1]))
+            for other in game_state["others"]
+        )
+        return min(threats / 3.0, 1.0)
 
     def safe_action_mask(self, game_state: Dict) -> np.ndarray:
         legal = self.legal_action_mask(game_state)
@@ -286,6 +352,7 @@ class FeatureExtractor:
         crates_in_blast = sum(field[tile] == 1 for tile in blast) / 12.0
         opponents = {tuple(other[-1]) for other in game_state["others"]}
         opponents_in_blast = sum(tile in opponents for tile in blast) / 3.0
+        trap_pressure = self.bomb_trap_pressure(game_state)
 
         for index, action in enumerate(ACTIONS):
             target = _add(current, MOVE_DELTAS[action])
@@ -312,6 +379,10 @@ class FeatureExtractor:
                 float(current_center_distance - self.center_box_distance(target))
                 if legal[index] and hunt_phase
                 else 0.0
+            )
+            row[18] = trap_pressure if action == "BOMB" and legal[index] else 0.0
+            row[19] = (
+                self.armed_opponent_threat(game_state, target) if legal[index] else 0.0
             )
         return features
 
