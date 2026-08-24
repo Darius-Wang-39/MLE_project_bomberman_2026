@@ -43,7 +43,10 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    checkpoint's 5.25, so it is retained as an initialization rather than a
    final policy.
 6. Train the bomb-and-escape curriculum against `peaceful_agent` and
-   `coin_collector_agent`.
+   `coin_collector_agent`. Completed with 50 rounds per stage and 20 held-out
+   evaluation rounds. The peaceful stage reached 11.7 score and 1.3 kills per
+   round. The coin-collector stage reduced suicides to 0.05 but collapsed to
+   zero kills, so both checkpoints are retained for the Day 7 opponent pool.
 7. Add an opponent checkpoint pool and self-play against frozen snapshots.
 8. Tune on training seeds and evaluate on a locked seed suite against all
    supplied agents.

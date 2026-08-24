@@ -14,6 +14,20 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 6 — staged opponent curriculum
+
+- **Change:** Trained and froze two 50-round DDQN stages against three peaceful
+  opponents and then three coin collectors; evaluated each on 20 disjoint-seed
+  rounds and added a combined experiment record.
+- **Method:** Continued the Day 4 RL checkpoint with identical DDQN/PER settings.
+  Each stage used a distinct training seed and a locked evaluation seed, and the
+  intermediate checkpoint was preserved before advancing the curriculum.
+- **Result:** The peaceful stage averaged 11.7 score, 1.3 kills, and 0.2
+  suicides per round. The coin-collector stage reached 0.05 suicides and 0.05
+  invalid actions per round but zero kills and 2.05 score, revealing an
+  over-conservative policy. Both checkpoints feed the Day 7 opponent pool.
+- **Commit:** this commit
+
 ### Day 5 — rule demonstrations and behaviour cloning
 
 - **Change:** Added a development-only rule demonstration collector, a
