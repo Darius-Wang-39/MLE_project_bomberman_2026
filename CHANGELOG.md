@@ -14,6 +14,23 @@ Each entry records:
 
 ## 2026-08-24
 
+### Local Docker preparation and visual match launcher
+
+- **Change:** Downloaded the official Docker Desktop installer to the D drive,
+  added a one-click Windows launcher for watching the frozen agent, and
+  documented the equivalent cross-platform GUI command.
+- **Method:** Verified Windows, CPU virtualization, WSL, and disk status;
+  SHA-256 checked the downloaded installer; installed only the 10.6 MB Pygame
+  GUI dependency; then launched the frozen Dueling DDQN against three supplied
+  rule-based agents on a fixed classic-map seed with replay saving enabled.
+- **Result:** The 628.7 MB installer is stored outside the repository at
+  `D:\Installers\DockerDesktop\Docker Desktop Installer.exe` with SHA-256
+  `9AC03D4E900C0FDEE981D4BDE083A55FDFB28FFBA2CAE77726EFF2A437254822`.
+  The native GUI opened successfully as `BombeRLe | Round #1`. Docker remains
+  uninstalled until BIOS/UEFI virtualization is enabled and WSL 2 is installed.
+  The frozen submission archive and model were not modified.
+- **Commit:** this commit
+
 ### Day 10 — candidate freeze and submission package
 
 - **Change:** Froze the Day 7 checkpoint, added deterministic packaging and
