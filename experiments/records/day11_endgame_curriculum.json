@@ -1,0 +1,111 @@
+{
+  "experiment": "day11_endgame_curriculum",
+  "starting_checkpoint": {
+    "path": "experiments/checkpoints/day7_ddqn_checkpoint_pool.pt",
+    "sha256": "FAC0332C3E3737B25AB2706726A734B88FD6C592677A9C6C75305D39BBF31760",
+    "environment_steps": 74892,
+    "learner_updates": 17219
+  },
+  "training": [
+    {
+      "stage": "empty_hunt",
+      "seed": 6501,
+      "rounds": 60,
+      "scenario": "empty",
+      "opponents": ["peaceful_agent", "rule_based_agent", "rule_based_agent"],
+      "environment_steps_after": 89495,
+      "learner_updates_after": 20619,
+      "mean_score": 1.0833333333333333,
+      "kills_per_round": 0.21666666666666667,
+      "suicides_per_round": 0.5666666666666667,
+      "invalid_per_round": 0.7666666666666667,
+      "mean_action_ms": 1.8344393024409256,
+      "checkpoint": "experiments/checkpoints/day11_empty_hunt.pt"
+    },
+    {
+      "stage": "classic_retention",
+      "seed": 6502,
+      "rounds": 60,
+      "scenario": "classic",
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"],
+      "environment_steps_after": 106300,
+      "learner_updates_after": 24570,
+      "mean_score": 3.3,
+      "coins_per_round": 2.1333333333333333,
+      "kills_per_round": 0.23333333333333334,
+      "suicides_per_round": 0.5,
+      "invalid_per_round": 0.85,
+      "mean_action_ms": 1.91789929088168,
+      "checkpoint": "experiments/checkpoints/day11_endgame_candidate.pt",
+      "sha256": "0432F84F320649F2872904F9AA0F5636F51CC1B26B71DC2B1B539B26A1861DFE"
+    }
+  ],
+  "paired_evaluation": {
+    "seed": 9501,
+    "rounds_per_candidate": 30,
+    "scenario": "classic",
+    "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"],
+    "candidate": {
+      "mean_score": 4.333333333333333,
+      "coins_per_round": 3.0,
+      "kills_per_round": 0.26666666666666666,
+      "suicides_per_round": 0.4666666666666667,
+      "invalid_per_round": 0.8666666666666667,
+      "wait_ratio": 0.039156288567261305,
+      "mean_longest_wait_streak": 3.6,
+      "worst_wait_streak": 7,
+      "rounds_with_wait_streak_over_20": 0
+    },
+    "day7_baseline": {
+      "mean_score": 3.7666666666666666,
+      "coins_per_round": 2.7666666666666666,
+      "kills_per_round": 0.2,
+      "suicides_per_round": 0.4666666666666667,
+      "invalid_per_round": 0.26666666666666666,
+      "wait_ratio": 0.3385404523198881,
+      "mean_longest_wait_streak": 48.4,
+      "worst_wait_streak": 216,
+      "rounds_with_wait_streak_over_20": 11
+    }
+  },
+  "locked_suite": {
+    "report": "experiments/records/day11_locked_suite.json",
+    "rounds": 120,
+    "mean_score": 6.408333333333333,
+    "coins_per_round": 4.2,
+    "crates_per_round": 61.63333333333333,
+    "kills_per_round": 0.44166666666666665,
+    "suicides_per_round": 0.225,
+    "invalid_per_round": 0.4083333333333333,
+    "mean_action_ms": 1.8636475871996787,
+    "day8_baseline_mean_score": 5.383333333333334
+  },
+  "visual_regression": {
+    "seed": 240824,
+    "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"],
+    "old_wait_ratio": 0.53,
+    "old_longest_stationary_steps": 168,
+    "candidate_wait_ratio": 0.03389830508474576,
+    "candidate_longest_wait_streak": 3,
+    "candidate_steps": 295,
+    "candidate_score": 2,
+    "candidate_suicides": 1,
+    "replay": "replays/day11_candidate_seed240824.pt"
+  },
+  "submission_verification": {
+    "archive": "submission/dueling_ddqn_agent.zip",
+    "archive_bytes": 261656,
+    "archive_sha256": "df21b0c0f74ce3058b06195bfe51599740f9e3c814f30042433baf6e6c2fe91f",
+    "files": 8,
+    "unit_tests_passed": 16,
+    "zip_crc": "passed",
+    "python_syntax": "passed",
+    "isolated_rounds": 5,
+    "isolated_seed": 10501,
+    "isolated_mean_score": 6.8,
+    "isolated_suicides_per_round": 0.0,
+    "isolated_invalid_per_round": 0.0,
+    "isolated_mean_action_ms": 1.579256296157837
+  },
+  "decision": "Promote the candidate: it removes observed endgame stalling and improves locked-suite score, coins, crates, kills, suicides, and latency. Invalid actions increased but remain below one per round in paired and locked evaluations."
+}

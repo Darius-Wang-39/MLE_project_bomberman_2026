@@ -14,7 +14,7 @@ Each entry records:
 
 ## 2026-08-24
 
-### Day 11 — endgame anti-stall candidate (in progress)
+### Day 11 — endgame anti-stall candidate
 
 - **Change:** Started a separate candidate from the exact Day 7 checkpoint,
   added opponent pursuit to target-free endgame shaping, strengthened the wait
@@ -25,10 +25,18 @@ Each entry records:
   Revisit penalties use an eight-position training history and are disabled
   while bombs or explosions require evasive movement. Added focused unit tests
   and a two-stage, seed-separated endgame/retention curriculum configuration.
-- **Result:** All 16 tests pass. The baseline adapter and Day 7 checkpoint both
-  have SHA-256 `FAC0332C3E3737B25AB2706726A734B88FD6C592677A9C6C75305D39BBF31760`.
-  Training and locked evaluation are in progress; the submission archive has
-  not been replaced.
+- **Result:** All 16 tests pass. Training added 31,408 environment steps and
+  7,351 learner updates. In a paired 30-round evaluation, wait rate fell from
+  33.9% to 3.9%, the worst wait streak fell from 216 to 7, mean score rose from
+  3.77 to 4.33, and suicides were unchanged. Across the original 120-round
+  locked suite, mean score rose from 5.38 to 6.41, kills from 0.317 to 0.442,
+  and suicides fell from 0.267 to 0.225. Invalid actions rose from 0.175 to
+  0.408 per round. The original seed-240824 visual regression fell from 212
+  waits to 10, with a longest wait streak of three. The promoted 261,656-byte
+  archive has SHA-256
+  `DF21B0C0F74CE3058B06195BFE51599740F9E3C814F30042433BAF6E6C2FE91F`;
+  its isolated five-round smoke test averaged 6.8 points with zero suicides or
+  invalid actions at 1.58 ms per action.
 - **Commit:** this commit
 
 ### Local Docker preparation and visual match launcher
