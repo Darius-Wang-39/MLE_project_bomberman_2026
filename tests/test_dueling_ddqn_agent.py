@@ -12,11 +12,14 @@ from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES, Featu
 from agent_code.dueling_ddqn_agent.model import DuelingQNetwork
 from agent_code.dueling_ddqn_agent.replay import PrioritizedReplayBuffer, Transition
 from agent_code.dueling_ddqn_agent.train import (
+    EVENT_REWARDS,
     HUNT_REVISIT_PENALTY,
     LOW_VALUE_BOMB_PENALTY,
+    SUICIDE_PENALTY_MULTIPLIER,
     _bomb_quality_penalty,
     _hunt_stall_penalty,
 )
+import events as e
 from agent_code.dueling_ddqn_agent.symmetry import (
     D4_TRANSFORMS,
     transform_action_features,
@@ -43,6 +46,10 @@ def sample_state():
 
 
 class DuelingDDQNTests(unittest.TestCase):
+    def test_suicide_penalty_uses_requested_multiplier(self):
+        self.assertEqual(SUICIDE_PENALTY_MULTIPLIER, 3.0)
+        self.assertEqual(EVENT_REWARDS[e.KILLED_SELF], -60.0)
+
     def test_appended_center_feature_checkpoint_migration(self):
         target = DuelingQNetwork(INPUT_DIM, len(ACTIONS)).state_dict()
         new_feature_count = len(FEATURE_NAMES)

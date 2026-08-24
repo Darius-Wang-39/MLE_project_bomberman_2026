@@ -1,0 +1,72 @@
+{
+  "experiment": "day14_suicide_penalty_multiplier",
+  "date": "2026-08-24",
+  "reward_change": {
+    "suicide_penalty_multiplier": 3.0,
+    "killed_self_reward_before": -20.0,
+    "killed_self_reward_after": -60.0,
+    "got_killed_reward_unchanged": -15.0
+  },
+  "training": [
+    {
+      "stage": "rule_safety_tune",
+      "seed": 6701,
+      "rounds": 100,
+      "record": "experiments/records/day14_rule_safety_train_raw.json",
+      "checkpoint": "experiments/checkpoints/day14_rule_safety_stage.pt"
+    },
+    {
+      "stage": "mixed_retention",
+      "seed": 6702,
+      "rounds": 50,
+      "record": "experiments/records/day14_mixed_retention_train_raw.json",
+      "checkpoint": "experiments/checkpoints/day14_suicide3_candidate.pt"
+    }
+  ],
+  "held_out_evaluation": {
+    "seed": 8701,
+    "rounds_per_candidate": 100,
+    "baseline": {
+      "total_score": 361,
+      "mean_score": 3.61,
+      "coins_per_round": 3.11,
+      "kills_per_round": 0.10,
+      "suicides_per_round": 0.51,
+      "bombs_per_round": 29.72,
+      "invalid_per_round": 0.90
+    },
+    "suicide3_candidate": {
+      "total_score": 392,
+      "mean_score": 3.92,
+      "coins_per_round": 3.22,
+      "kills_per_round": 0.14,
+      "suicides_per_round": 0.56,
+      "bombs_per_round": 24.43,
+      "invalid_per_round": 1.10,
+      "mean_action_ms": 2.45,
+      "rule_agent_scores": [281, 280, 266]
+    }
+  },
+  "promoted_checkpoint": {
+    "path": "agent_code/dueling_ddqn_agent/dueling_ddqn_model.pt",
+    "sha256": "C1AF4217707AEE90677CDDD459DBBAA65C9B7C00991EEA7F562EF4400F746492",
+    "environment_steps": 202391,
+    "learner_updates": 47590
+  },
+  "visual_match": {
+    "seed": 8801,
+    "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"],
+    "our_agent_color": "pink",
+    "replay": "replays/day14_suicide3_visual.pt"
+  },
+  "submission": {
+    "archive": "submission/dueling_ddqn_agent.zip",
+    "archive_bytes": 283401,
+    "archive_sha256": "E2C247A0667D7BFAD2C67E8080684C0012F984049E52E9D16F2A75A697A1223C",
+    "files": 8,
+    "unit_tests_passed": 21,
+    "zip_crc": "passed",
+    "python_syntax": "passed"
+  },
+  "decision": "Promote at the requested 3.0 multiplier. It reduces bomb frequency and improves score and kills, while still beating all three rule-based agents. It does not reduce held-out suicides in this run, so the 0.05 increase is documented rather than hidden."
+}

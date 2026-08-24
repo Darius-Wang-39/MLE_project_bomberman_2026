@@ -1,0 +1,32 @@
+{
+  "experiment": "day14_suicide_penalty_multiplier",
+  "starting_checkpoint": "experiments/checkpoints/day14_pre_suicide_tune.pt",
+  "reward_change": {
+    "suicide_penalty_multiplier": 3.0,
+    "killed_self_reward_before": -20.0,
+    "killed_self_reward_after": -60.0,
+    "got_killed_reward": -15.0
+  },
+  "training": [
+    {
+      "stage": "rule_safety_tune",
+      "scenario": "classic",
+      "seed": 6701,
+      "rounds": 100,
+      "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"]
+    },
+    {
+      "stage": "mixed_retention",
+      "scenario": "classic",
+      "seed": 6702,
+      "rounds": 50,
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"]
+    }
+  ],
+  "evaluation": {
+    "scenario": "classic",
+    "seed": 8701,
+    "rounds": 100,
+    "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"]
+  }
+}

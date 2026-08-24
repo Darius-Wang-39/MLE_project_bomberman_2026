@@ -18,7 +18,9 @@ Implemented components:
   target-free opponent-hunting endgame;
 - opponent escape-pressure and armed-opponent threat features;
 - a contextual training penalty for bombs with neither resource yield nor
-  meaningful opponent pressure.
+  meaningful opponent pressure;
+- a `3.0` suicide-penalty multiplier, making the `KILLED_SELF` training reward
+  `-60` while leaving ordinary `GOT_KILLED` at `-15`.
 
 Training example:
 

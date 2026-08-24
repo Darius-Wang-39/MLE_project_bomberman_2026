@@ -14,6 +14,30 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 14 — 3.0 suicide-penalty multiplier and visual match
+
+- **Change:** Set the requested suicide-penalty multiplier to `3.0`, changing
+  the `KILLED_SELF` event reward from `-20` to `-60`, retrained the promoted
+  tactical model, and launched a visible match against three rule-based agents.
+- **Method:** Preserved the exact Day 13 checkpoint, ran 100 rule-agent safety
+  rounds plus 50 mixed-retention rounds, then compared old and new weights over
+  100 zero-exploration rounds on seed `8701`. `GOT_KILLED` remains `-15`, so the
+  stronger multiplier specifically distinguishes self-kills. A unit test locks
+  the multiplier and resulting event reward.
+- **Result:** The candidate scored 392 versus the baseline's 361 (+8.6%) and
+  beat all three rule agents (281, 280, 266). Bomb use fell from 29.72 to 24.43
+  per round and kills rose from 0.10 to 0.14; suicides did not improve, moving
+  from 0.51 to 0.56, and invalid actions rose from 0.90 to 1.10. The requested
+  candidate was promoted with this tradeoff documented. All 21 tests pass. A
+  visible seed-8801 match identifies the promoted agent as pink and saves its
+  replay under `replays/day14_suicide3_visual.pt`. The promoted checkpoint
+  SHA-256 is
+  `C1AF4217707AEE90677CDDD459DBBAA65C9B7C00991EEA7F562EF4400F746492`.
+  The rebuilt 283,401-byte submission ZIP passed CRC and syntax checks and has
+  SHA-256
+  `E2C247A0667D7BFAD2C67E8080684C0012F984049E52E9D16F2A75A697A1223C`.
+- **Commit:** this commit
+
 ### Day 13 — rule-based tactical specialization
 
 - **Change:** Diagnosed a fresh 100-round three-rule baseline, appended tactical
