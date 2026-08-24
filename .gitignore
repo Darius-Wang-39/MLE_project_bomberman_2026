@@ -111,3 +111,7 @@ screenshots/*.webm
 
 replays/
 results/
+
+# Local isolated submission smoke-test directories
+agent_code/submission_smoke_agent/
+agent_code/submission_smoke_extract/

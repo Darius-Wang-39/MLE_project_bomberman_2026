@@ -14,6 +14,22 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 10 — candidate freeze and submission package
+
+- **Change:** Froze the Day 7 checkpoint, added deterministic packaging and
+  package-exclusion tests, generated the agent-only ZIP and SHA-256 manifest,
+  and ran the extracted archive under a temporary framework agent name.
+- **Method:** Packaging sorts files, fixes ZIP timestamps, includes only source,
+  checkpoint, and documentation suffixes, excludes logs/caches, verifies CRC,
+  compiles every archived Python file, and records per-file hashes. The active
+  and frozen checkpoint hashes were compared directly.
+- **Result:** All 14 tests pass. The 259,433-byte archive contains eight files
+  and has SHA-256 `83ab316bcb2c9667728c08a24d5bfd967f9257ce1fcb78b6b535763fb4d77c1f`.
+  The extracted ZIP completed five rounds with zero suicides/invalid actions at
+  1.86 ms per action. Docker was not run because the executable is absent; the
+  official Dockerfile statically installs the required NumPy and PyTorch.
+- **Commit:** this commit
+
 ### Day 9 — safety ablation and 100-round stress match
 
 - **Change:** Added a legal-only inference adapter, ran a paired 30-round safety

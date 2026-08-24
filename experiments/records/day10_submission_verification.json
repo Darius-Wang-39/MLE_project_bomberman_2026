@@ -1,0 +1,40 @@
+{
+  "experiment": "day10_submission_freeze_and_verification",
+  "candidate": "dueling_ddqn_agent",
+  "frozen_checkpoint": "experiments/checkpoints/day7_ddqn_checkpoint_pool.pt",
+  "checkpoint_sha256": "fac0332c3e3737b25ab2706726a734b88fd6c592677a9c6c75305d39bbf31760",
+  "active_checkpoint_matches_frozen": true,
+  "archive": "submission/dueling_ddqn_agent.zip",
+  "archive_bytes": 259433,
+  "archive_sha256": "83ab316bcb2c9667728c08a24d5bfd967f9257ce1fcb78b6b535763fb4d77c1f",
+  "archive_files": 8,
+  "checks": {
+    "unit_tests": {
+      "passed": 14,
+      "failed": 0
+    },
+    "zip_crc": "passed",
+    "python_syntax": "passed",
+    "cache_and_logs_excluded": true,
+    "isolated_archive_game": {
+      "rounds": 5,
+      "seed": 10401,
+      "opponents": ["random_agent", "random_agent", "random_agent"],
+      "mean_score": 4.0,
+      "suicides_per_round": 0.0,
+      "invalid_per_round": 0.0,
+      "mean_action_ms": 1.8620924949645996,
+      "completed_without_error": true
+    },
+    "local_runtime": {
+      "python": "3.13.3",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128"
+    },
+    "docker": {
+      "status": "not_run",
+      "reason": "Docker executable is not installed on this machine",
+      "static_dependency_check": "Official Dockerfile installs numpy and pytorch, the only non-standard runtime dependencies."
+    }
+  }
+}

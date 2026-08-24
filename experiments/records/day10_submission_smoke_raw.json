@@ -1,0 +1,79 @@
+{
+    "by_agent": {
+        "random_agent_0": {
+            "bombs": 5,
+            "crates": 14,
+            "invalid": 34,
+            "moves": 20,
+            "rounds": 5,
+            "score": 0,
+            "steps": 59,
+            "suicides": 5,
+            "time": 0.00606989860534668
+        },
+        "random_agent_1": {
+            "bombs": 5,
+            "crates": 14,
+            "invalid": 40,
+            "moves": 23,
+            "rounds": 5,
+            "score": 0,
+            "steps": 68,
+            "suicides": 5,
+            "time": 0.0051708221435546875
+        },
+        "random_agent_2": {
+            "bombs": 5,
+            "crates": 12,
+            "invalid": 85,
+            "moves": 66,
+            "rounds": 5,
+            "score": 0,
+            "steps": 156,
+            "suicides": 5,
+            "time": 0.011529684066772461
+        },
+        "submission_smoke_agent": {
+            "bombs": 164,
+            "coins": 20,
+            "crates": 402,
+            "moves": 886,
+            "rounds": 5,
+            "score": 20,
+            "steps": 2000,
+            "time": 3.724184989929199
+        }
+    },
+    "by_round": {
+        "Round 01 (2026-08-24 17-11-44)": {
+            "coins": 1,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Round 02 (2026-08-24 17-11-45)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Round 03 (2026-08-24 17-11-46)": {
+            "coins": 5,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Round 04 (2026-08-24 17-11-47)": {
+            "coins": 4,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Round 05 (2026-08-24 17-11-47)": {
+            "coins": 2,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        }
+    }
+}

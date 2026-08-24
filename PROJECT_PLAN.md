@@ -63,7 +63,11 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    suicides; the full candidate completed 27,684 actions over 100 rounds at
    2.07 ms mean latency without runtime errors.
 10. Freeze candidates, run Docker/pre-submission checks, and package only the
-    selected agent directory.
+    selected agent directory. The Day 7 checkpoint is frozen byte-for-byte,
+    14 tests pass, and a deterministic 259,433-byte agent-only ZIP passed CRC,
+    syntax, cache exclusion, and a five-round isolated extraction test. Docker
+    could not be executed because it is not installed on this machine; the
+    official Dockerfile statically includes NumPy and PyTorch.
 
 ## Evaluation rules
 

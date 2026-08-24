@@ -29,3 +29,9 @@ python main.py play --no-gui --agents dueling_ddqn_agent --scenario coin-heaven 
 Training is enabled with `--train 1`. Keep training and evaluation seeds
 separate; raw framework output under `results/` stays local.
 
+The frozen competition archive and its per-file checksum manifest are under
+[`submission/`](submission/). Rebuild them with
+`python tools/package_submission.py agent_code/dueling_ddqn_agent --output
+submission/dueling_ddqn_agent.zip --manifest
+submission/dueling_ddqn_agent_manifest.json`.
+
