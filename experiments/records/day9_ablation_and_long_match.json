@@ -1,0 +1,53 @@
+{
+  "experiment": "day9_safety_ablation_and_long_match",
+  "safety_mask_ablation": {
+    "seed": 9401,
+    "rounds_per_variant": 30,
+    "lineup": [
+      "candidate",
+      "peaceful_agent",
+      "coin_collector_agent",
+      "rule_based_agent"
+    ],
+    "full_time_expanded_mask": {
+      "mean_score": 3.9,
+      "coins_per_round": 2.566666666666667,
+      "crates_per_round": 38.7,
+      "kills_per_round": 0.26666666666666666,
+      "suicides_per_round": 0.5,
+      "invalid_per_round": 0.5666666666666667,
+      "mean_action_ms": 2.9199141609831583,
+      "total_steps": 7979
+    },
+    "immediate_legal_only": {
+      "mean_score": 0.0,
+      "coins_per_round": 0.0,
+      "crates_per_round": 3.2666666666666666,
+      "kills_per_round": 0.0,
+      "suicides_per_round": 1.0,
+      "invalid_per_round": 0.0,
+      "mean_action_ms": 1.1610642075538635,
+      "total_steps": 160
+    },
+    "conclusion": "Removing six-step survival lookahead caused suicide in every round; its speed advantage is unusable."
+  },
+  "long_match": {
+    "seed": 9402,
+    "rounds": 100,
+    "lineup": [
+      "dueling_ddqn_agent",
+      "peaceful_agent",
+      "coin_collector_agent",
+      "rule_based_agent"
+    ],
+    "mean_score": 3.87,
+    "coins_per_round": 2.47,
+    "crates_per_round": 40.17,
+    "kills_per_round": 0.28,
+    "suicides_per_round": 0.47,
+    "invalid_per_round": 0.37,
+    "mean_action_ms": 2.0740892807539275,
+    "total_steps": 27684,
+    "completed_without_error": true
+  }
+}

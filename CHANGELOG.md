@@ -14,6 +14,19 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 9 — safety ablation and 100-round stress match
+
+- **Change:** Added a legal-only inference adapter, ran a paired 30-round safety
+  ablation, and ran the untouched Day 7 candidate for 100 mixed-opponent rounds.
+- **Method:** The ablation kept network architecture, weights, features, lineup,
+  and seed fixed; only the six-step time-expanded action mask was replaced by
+  immediate legality. The long match used another locked seed and no training.
+- **Result:** Legal-only committed suicide in all 30 rounds, scored zero, and
+  survived just 160 total steps. The full mask scored 3.9 with 0.5 suicides per
+  round. The 100-round candidate stress test completed 27,684 actions without
+  error at 2.07 ms mean latency, averaging 3.87 score and 0.28 kills per round.
+- **Commit:** this commit
+
 ### Day 8 — locked built-in-opponent evaluation suite
 
 - **Change:** Added a configurable, resumable locked-suite runner and evaluated

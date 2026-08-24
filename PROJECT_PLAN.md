@@ -57,7 +57,11 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    score, 0.317 kills, 0.267 suicides, 0.175 invalid actions per round, and 2.72
    ms mean action time. Mixed and rule-based lineups have the highest suicide
    rates and remain the primary weaknesses.
-9. Run ablations, timing tests, and long tournament-style matches.
+9. Run ablations, timing tests, and long tournament-style matches. Completed a
+   30+30 round safety-mask ablation and a 100-round mixed-opponent stress match.
+   Immediate legality without six-step survival lookahead caused 30/30
+   suicides; the full candidate completed 27,684 actions over 100 rounds at
+   2.07 ms mean latency without runtime errors.
 10. Freeze candidates, run Docker/pre-submission checks, and package only the
     selected agent directory.
 
