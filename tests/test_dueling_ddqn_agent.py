@@ -7,7 +7,7 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 
-from agent_code.dueling_ddqn_agent.callbacks import INPUT_DIM, migrate_policy_input
+from agent_code.dueling_ddqn_agent.callbacks import HUNT_CENTER_Q_BIAS, INPUT_DIM, migrate_policy_input
 from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES, FeatureExtractor
 from agent_code.dueling_ddqn_agent.model import DuelingQNetwork
 from agent_code.dueling_ddqn_agent.replay import PrioritizedReplayBuffer, Transition
@@ -60,6 +60,12 @@ class DuelingDDQNTests(unittest.TestCase):
                 migrated["encoder.0.weight"][:, new_start : new_start + old_feature_count],
                 old_weight[:, old_start : old_start + old_feature_count],
             )
+            self.assertEqual(
+                torch.count_nonzero(
+                    migrated["encoder.0.weight"][:, new_start + old_feature_count]
+                ).item(),
+                0,
+            )
 
     def test_hunt_center_progress_prefers_entering_central_box(self):
         extractor = FeatureExtractor()
@@ -73,6 +79,7 @@ class DuelingDDQNTests(unittest.TestCase):
         self.assertEqual(extractor.center_box_distance((3, 8)), 0)
         self.assertEqual(features[ACTIONS.index("RIGHT"), center_index], 1.0)
         self.assertEqual(features[ACTIONS.index("LEFT"), center_index], -1.0)
+        self.assertGreater(HUNT_CENTER_Q_BIAS, 0.0)
 
     def test_endgame_potential_rewards_opponent_progress(self):
         extractor = FeatureExtractor()

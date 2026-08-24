@@ -14,6 +14,8 @@ Implemented components:
 - soft target-network updates;
 - one randomly selected D4 symmetry per sampled transition;
 - safety and legality masks during exploration, training targets, and inference.
+- a soft `0.08` Q-value bias toward the central inclusive 11x11 box during the
+  target-free opponent-hunting endgame.
 
 Training example:
 
@@ -23,4 +25,3 @@ python main.py play --no-gui --agents dueling_ddqn_agent --train 1 --scenario co
 
 The checkpoint `dueling_ddqn_model.pt` contains state dictionaries and counters,
 not a pickled model object, so CPU loading remains portable.
-

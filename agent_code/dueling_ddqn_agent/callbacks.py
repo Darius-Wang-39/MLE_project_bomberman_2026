@@ -18,6 +18,7 @@ INPUT_DIM = len(ACTIONS) * len(FEATURE_NAMES)
 EPSILON_START = 0.60
 EPSILON_MIN = 0.05
 EPSILON_DECAY_STEPS = 120_000.0
+HUNT_CENTER_Q_BIAS = 0.08
 
 
 def migrate_policy_input(policy_state, target_state):
@@ -37,7 +38,7 @@ def migrate_policy_input(policy_state, target_state):
     if new_feature_count <= old_feature_count:
         raise ValueError("Automatic migration only supports appended action features")
 
-    migrated_weight = target_weight.clone()
+    migrated_weight = torch.zeros_like(target_weight)
     for action_index in range(len(ACTIONS)):
         old_start = action_index * old_feature_count
         new_start = action_index * new_feature_count
@@ -60,6 +61,7 @@ def setup(self):
     self.environment_steps = 0
     self.learner_updates = 0
     self.loaded_optimizer_state = None
+    self.hunt_center_q_bias = HUNT_CENTER_Q_BIAS
     checkpoint_path = Path(MODEL_FILE)
     self.checkpoint_migrated = False
     if checkpoint_path.exists():
@@ -99,9 +101,12 @@ def act(self, game_state: dict) -> str:
     if self.train and self.rng.random() < exploration_rate(self):
         return ACTIONS[self.rng.choice(allowed_indices.tolist())]
 
-    state = torch.from_numpy(vectorize_state(self.feature_extractor, game_state)).unsqueeze(0).to(self.device)
+    action_features = self.feature_extractor.action_features(game_state)
+    state = torch.from_numpy(action_features.astype(np.float32).reshape(-1)).unsqueeze(0).to(self.device)
     with torch.no_grad():
         q_values = self.policy_net(state).squeeze(0).cpu().numpy()
+    center_index = FEATURE_NAMES.index("hunt_center_progress")
+    q_values = q_values + self.hunt_center_q_bias * action_features[:, center_index]
     masked_q = np.where(allowed, q_values, -np.inf)
     best = np.flatnonzero(np.isclose(masked_q, np.max(masked_q)))
     return ACTIONS[self.rng.choice(best.tolist())]

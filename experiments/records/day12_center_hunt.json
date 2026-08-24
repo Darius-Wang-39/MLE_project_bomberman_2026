@@ -1,0 +1,82 @@
+{
+  "experiment": "day12_center_hunt",
+  "center_box": {
+    "min_coordinate": 3,
+    "max_coordinate": 13,
+    "width": 11
+  },
+  "trained_potential_ablation": {
+    "potential_weight": 0.2,
+    "training_seeds": [6601, 6602],
+    "rounds": 80,
+    "starting_environment_steps": 106300,
+    "ending_environment_steps": 128703,
+    "ending_learner_updates": 29669,
+    "checkpoint": "experiments/checkpoints/day12_center_candidate.pt",
+    "checkpoint_sha256": "6112CD01B171DCA52B34059F31C1CA9608FC84E17130A9A0BC812A9A0F8DC0F9",
+    "paired_seed": 9601,
+    "paired_rounds": 30,
+    "center_ratio": 0.33426495248742316,
+    "mean_box_distance": 1.4879821129122415,
+    "mean_score": 3.7333333333333334,
+    "kills_per_round": 0.16666666666666666,
+    "suicides_per_round": 0.6333333333333333,
+    "decision": "rejected because the small center gain did not justify the score and kill regression"
+  },
+  "promoted_q_bias": {
+    "parameter": "HUNT_CENTER_Q_BIAS",
+    "value": 0.08,
+    "checkpoint": "experiments/checkpoints/day11_endgame_candidate.pt",
+    "checkpoint_sha256": "0432F84F320649F2872904F9AA0F5636F51CC1B26B71DC2B1B539B26A1861DFE",
+    "paired_seed": 9601,
+    "paired_rounds": 30,
+    "candidate": {
+      "center_ratio": 0.8817024128686327,
+      "mean_box_distance": 0.17560321715817695,
+      "wait_ratio": 0.03685148073925629,
+      "worst_wait_streak": 4,
+      "mean_score": 3.966666666666667,
+      "coins_per_round": 2.8,
+      "kills_per_round": 0.23333333333333334,
+      "suicides_per_round": 0.43333333333333335,
+      "invalid_per_round": 0.9666666666666667
+    },
+    "day11_baseline": {
+      "center_ratio": 0.28839957035445757,
+      "mean_box_distance": 1.6004296455424274,
+      "wait_ratio": 0.054428717350065665,
+      "worst_wait_streak": 19,
+      "mean_score": 4.466666666666667,
+      "coins_per_round": 2.966666666666667,
+      "kills_per_round": 0.3,
+      "suicides_per_round": 0.6333333333333333,
+      "invalid_per_round": 0.9666666666666667
+    }
+  },
+  "locked_suite": {
+    "report": "experiments/records/day12_center_locked_suite.json",
+    "rounds": 120,
+    "mean_score": 6.533333333333333,
+    "coins_per_round": 4.533333333333333,
+    "crates_per_round": 64.59166666666667,
+    "kills_per_round": 0.4,
+    "suicides_per_round": 0.24166666666666667,
+    "invalid_per_round": 0.44166666666666665,
+    "mean_action_ms": 1.940403300906061,
+    "day11_mean_score": 6.408333333333333,
+    "original_day8_mean_score": 5.383333333333334
+  },
+  "submission_verification": {
+    "archive": "submission/dueling_ddqn_agent.zip",
+    "archive_bytes": 262673,
+    "archive_sha256": "aaa79e5b65c01a5dfeb2ce278133b67ee83bcfb78f13cebc167beb28417e0130",
+    "unit_tests_passed": 18,
+    "isolated_rounds": 5,
+    "isolated_seed": 10601,
+    "isolated_mean_score": 7.6,
+    "isolated_suicides_per_round": 0.0,
+    "isolated_invalid_per_round": 0.0,
+    "isolated_mean_action_ms": 1.6561435461044312
+  },
+  "decision": "Promote the 0.08 inference Q bias. It keeps 88.2% of measured target-free endgame activity inside the central 11x11 box while preserving the strongest locked-suite mean score."
+}

@@ -14,7 +14,7 @@ Each entry records:
 
 ## 2026-08-24
 
-### Day 12 — soft central 11x11 endgame preference (in progress)
+### Day 12 — soft central 11x11 endgame preference
 
 - **Change:** Added a tunable soft preference for the inclusive central box
   `x,y in [3,13]`, active only after coins and crates are gone while opponents
@@ -26,8 +26,17 @@ Each entry records:
   the six new feature columns. Escape remains controlled by the six-step safety
   mask; the center preference is not a hard movement restriction.
 - **Result:** All 18 tests pass, including exact old-weight migration and center
-  progress tests. Training and seed-separated evaluation are in progress; the
-  Day 11 submission remains recoverable and has not yet been replaced.
+  progress tests. The trained `0.20` potential was rejected: it raised central
+  occupancy only from 28.8% to 33.4% while reducing paired mean score from 4.47
+  to 3.73. Restoring the Day 11 weights and applying a `0.08` inference Q bias
+  raised central occupancy to 88.2%, reduced mean box distance from 1.60 to
+  0.18 tiles, and reduced suicides from 0.63 to 0.43 in the paired 30-round
+  comparison. Its 120-round locked-suite mean score was 6.53 versus Day 11's
+  6.41, so the lightweight bias was promoted and the training potential default
+  was disabled. The resulting 262,673-byte archive has SHA-256
+  `AAA79E5B65C01A5DFEB2CE278133B67EE83BCFB78F13CEBC167BEB28417E0130`;
+  an isolated five-round run averaged 7.6 points with zero suicides or invalid
+  actions and confirmed automatic checkpoint migration works after extraction.
 - **Commit:** this commit
 
 ### Day 11 — endgame anti-stall candidate
