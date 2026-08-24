@@ -32,8 +32,9 @@ separate; raw framework output under `results/` stays local.
 ## Watch the frozen agent
 
 On Windows, double-click `watch_agent.cmd` to watch the frozen Dueling DDQN
-play one seeded classic round against three supplied rule-based agents. The blue
-player is `dueling_ddqn_agent`. The match is also saved locally as
+play one seeded classic round against three supplied rule-based agents. The pink
+player is `dueling_ddqn_agent` (the framework assigns colors by popping the
+configured list). The match is also saved locally as
 `replays/visual_demo.pt` for replay. The GUI requires `pygame`; install it with
 `python -m pip install pygame` if the launcher reports that it is missing.
 

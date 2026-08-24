@@ -28,7 +28,9 @@ Each entry records:
   `9AC03D4E900C0FDEE981D4BDE083A55FDFB28FFBA2CAE77726EFF2A437254822`.
   The native GUI opened successfully as `BombeRLe | Round #1`. Docker remains
   uninstalled until BIOS/UEFI virtualization is enabled and WSL 2 is installed.
-  The frozen submission archive and model were not modified.
+  Replay inspection later confirmed that the first configured agent is rendered
+  pink, not blue; the README identification was corrected. The frozen
+  submission archive and model were not modified.
 - **Commit:** this commit
 
 ### Day 10 — candidate freeze and submission package
