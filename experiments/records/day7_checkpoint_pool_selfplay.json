@@ -1,0 +1,49 @@
+{
+  "experiment": "day7_checkpoint_pool_selfplay",
+  "training": {
+    "seed": 6301,
+    "rounds": 50,
+    "starting_checkpoint": "experiments/checkpoints/day6_ddqn_coin_collectors_final.pt",
+    "opponents": [
+      "frozen_ddqn_day4",
+      "frozen_ddqn_peaceful",
+      "frozen_ddqn_safe"
+    ],
+    "environment_steps": 74892,
+    "learner_updates": 17219,
+    "output_checkpoint": "experiments/checkpoints/day7_ddqn_checkpoint_pool.pt"
+  },
+  "full_pool_evaluation": {
+    "seed": 7301,
+    "rounds": 20,
+    "mean_score": 2.3,
+    "coins_per_round": 1.55,
+    "crates_per_round": 29.2,
+    "kills_per_round": 0.15,
+    "suicides_per_round": 0.4,
+    "invalid_per_round": 0.3,
+    "mean_action_ms": 2.9326820373535156
+  },
+  "fair_ablation": {
+    "seed": 7302,
+    "rounds_per_candidate": 20,
+    "common_opponents": [
+      "frozen_ddqn_day4",
+      "frozen_ddqn_peaceful",
+      "rule_based_agent"
+    ],
+    "day7_selfplay": {
+      "mean_score": 3.15,
+      "kills_per_round": 0.15,
+      "suicides_per_round": 0.45,
+      "invalid_per_round": 0.4
+    },
+    "day6_safe": {
+      "mean_score": 2.6,
+      "kills_per_round": 0.05,
+      "suicides_per_round": 0.45,
+      "invalid_per_round": 3.45
+    }
+  },
+  "conclusion": "Checkpoint-pool self-play improved score, kills, and action validity over the Day 6 safe checkpoint under an identical lineup without increasing suicides."
+}

@@ -48,6 +48,10 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    round. The coin-collector stage reduced suicides to 0.05 but collapsed to
    zero kills, so both checkpoints are retained for the Day 7 opponent pool.
 7. Add an opponent checkpoint pool and self-play against frozen snapshots.
+   Completed with Day 4 aggressive, Day 6 high-scoring, and Day 6 safe frozen
+   policies. A 50-round self-play stage improved score from 2.6 to 3.15 and
+   kills from 0.05 to 0.15 on an identical 20-round ablation lineup, while
+   suicides remained equal and invalid actions fell from 3.45 to 0.4.
 8. Tune on training seeds and evaluate on a locked seed suite against all
    supplied agents.
 9. Run ablations, timing tests, and long tournament-style matches.

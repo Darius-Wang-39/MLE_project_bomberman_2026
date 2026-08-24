@@ -14,6 +14,19 @@ Each entry records:
 
 ## 2026-08-24
 
+### Day 7 — frozen checkpoint pool and self-play
+
+- **Change:** Added three independent frozen DDQN adapters for the Day 4
+  aggressive, Day 6 high-scoring, and Day 6 conservative checkpoints; trained
+  the live candidate against all three for 50 rounds and froze the result.
+- **Method:** Each opponent loads a physically separate checkpoint and runs only
+  inference. Evaluation used a 20-round full-pool seed plus a fair 20-round
+  ablation where Day 6 and Day 7 faced the exact same three opponents and seed.
+- **Result:** On the fair ablation, Day 7 scored 3.15 versus 2.6, achieved 0.15
+  versus 0.05 kills, and reduced invalid actions from 3.45 to 0.4 while both
+  candidates had 0.45 suicides per round. The self-play checkpoint is retained.
+- **Commit:** this commit
+
 ### Day 6 — staged opponent curriculum
 
 - **Change:** Trained and froze two 50-round DDQN stages against three peaceful
