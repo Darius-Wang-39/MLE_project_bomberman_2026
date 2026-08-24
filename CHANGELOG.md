@@ -12,6 +12,24 @@ Each entry records:
 - **Result**: measurable outcome or current status.
 - **Commit**: the related Git commit, added after committing when practical.
 
+## 2026-08-24
+
+### Day 5 — rule demonstrations and behaviour cloning
+
+- **Change:** Added a development-only rule demonstration collector, a
+  round-disjoint behaviour-cloning pretrainer, a separate BC evaluation adapter,
+  two tests, the dataset, checkpoint, and comparison record.
+- **Method:** Collected 11,627 state/action samples over 50 seeded four-player
+  rounds. D4 augmentation was applied online during 15 supervised epochs; entire
+  rounds, not random frames, were held out for validation. The same 20-round
+  lineup and seed compared the BC policy with the existing RL checkpoint.
+- **Result:** Held-out teacher-action accuracy was 69.2%. BC scored 2.9 versus
+  5.25 for the RL checkpoint, so BC is useful only as a warm start. The supplied
+  teacher returned `None` 185 times; the collector now counts these and applies
+  an explicit safe fallback. A first CLI run also exposed and fixed a project
+  import-path error. All 12 tests pass.
+- **Commit:** this commit
+
 ## 2026-08-16
 
 ### Team collaboration workflow

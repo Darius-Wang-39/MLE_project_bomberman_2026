@@ -1,0 +1,86 @@
+{
+  "dataset": "experiments\\demonstrations\\day5_rule_classic_seed5101.npz",
+  "output": "experiments\\checkpoints\\day5_bc_rule_seed6101.pt",
+  "samples": 11627,
+  "rounds": 50,
+  "train_samples": 9350,
+  "validation_samples": 2277,
+  "unsafe_teacher_fraction": 0.0006020469596628537,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.7124518309047516,
+      "validation_accuracy": 0.41238471673254284
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.4466584060281356,
+      "validation_accuracy": 0.554238032498902
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.1406220637285773,
+      "validation_accuracy": 0.582784365393061
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9229329486709228,
+      "validation_accuracy": 0.6144049187527448
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.7882899450108329,
+      "validation_accuracy": 0.653052261747914
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.7241163657693301,
+      "validation_accuracy": 0.6701800614844093
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.6852280304011177,
+      "validation_accuracy": 0.6859903381642513
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.6615073961752621,
+      "validation_accuracy": 0.6895037329819939
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.6441603145752361,
+      "validation_accuracy": 0.6921387790953009
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.6303070362493953,
+      "validation_accuracy": 0.6921387790953009
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.6175651830530422,
+      "validation_accuracy": 0.6912604303908652
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.610715992080974,
+      "validation_accuracy": 0.6886253842775582
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.6050555454855934,
+      "validation_accuracy": 0.6859903381642513
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.5938785004233293,
+      "validation_accuracy": 0.6903820816864296
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.5853048020186908,
+      "validation_accuracy": 0.6921387790953009
+    }
+  ]
+}

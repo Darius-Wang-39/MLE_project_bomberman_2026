@@ -1,0 +1,50 @@
+{
+  "experiment": "day5_behavior_cloning_warm_start",
+  "demonstrations": {
+    "path": "experiments/demonstrations/day5_rule_classic_seed5101.npz",
+    "seed": 5101,
+    "rounds": 50,
+    "samples": 11627,
+    "teacher_fallbacks": 185,
+    "unsafe_teacher_fraction": 0.0006020469596628537,
+    "bomb_actions": 1029
+  },
+  "pretraining": {
+    "seed": 6101,
+    "epochs": 15,
+    "train_samples": 9350,
+    "validation_samples": 2277,
+    "validation_split": "held-out complete rounds",
+    "validation_accuracy": 0.6921387790953009,
+    "checkpoint": "experiments/checkpoints/day5_bc_rule_seed6101.pt"
+  },
+  "evaluation": {
+    "seed": 7101,
+    "rounds": 20,
+    "lineup": [
+      "candidate",
+      "peaceful_agent",
+      "coin_collector_agent",
+      "rule_based_agent"
+    ],
+    "behavior_clone": {
+      "mean_score": 2.9,
+      "coins_per_round": 1.15,
+      "crates_per_round": 14.85,
+      "kills_per_round": 0.35,
+      "suicides_per_round": 0.4,
+      "invalid_per_round": 2.2,
+      "mean_action_ms": 3.0486458622101
+    },
+    "rl_checkpoint": {
+      "mean_score": 5.25,
+      "coins_per_round": 3.0,
+      "crates_per_round": 40.45,
+      "kills_per_round": 0.45,
+      "suicides_per_round": 0.7,
+      "invalid_per_round": 1.1,
+      "mean_action_ms": 2.877653476803802
+    }
+  },
+  "conclusion": "Behaviour cloning learns a useful initialization but does not replace RL fine-tuning; the cloned policy inherited risky teacher behaviour and underperformed the RL checkpoint."
+}

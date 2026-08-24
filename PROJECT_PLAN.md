@@ -37,7 +37,11 @@ room for behaviour-cloning warm-start data from the supplied `rule_based_agent`.
    and 8.65 coins on a 20-round held-out seed, with zero suicides and invalid
    actions; opponent pressure and round efficiency remain untested.
 5. Generate rule-agent demonstrations and test behaviour-cloning/replay warm
-   starts.
+   starts. Completed with 11,627 transitions from 50 four-player rounds and a
+   round-disjoint validation split. Behaviour cloning reached 69.2% held-out
+   teacher-action accuracy, but its 2.9 mean match score trailed the RL
+   checkpoint's 5.25, so it is retained as an initialization rather than a
+   final policy.
 6. Train the bomb-and-escape curriculum against `peaceful_agent` and
    `coin_collector_agent`.
 7. Add an opponent checkpoint pool and self-play against frozen snapshots.
