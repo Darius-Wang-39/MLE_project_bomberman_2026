@@ -1,0 +1,58 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 52,
+            "coins": 4,
+            "crates": 33,
+            "moves": 332,
+            "rounds": 1,
+            "score": 4,
+            "steps": 400,
+            "time": 1.7495172023773193
+        },
+        "rule_based_agent_0": {
+            "bombs": 17,
+            "coins": 2,
+            "crates": 21,
+            "invalid": 8,
+            "moves": 151,
+            "rounds": 1,
+            "score": 2,
+            "steps": 176,
+            "suicides": 1,
+            "time": 0.12798404693603516
+        },
+        "rule_based_agent_1": {
+            "bombs": 15,
+            "coins": 2,
+            "crates": 38,
+            "invalid": 4,
+            "moves": 141,
+            "rounds": 1,
+            "score": 2,
+            "steps": 160,
+            "suicides": 1,
+            "time": 0.11430621147155762
+        },
+        "rule_based_agent_2": {
+            "bombs": 17,
+            "coins": 1,
+            "crates": 31,
+            "invalid": 9,
+            "moves": 185,
+            "rounds": 1,
+            "score": 1,
+            "steps": 211,
+            "suicides": 1,
+            "time": 0.17034387588500977
+        }
+    },
+    "by_round": {
+        "Day18-safe-target-v2 | Round 01 (2026-08-26 20-43-48)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        }
+    }
+}

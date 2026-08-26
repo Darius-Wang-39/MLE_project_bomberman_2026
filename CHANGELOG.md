@@ -14,6 +14,39 @@ Each entry records:
 
 ## 2026-08-26
 
+### Day 18 — senior target guidance and active opening recovery
+
+- **Change:** Studied the senior repository at commit `a7fe504` and adapted its
+  strongest idea: use a BFS-style planner to mark an explicit target action for
+  coins, productive crate positions, and opponents. Added a `1.00` inference
+  bias and `0.50` training reward for following that target. A carefully scoped
+  opening exception permits a productive one-branch bomb only before step 121
+  when there are no bombs, explosions, or nearby opponents; normal play retains
+  the two-branch safety requirement. Recent-position memory grew from 8 to 32.
+- **Method:** Kept our Dueling Double DQN, five-step targets, PER, and D4 replay
+  rather than copying the senior model or weights. Trained 50 target-curriculum
+  rounds against peaceful opponents and 75 retention rounds against rule-based
+  opponents. Compared both checkpoints on the same 50 unseen seed-`9801`
+  rounds and replayed the original bad-opening seed `9602`.
+- **Result:** On seed `9602`, the first bomb moved from step 135 to step 2 and
+  bombs in the first 120 steps rose from 0 to 11; the promoted model survived
+  all 400 steps. In the paired evaluation, the target stage averaged 3.94 score,
+  0.28 kills, and 0.22 suicides versus the later stage's 2.84 score, 0.10 kills,
+  and 0.08 suicides. The target stage was promoted because the later stage again
+  became passive and raised invalid actions from 80 to 187. A second seed then
+  exposed crate-adjacent targets where no safe bomb was possible; filtering
+  every candidate target through a hypothetical escape simulation moved that
+  seed's first bomb from step 129 to step 2 and first-120-step bombs from 0 to
+  13. The final post-fix 50-round evaluation averaged 3.62 score, 0.20 kills,
+  0.20 suicides, 37.82 bombs, and 29.84 destroyed crates per round at 4.36
+  ms/action. All 27 tests pass.
+  The promoted checkpoint SHA-256 is
+  `709CCA4351F3BC5893F766B01B8C9335FA299D25331A275AE281B123DF31009A`.
+  The rebuilt 282,920-byte submission ZIP passed CRC and syntax checks and has
+  SHA-256
+  `D6548DB49BDBAB6CB2668178073EA40CA7F0679E1675C31EAF5C981DF04D5E22`.
+- **Commit:** this commit
+
 ### Day 17 — robust bomb safety and retraining
 
 - **Change:** Replaced the one-path bomb-safety test with a hard requirement for

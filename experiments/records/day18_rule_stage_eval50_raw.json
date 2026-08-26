@@ -1,0 +1,358 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 1346,
+            "coins": 117,
+            "crates": 1110,
+            "invalid": 187,
+            "kills": 5,
+            "moves": 14912,
+            "rounds": 50,
+            "score": 142,
+            "steps": 17258,
+            "suicides": 4,
+            "time": 56.61672568321228
+        },
+        "rule_based_agent_0": {
+            "bombs": 862,
+            "coins": 91,
+            "crates": 1512,
+            "invalid": 337,
+            "kills": 7,
+            "moves": 8787,
+            "rounds": 50,
+            "score": 126,
+            "steps": 10016,
+            "suicides": 36,
+            "time": 7.638961553573608
+        },
+        "rule_based_agent_1": {
+            "bombs": 994,
+            "coins": 118,
+            "crates": 1696,
+            "invalid": 394,
+            "kills": 14,
+            "moves": 10061,
+            "rounds": 50,
+            "score": 188,
+            "steps": 11498,
+            "suicides": 28,
+            "time": 8.774468421936035
+        },
+        "rule_based_agent_2": {
+            "bombs": 1148,
+            "coins": 124,
+            "crates": 1783,
+            "invalid": 410,
+            "kills": 10,
+            "moves": 11698,
+            "rounds": 50,
+            "score": 174,
+            "steps": 13330,
+            "suicides": 25,
+            "time": 10.240091323852539
+        }
+    },
+    "by_round": {
+        "Day18-rule-stage-eval50 | Round 01 (2026-08-26 20-33-54)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 02 (2026-08-26 20-33-57)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 03 (2026-08-26 20-33-59)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 04 (2026-08-26 20-34-02)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 231,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 05 (2026-08-26 20-34-03)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 06 (2026-08-26 20-34-05)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 07 (2026-08-26 20-34-07)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 08 (2026-08-26 20-34-09)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 09 (2026-08-26 20-34-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 285,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 10 (2026-08-26 20-34-12)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 11 (2026-08-26 20-34-14)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 215,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 12 (2026-08-26 20-34-15)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 13 (2026-08-26 20-34-17)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 14 (2026-08-26 20-34-19)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 15 (2026-08-26 20-34-21)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 245,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 16 (2026-08-26 20-34-22)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 17 (2026-08-26 20-34-23)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 18 (2026-08-26 20-34-25)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 19 (2026-08-26 20-34-27)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 20 (2026-08-26 20-34-29)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 21 (2026-08-26 20-34-31)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 22 (2026-08-26 20-34-33)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 23 (2026-08-26 20-34-35)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 24 (2026-08-26 20-34-38)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 25 (2026-08-26 20-34-40)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 26 (2026-08-26 20-34-42)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 27 (2026-08-26 20-34-44)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 28 (2026-08-26 20-34-47)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 29 (2026-08-26 20-34-49)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 294,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 30 (2026-08-26 20-34-49)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 31 (2026-08-26 20-34-52)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 32 (2026-08-26 20-34-53)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 33 (2026-08-26 20-34-55)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 322,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 34 (2026-08-26 20-34-57)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 35 (2026-08-26 20-34-59)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 36 (2026-08-26 20-35-00)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 232,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 37 (2026-08-26 20-35-01)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 38 (2026-08-26 20-35-03)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 39 (2026-08-26 20-35-06)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 40 (2026-08-26 20-35-08)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 41 (2026-08-26 20-35-10)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 42 (2026-08-26 20-35-12)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-stage-eval50 | Round 43 (2026-08-26 20-35-14)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 44 (2026-08-26 20-35-16)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 45 (2026-08-26 20-35-18)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 46 (2026-08-26 20-35-20)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 47 (2026-08-26 20-35-22)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 248,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 48 (2026-08-26 20-35-23)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 249,
+            "suicides": 2
+        },
+        "Day18-rule-stage-eval50 | Round 49 (2026-08-26 20-35-23)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-stage-eval50 | Round 50 (2026-08-26 20-35-25)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        }
+    }
+}

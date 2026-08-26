@@ -1,28 +1,28 @@
 {
   "agent": "dueling_ddqn_agent",
   "archive": "dueling_ddqn_agent.zip",
-  "archive_bytes": 288265,
-  "archive_sha256": "80769c272d7f861903bcf2e76c5af08b0313073bb8c4852580c19ab7c0f2e7e8",
+  "archive_bytes": 282920,
+  "archive_sha256": "d6548db49bdbab6cb2668178073ea40ca7f0679e1675c31eaf5c981df04d5e22",
   "files": [
     {
       "path": "dueling_ddqn_agent/README.md",
-      "bytes": 2345,
-      "sha256": "eeac8f2034e07b7cf66f7849eba84f9c1d305de1b432c06952eaac895e4fbdca"
+      "bytes": 2966,
+      "sha256": "357e4feac3cd214124705a5090333852b7b68f2c871cdb965f1eb5db6f511a20"
     },
     {
       "path": "dueling_ddqn_agent/callbacks.py",
-      "bytes": 5494,
-      "sha256": "f1e66259e18c08fa3e6ddff0eb8a461b193a2add6e73e287534e7e464ba2e43b"
+      "bytes": 5805,
+      "sha256": "75626b72aed5818fce7babb901b2a4d42cfa08a35344ea2f7b85ae1fef4334d1"
     },
     {
       "path": "dueling_ddqn_agent/dueling_ddqn_model.pt",
-      "bytes": 368095,
-      "sha256": "59355cd064ea4be9996a7da1a490cfc9772494db6dfb1d5e894cda550d87acb8"
+      "bytes": 377119,
+      "sha256": "709cca4351f3bc5893f766b01b8c9335fa299d25331a275ae281b123df31009a"
     },
     {
       "path": "dueling_ddqn_agent/features.py",
-      "bytes": 21678,
-      "sha256": "342100e6fd7771e3beb0cab2f5f0c1488780de63660d73d469010edabbb8c377"
+      "bytes": 27224,
+      "sha256": "28c2cf5e706c36ec1b3228c120e38cd9b20bf76c505ada92b69c352cf9bad0bf"
     },
     {
       "path": "dueling_ddqn_agent/model.py",
@@ -41,8 +41,8 @@
     },
     {
       "path": "dueling_ddqn_agent/train.py",
-      "bytes": 10651,
-      "sha256": "15ebb14a0092d7fdb6d880fdd810754e57b367e05bb0aeb50172c63f89ecf5ee"
+      "bytes": 11113,
+      "sha256": "542fe6402fc3ef93e996c1bcd4c2149522e1979effa0c2aee05cfe8755f9538c"
     }
   ],
   "verification": {

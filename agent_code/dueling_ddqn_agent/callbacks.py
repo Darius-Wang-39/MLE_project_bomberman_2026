@@ -21,7 +21,8 @@ EPSILON_MIN = 0.05
 EPSILON_DECAY_STEPS = 120_000.0
 HUNT_CENTER_Q_BIAS = 0.08
 REVISIT_Q_PENALTY = 0.60
-REVISIT_HISTORY_LENGTH = 8
+REVISIT_HISTORY_LENGTH = 32
+OBJECTIVE_Q_BIAS = 1.00
 
 
 def migrate_policy_input(policy_state, target_state):
@@ -110,7 +111,12 @@ def act(self, game_state: dict) -> str:
         self.position_round = game_state["round"]
     revisit_penalties = np.zeros(len(ACTIONS), dtype=np.float32)
     danger_index = FEATURE_NAMES.index("target_danger")
-    if not allowed[ACTIONS.index("BOMB")]:
+    hunt_phase = (
+        not game_state["coins"]
+        and not np.any(game_state["field"] == 1)
+        and bool(game_state["others"])
+    )
+    if hunt_phase or not allowed[ACTIONS.index("BOMB")]:
         for index, action in enumerate(ACTIONS):
             if action == "BOMB" or action_features[index, danger_index] > 0.0:
                 continue
@@ -130,9 +136,11 @@ def act(self, game_state: dict) -> str:
     with torch.no_grad():
         q_values = self.policy_net(state).squeeze(0).cpu().numpy()
     center_index = FEATURE_NAMES.index("hunt_center_progress")
+    objective_index = FEATURE_NAMES.index("objective_target")
     q_values = (
         q_values
         + self.hunt_center_q_bias * action_features[:, center_index]
+        + OBJECTIVE_Q_BIAS * action_features[:, objective_index]
         - revisit_penalties
     )
     masked_q = np.where(allowed, q_values, -np.inf)

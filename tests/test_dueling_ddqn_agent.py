@@ -7,7 +7,12 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 
-from agent_code.dueling_ddqn_agent.callbacks import HUNT_CENTER_Q_BIAS, INPUT_DIM, migrate_policy_input
+from agent_code.dueling_ddqn_agent.callbacks import (
+    HUNT_CENTER_Q_BIAS,
+    INPUT_DIM,
+    OBJECTIVE_Q_BIAS,
+    migrate_policy_input,
+)
 from agent_code.dueling_ddqn_agent.features import (
     ACTIONS,
     FEATURE_NAMES,
@@ -21,10 +26,12 @@ from agent_code.dueling_ddqn_agent.train import (
     HUNT_REVISIT_PENALTY,
     LOW_VALUE_BOMB_PENALTY,
     MIDGAME_PRODUCTIVE_REVISIT_PENALTY,
+    OBJECTIVE_ACTION_REWARD,
     SAFE_PRODUCTIVE_BOMB_REWARD,
     SUICIDE_PENALTY_MULTIPLIER,
     _bomb_quality_penalty,
     _hunt_stall_penalty,
+    _objective_action_reward,
 )
 import events as e
 from agent_code.dueling_ddqn_agent.symmetry import (
@@ -60,7 +67,7 @@ class DuelingDDQNTests(unittest.TestCase):
     def test_appended_center_feature_checkpoint_migration(self):
         target = DuelingQNetwork(INPUT_DIM, len(ACTIONS)).state_dict()
         new_feature_count = len(FEATURE_NAMES)
-        old_feature_count = new_feature_count - 3
+        old_feature_count = new_feature_count - 4
         old_width = len(ACTIONS) * old_feature_count
         old = {key: value.clone() for key, value in target.items()}
         old_weight = torch.arange(
@@ -120,7 +127,7 @@ class DuelingDDQNTests(unittest.TestCase):
             extractor.action_features(empty)[ACTIONS.index("BOMB"), feature_index], 0.0
         )
 
-    def test_bomb_requires_two_independent_escape_branches(self):
+    def test_quiet_opening_allows_one_productive_escape_branch(self):
         extractor = FeatureExtractor()
         state = sample_state()
         state["field"][1, 2] = 1
@@ -129,13 +136,16 @@ class DuelingDDQNTests(unittest.TestCase):
 
         self.assertEqual(extractor.bomb_escape_branch_count(state), 1)
         self.assertEqual(MIN_BOMB_ESCAPE_BRANCHES, 2)
-        self.assertFalse(extractor.safe_action_mask(state)[ACTIONS.index("BOMB")])
+        self.assertTrue(extractor.safe_action_mask(state)[ACTIONS.index("BOMB")])
         self.assertEqual(
             extractor.action_features(state)[
                 ACTIONS.index("BOMB"), FEATURE_NAMES.index("safe_productive_bomb")
             ],
-            0.0,
+            1.0,
         )
+
+        state["step"] = 121
+        self.assertFalse(extractor.safe_action_mask(state)[ACTIONS.index("BOMB")])
 
     def test_bomb_schedule_models_chain_reaction(self):
         extractor = FeatureExtractor()
@@ -146,6 +156,19 @@ class DuelingDDQNTests(unittest.TestCase):
 
         self.assertEqual(times[(4, 2)], 3)
         self.assertEqual(times[(2, 2)], 3)
+
+    def test_productive_targets_exclude_unescapable_bomb_tiles(self):
+        extractor = FeatureExtractor()
+        state = sample_state()
+        state["field"][3, 2] = 1
+        self.assertIn((2, 2), extractor.productive_bomb_targets(state))
+
+        trapped = sample_state()
+        trapped["field"][1, 2] = 1
+        trapped["field"][2, 1] = -1
+        trapped["field"][2, 3] = -1
+        trapped["field"][3, 2] = -1
+        self.assertNotIn((2, 2), extractor.productive_bomb_targets(trapped))
 
     def test_low_value_bomb_penalty_spares_productive_bombs(self):
         extractor = FeatureExtractor()
@@ -161,6 +184,30 @@ class DuelingDDQNTests(unittest.TestCase):
             _bomb_quality_penalty(trainer, productive, "BOMB"),
             SAFE_PRODUCTIVE_BOMB_REWARD,
         )
+
+    def test_objective_target_prioritizes_coin_then_productive_bomb(self):
+        extractor = FeatureExtractor()
+        trainer = SimpleNamespace(feature_extractor=extractor)
+        coin_state = sample_state()
+        coin_state["coins"] = [(4, 2)]
+        features = extractor.action_features(coin_state)
+        target_index = FEATURE_NAMES.index("objective_target")
+        self.assertEqual(features[ACTIONS.index("RIGHT"), target_index], 1.0)
+        self.assertGreater(OBJECTIVE_Q_BIAS, 0.0)
+        self.assertEqual(
+            _objective_action_reward(trainer, coin_state, "RIGHT"),
+            OBJECTIVE_ACTION_REWARD,
+        )
+
+        bomb_state = sample_state()
+        bomb_state["field"][3, 2] = 1
+        bomb_features = extractor.action_features(bomb_state)
+        self.assertEqual(bomb_features[ACTIONS.index("BOMB"), target_index], 1.0)
+
+        hunt_state = sample_state()
+        hunt_state["others"] = [("enemy", 0, True, (6, 2))]
+        hunt_features = extractor.action_features(hunt_state)
+        self.assertEqual(hunt_features[ACTIONS.index("RIGHT"), target_index], 1.0)
 
     def test_hunt_center_progress_prefers_entering_central_box(self):
         extractor = FeatureExtractor()

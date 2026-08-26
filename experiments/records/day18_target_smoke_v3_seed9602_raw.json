@@ -1,0 +1,57 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 35,
+            "coins": 4,
+            "crates": 29,
+            "invalid": 5,
+            "moves": 343,
+            "rounds": 1,
+            "score": 4,
+            "steps": 400,
+            "time": 1.4424781799316406
+        },
+        "rule_based_agent_0": {
+            "bombs": 15,
+            "crates": 26,
+            "invalid": 8,
+            "moves": 167,
+            "rounds": 1,
+            "score": 0,
+            "steps": 190,
+            "time": 0.11960315704345703
+        },
+        "rule_based_agent_1": {
+            "bombs": 37,
+            "coins": 3,
+            "crates": 32,
+            "invalid": 22,
+            "kills": 1,
+            "moves": 339,
+            "rounds": 1,
+            "score": 8,
+            "steps": 400,
+            "time": 0.3560645580291748
+        },
+        "rule_based_agent_2": {
+            "bombs": 26,
+            "coins": 2,
+            "crates": 29,
+            "invalid": 9,
+            "kills": 1,
+            "moves": 231,
+            "rounds": 1,
+            "score": 7,
+            "steps": 266,
+            "time": 0.2086641788482666
+        }
+    },
+    "by_round": {
+        "Day18-target-smoke-v3 | Round 01 (2026-08-26 15-30-15)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        }
+    }
+}

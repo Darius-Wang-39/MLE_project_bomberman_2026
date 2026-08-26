@@ -1,0 +1,44 @@
+{
+  "experiment": "day18_senior_target_guidance",
+  "date": "2026-08-26",
+  "source": {
+    "repository": "https://github.com/Li-Jesse-Jiaze/MLE_project_bomberman",
+    "commit": "a7fe5041b02548ce4438e502ca3adb11576bae75",
+    "reference_files": [
+      "agent_code/feature_is_everything/features.py",
+      "agent_code/feature_is_everything/train.py",
+      "agent_code/dqn/features.py",
+      "agent_code/dqn/train.py"
+    ]
+  },
+  "adaptation": {
+    "objective_target_feature": true,
+    "objective_q_bias": 1.0,
+    "objective_action_reward": 0.5,
+    "priority_order": ["escape", "visible_coin", "productive_bomb", "crate_position", "opponent"],
+    "opening_single_branch_max_step": 120,
+    "opening_single_branch_min_survival": 1,
+    "opening_single_branch_min_opponent_distance": 5,
+    "productive_target_requires_simulated_escape": true,
+    "revisit_history_length": 32
+  },
+  "training": [
+    {
+      "stage": "target_curriculum",
+      "rounds": 50,
+      "seed": 9701,
+      "opponents": ["peaceful_agent", "peaceful_agent", "peaceful_agent"]
+    },
+    {
+      "stage": "rule_retention",
+      "rounds": 75,
+      "seed": 9702,
+      "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"]
+    }
+  ],
+  "evaluation": {
+    "rounds": 50,
+    "seed": 9801,
+    "opening_regression_seed": 9602
+  }
+}

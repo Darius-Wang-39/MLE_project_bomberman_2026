@@ -22,6 +22,9 @@ HUNT_CENTER_MIN = 3
 HUNT_CENTER_MAX = 13
 HUNT_CENTER_WEIGHT = 0.0
 MIN_BOMB_ESCAPE_BRANCHES = 2
+OPENING_SINGLE_BRANCH_MAX_STEP = 120
+OPENING_SINGLE_BRANCH_MIN_SURVIVAL = 1
+OPENING_SINGLE_BRANCH_MIN_OPPONENT_DISTANCE = 5
 
 FEATURE_NAMES = (
     "bias",
@@ -45,6 +48,7 @@ FEATURE_NAMES = (
     "bomb_trap_pressure",
     "armed_opponent_threat",
     "safe_productive_bomb",
+    "objective_target",
 )
 
 
@@ -76,6 +80,8 @@ class FeatureExtractor:
         self.hunt_center_min = hunt_center_min
         self.hunt_center_max = hunt_center_max
         self.hunt_center_weight = hunt_center_weight
+        self._productive_target_cache_key = None
+        self._productive_target_cache: Set[Tuple[int, int]] = set()
 
     @property
     def feature_count(self) -> int:
@@ -238,6 +244,40 @@ class FeatureExtractor:
                 branches += 1
         return branches
 
+    def bomb_safety_is_acceptable(
+        self,
+        game_state: Dict,
+        survival_count: int | None = None,
+        branch_count: int | None = None,
+    ) -> bool:
+        """Use two escape branches normally, but allow a quiet opening bomb."""
+        if survival_count is None:
+            survival_count = self.survival_count(game_state, "BOMB")
+        if survival_count <= 0:
+            return False
+        if branch_count is None:
+            branch_count = self.bomb_escape_branch_count(game_state)
+        if branch_count >= MIN_BOMB_ESCAPE_BRANCHES:
+            return True
+
+        field = game_state["field"]
+        position = tuple(game_state["self"][-1])
+        productive = any(field[tile] == 1 for tile in self.blast_tiles(field, position))
+        opponent_distances = [
+            abs(position[0] - int(other[-1][0])) + abs(position[1] - int(other[-1][1]))
+            for other in game_state["others"]
+        ]
+        nearest_opponent = min(opponent_distances, default=99)
+        return bool(
+            branch_count == 1
+            and productive
+            and int(game_state.get("step", 1)) <= OPENING_SINGLE_BRANCH_MAX_STEP
+            and not game_state["bombs"]
+            and not np.any(game_state["explosion_map"] > 0)
+            and survival_count >= OPENING_SINGLE_BRANCH_MIN_SURVIVAL
+            and nearest_opponent >= OPENING_SINGLE_BRANCH_MIN_OPPONENT_DISTANCE
+        )
+
     def _reachable_positions(
         self,
         game_state: Dict,
@@ -306,7 +346,10 @@ class FeatureExtractor:
         )
         safe = legal & (survival > 0)
         bomb_index = ACTIONS.index("BOMB")
-        if safe[bomb_index] and self.bomb_escape_branch_count(game_state) < MIN_BOMB_ESCAPE_BRANCHES:
+        if safe[bomb_index] and not self.bomb_safety_is_acceptable(
+            game_state,
+            survival_count=int(survival[bomb_index]),
+        ):
             safe[bomb_index] = False
         if safe.any():
             return safe
@@ -366,6 +409,44 @@ class FeatureExtractor:
         opponent_map = self._distance_map(field, opponent_targets, bomb_positions)
         return coin_map, crate_map, opponent_map
 
+    def productive_bomb_targets(self, game_state: Dict) -> Set[Tuple[int, int]]:
+        """Return crate-bombing tiles with at least one static escape branch."""
+        field = game_state["field"]
+        cache_key = field.tobytes()
+        if cache_key == self._productive_target_cache_key:
+            return set(self._productive_target_cache)
+
+        targets: Set[Tuple[int, int]] = set()
+        empty_explosions = np.zeros_like(field, dtype=float)
+        identity = game_state["self"][:2]
+        for x, y in np.argwhere(field == 0):
+            position = (int(x), int(y))
+            if not any(field[tile] == 1 for tile in self.blast_tiles(field, position)):
+                continue
+            hypothetical = {
+                "round": game_state.get("round", 1),
+                "step": 1,
+                "field": field,
+                "self": (*identity, True, position),
+                "others": [],
+                "bombs": [],
+                "coins": [],
+                "explosion_map": empty_explosions,
+            }
+            survival = self.survival_count(hypothetical, "BOMB")
+            if survival >= OPENING_SINGLE_BRANCH_MIN_SURVIVAL and self.bomb_escape_branch_count(hypothetical) >= 1:
+                targets.add(position)
+
+        self._productive_target_cache_key = cache_key
+        self._productive_target_cache = set(targets)
+        return targets
+
+    def productive_bomb_target_map(self, game_state: Dict) -> np.ndarray:
+        field = game_state["field"]
+        blocked = {tuple(position) for position, _ in game_state["bombs"]}
+        blocked.update(tuple(other[-1]) for other in game_state["others"])
+        return self._distance_map(field, self.productive_bomb_targets(game_state), blocked)
+
     @staticmethod
     def _progress(distance_map: np.ndarray, current: Tuple[int, int], target: Tuple[int, int]) -> float:
         before = distance_map[current]
@@ -414,6 +495,7 @@ class FeatureExtractor:
             dtype=float,
         )
         coin_map, crate_map, opponent_map = self._target_maps(game_state)
+        productive_bomb_map = self.productive_bomb_target_map(game_state)
         field = game_state["field"]
         current = tuple(game_state["self"][-1])
         current_danger = self._danger_score(game_state, current)
@@ -427,6 +509,12 @@ class FeatureExtractor:
         opponents = {tuple(other[-1]) for other in game_state["others"]}
         opponents_in_blast = sum(tile in opponents for tile in blast) / 3.0
         trap_pressure = self.bomb_trap_pressure(game_state)
+        bomb_branches = self.bomb_escape_branch_count(game_state)
+        bomb_safety_acceptable = self.bomb_safety_is_acceptable(
+            game_state,
+            survival_count=int(survival[ACTIONS.index("BOMB")]),
+            branch_count=bomb_branches,
+        )
 
         for index, action in enumerate(ACTIONS):
             target = _add(current, MOVE_DELTAS[action])
@@ -462,9 +550,48 @@ class FeatureExtractor:
                 action == "BOMB"
                 and legal[index]
                 and survival[index] > 0
-                and self.bomb_escape_branch_count(game_state) >= MIN_BOMB_ESCAPE_BRANCHES
+                and bomb_safety_acceptable
                 and crates_in_blast > 0
             )
+
+        safe = self.safe_action_mask(game_state)
+        objective = np.zeros(len(ACTIONS), dtype=bool)
+        safe_indices = np.flatnonzero(safe)
+        bomb_index = ACTIONS.index("BOMB")
+        if current_danger > 0.0 and safe_indices.size:
+            escape_score = features[:, 7] + features[:, 5]
+            best = np.max(escape_score[safe_indices])
+            objective = safe & np.isclose(escape_score, best)
+        elif game_state["coins"]:
+            coin_score = features[:, 8]
+            best = np.max(coin_score[safe_indices]) if safe_indices.size else 0.0
+            if best > 0.0:
+                objective = safe & np.isclose(coin_score, best)
+        if not objective.any() and safe[bomb_index] and crates_in_blast > 0.0:
+            objective[bomb_index] = True
+        if not objective.any():
+            crate_score = np.array(
+                [
+                    self._progress(productive_bomb_map, current, _add(current, MOVE_DELTAS[action]))
+                    if legal[index]
+                    else 0.0
+                    for index, action in enumerate(ACTIONS)
+                ],
+                dtype=float,
+            )
+            best = np.max(crate_score[safe_indices]) if safe_indices.size else 0.0
+            if best > 0.0:
+                objective = safe & np.isclose(crate_score, best)
+        if (
+            not objective.any()
+            and not np.any(field == 1)
+            and bool(game_state["others"])
+        ):
+            opponent_score = features[:, 10]
+            best = np.max(opponent_score[safe_indices]) if safe_indices.size else 0.0
+            if best > 0.0:
+                objective = safe & np.isclose(opponent_score, best)
+        features[:, 21] = objective.astype(np.float64)
         return features
 
     def state_potential(self, game_state: Dict | None) -> float:

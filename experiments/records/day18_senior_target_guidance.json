@@ -1,0 +1,126 @@
+{
+  "experiment": "day18_senior_target_guidance",
+  "date": "2026-08-26",
+  "source": {
+    "repository": "https://github.com/Li-Jesse-Jiaze/MLE_project_bomberman",
+    "commit": "a7fe5041b02548ce4438e502ca3adb11576bae75",
+    "borrowed_concepts": [
+      "BFS-scored explicit target direction",
+      "coin-first then productive-crate target hierarchy",
+      "target-following reward shaping",
+      "safe productive bombing at the selected target tile"
+    ],
+    "not_copied": [
+      "network architecture",
+      "model weights",
+      "Q-table",
+      "reward magnitudes"
+    ]
+  },
+  "opening_regression": {
+    "seed": 9602,
+    "day17_first_bomb_step": 135,
+    "day17_bombs_first_120_steps": 0,
+    "day17_opening_cycle_period": 12,
+    "day18_first_bomb_step": 2,
+    "day18_bombs_first_120_steps": 11,
+    "day18_agent_steps": 400,
+    "day18_invalid_actions": 4
+  },
+  "second_opening_regression": {
+    "seed": 9902,
+    "before_safe_target_filter_first_bomb_step": 129,
+    "before_safe_target_filter_bombs_first_120_steps": 0,
+    "after_safe_target_filter_first_bomb_step": 2,
+    "after_safe_target_filter_bombs_first_120_steps": 13,
+    "after_safe_target_filter_score": 4,
+    "after_safe_target_filter_agent_steps": 400,
+    "after_safe_target_filter_suicides": 0
+  },
+  "training": {
+    "target_curriculum": {
+      "rounds": 50,
+      "score": 119,
+      "coins": 94,
+      "kills": 5,
+      "suicides": 0,
+      "bombs": 783,
+      "crates": 1260,
+      "invalid_actions": 1
+    },
+    "rule_retention": {
+      "rounds": 75,
+      "score": 244,
+      "coins": 174,
+      "kills": 14,
+      "suicides": 13,
+      "bombs": 1714,
+      "crates": 1621,
+      "invalid_actions": 218
+    }
+  },
+  "paired_evaluation": {
+    "seed": 9801,
+    "rounds": 50,
+    "target_curriculum_stage": {
+      "score": 197,
+      "mean_score": 3.94,
+      "coins": 127,
+      "kills": 14,
+      "suicides": 11,
+      "suicides_per_round": 0.22,
+      "bombs": 1867,
+      "crates": 1231,
+      "invalid_actions": 80,
+      "mean_action_ms": 3.02
+    },
+    "rule_retention_stage": {
+      "score": 142,
+      "mean_score": 2.84,
+      "coins": 117,
+      "kills": 5,
+      "suicides": 4,
+      "suicides_per_round": 0.08,
+      "bombs": 1346,
+      "crates": 1110,
+      "invalid_actions": 187,
+      "mean_action_ms": 3.28
+    }
+  },
+  "promotion": {
+    "checkpoint": "experiments/checkpoints/day18_target_curriculum_stage.pt",
+    "sha256": "709CCA4351F3BC5893F766B01B8C9335FA299D25331A275AE281B123DF31009A",
+    "reason": "Higher score, coins, kills, and activity with acceptable safety; the later stage became over-conservative and produced more invalid actions."
+  },
+  "final_safe_target_evaluation": {
+    "seed": 9801,
+    "rounds": 50,
+    "score": 181,
+    "mean_score": 3.62,
+    "coins": 131,
+    "kills": 10,
+    "kills_per_round": 0.20,
+    "suicides": 10,
+    "suicides_per_round": 0.20,
+    "bombs": 1891,
+    "bombs_per_round": 37.82,
+    "crates": 1492,
+    "crates_per_round": 29.84,
+    "invalid_actions": 75,
+    "invalid_actions_per_round": 1.50,
+    "mean_action_ms": 4.36
+  },
+  "visual_match": {
+    "seed": 9903,
+    "observed_step": 36,
+    "observed_score": 2,
+    "replay_saved": false,
+    "note": "The visible window was closed before the round completed; the full seed-9902 regression is preserved separately."
+  },
+  "submission": {
+    "archive_bytes": 282920,
+    "sha256": "D6548DB49BDBAB6CB2668178073EA40CA7F0679E1675C31EAF5C981DF04D5E22",
+    "zip_crc": "passed",
+    "python_syntax": "passed"
+  }
+}

@@ -1,0 +1,508 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 1714,
+            "coins": 174,
+            "crates": 1621,
+            "invalid": 218,
+            "kills": 14,
+            "moves": 20038,
+            "rounds": 75,
+            "score": 244,
+            "steps": 23807,
+            "suicides": 13,
+            "time": 85.93950963020325
+        },
+        "rule_based_agent_0": {
+            "bombs": 1300,
+            "coins": 159,
+            "crates": 2429,
+            "invalid": 488,
+            "kills": 17,
+            "moves": 13042,
+            "rounds": 75,
+            "score": 244,
+            "steps": 14870,
+            "suicides": 43,
+            "time": 11.243376016616821
+        },
+        "rule_based_agent_1": {
+            "bombs": 1112,
+            "coins": 159,
+            "crates": 2359,
+            "invalid": 448,
+            "kills": 6,
+            "moves": 10856,
+            "rounds": 75,
+            "score": 189,
+            "steps": 12431,
+            "suicides": 50,
+            "time": 8.503921747207642
+        },
+        "rule_based_agent_2": {
+            "bombs": 1477,
+            "coins": 154,
+            "crates": 2444,
+            "invalid": 536,
+            "kills": 13,
+            "moves": 15514,
+            "rounds": 75,
+            "score": 219,
+            "steps": 17603,
+            "suicides": 35,
+            "time": 12.87638783454895
+        }
+    },
+    "by_round": {
+        "Day18-rule-retention-train | Round 01 (2026-08-26 15-34-41)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 02 (2026-08-26 15-34-46)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 297,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 03 (2026-08-26 15-34-50)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 04 (2026-08-26 15-34-57)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 05 (2026-08-26 15-35-04)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 06 (2026-08-26 15-35-10)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 261,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 07 (2026-08-26 15-35-15)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 08 (2026-08-26 15-35-20)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 296,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 09 (2026-08-26 15-35-25)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 10 (2026-08-26 15-35-31)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 311,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 11 (2026-08-26 15-35-36)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 280,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 12 (2026-08-26 15-35-40)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 13 (2026-08-26 15-35-47)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 251,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 14 (2026-08-26 15-35-51)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 153,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 15 (2026-08-26 15-35-53)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 112,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 16 (2026-08-26 15-35-54)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 343,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 17 (2026-08-26 15-35-59)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 267,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 18 (2026-08-26 15-36-04)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 119,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 19 (2026-08-26 15-36-05)": {
+            "coins": 7,
+            "kills": 0,
+            "steps": 104,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 20 (2026-08-26 15-36-07)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 21 (2026-08-26 15-36-13)": {
+            "coins": 4,
+            "kills": 1,
+            "steps": 60,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 22 (2026-08-26 15-36-14)": {
+            "coins": 6,
+            "kills": 1,
+            "steps": 166,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 23 (2026-08-26 15-36-16)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 323,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 24 (2026-08-26 15-36-21)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 25 (2026-08-26 15-36-28)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 26 (2026-08-26 15-36-35)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 321,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 27 (2026-08-26 15-36-40)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 259,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 28 (2026-08-26 15-36-44)": {
+            "coins": 6,
+            "kills": 1,
+            "steps": 119,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 29 (2026-08-26 15-36-46)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 165,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 30 (2026-08-26 15-36-49)": {
+            "coins": 5,
+            "kills": 1,
+            "steps": 75,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 31 (2026-08-26 15-36-50)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 32 (2026-08-26 15-36-57)": {
+            "coins": 7,
+            "kills": 1,
+            "steps": 140,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 33 (2026-08-26 15-36-59)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 34 (2026-08-26 15-37-06)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 176,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 35 (2026-08-26 15-37-08)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 36 (2026-08-26 15-37-15)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 37 (2026-08-26 15-37-22)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 38 (2026-08-26 15-37-28)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 39 (2026-08-26 15-37-35)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 348,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 40 (2026-08-26 15-37-40)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 41 (2026-08-26 15-37-47)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 42 (2026-08-26 15-37-54)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 43 (2026-08-26 15-38-00)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 44 (2026-08-26 15-38-05)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 347,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 45 (2026-08-26 15-38-10)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 346,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 46 (2026-08-26 15-38-16)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 118,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 47 (2026-08-26 15-38-17)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 48 (2026-08-26 15-38-23)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 49 (2026-08-26 15-38-29)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 50 (2026-08-26 15-38-36)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 344,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 51 (2026-08-26 15-38-41)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 52 (2026-08-26 15-38-48)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 246,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 53 (2026-08-26 15-38-51)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 54 (2026-08-26 15-38-58)": {
+            "coins": 7,
+            "kills": 2,
+            "steps": 122,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 55 (2026-08-26 15-39-00)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 56 (2026-08-26 15-39-05)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 356,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 57 (2026-08-26 15-39-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 177,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 58 (2026-08-26 15-39-14)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 59 (2026-08-26 15-39-20)": {
+            "coins": 6,
+            "kills": 0,
+            "steps": 172,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 60 (2026-08-26 15-39-22)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 306,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 61 (2026-08-26 15-39-26)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 62 (2026-08-26 15-39-32)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 63 (2026-08-26 15-39-38)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 64 (2026-08-26 15-39-44)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-rule-retention-train | Round 65 (2026-08-26 15-39-50)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 230,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 66 (2026-08-26 15-39-53)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 67 (2026-08-26 15-39-59)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 97,
+            "suicides": 0
+        },
+        "Day18-rule-retention-train | Round 68 (2026-08-26 15-40-00)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 69 (2026-08-26 15-40-06)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 70 (2026-08-26 15-40-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-rule-retention-train | Round 71 (2026-08-26 15-40-18)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 72 (2026-08-26 15-40-24)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 73 (2026-08-26 15-40-30)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 74 (2026-08-26 15-40-36)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-rule-retention-train | Round 75 (2026-08-26 15-40-42)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        }
+    }
+}

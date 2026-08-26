@@ -25,6 +25,17 @@ Implemented components:
   Double-DQN target may select `BOMB`;
 - a recent-position Q penalty, active only when robust bomb safety rejects
   `BOMB`, so the agent changes route instead of oscillating in a narrow area;
+- a BFS-style `objective_target` feature adapted from the senior team's
+  target-marker design, with explicit coin, productive-crate, and endgame
+  opponent priorities;
+- productive crate targets are filtered by a hypothetical bomb simulation, so
+  the planner never walks toward a crate tile where it cannot subsequently
+  escape its own bomb;
+- a `+1.00` target-action inference bias and `+0.50` target-following training
+  reward;
+- a quiet-opening exception that permits a productive one-branch bomb only
+  before step 121, with no active explosion, no other bomb, and no nearby
+  opponent; the normal two-branch requirement remains active otherwise;
 - a `+0.30` training reward for safe productive bombs and a `-0.20` recent-tile
   revisit penalty when the agent could safely open a nearby crate instead of
   oscillating;
@@ -33,12 +44,11 @@ Implemented components:
 - a `2.5` suicide-penalty multiplier for future training, making the
   `KILLED_SELF` reward `-50` while leaving ordinary `GOT_KILLED` at `-15`.
 
-The bundled checkpoint is the Day 17 robust-safety stage trained with the
-current `2.5` multiplier. The strict safety-only evaluation reached 0.26
-suicides and 2.24 score per round. The final balanced controller reached 0.34
-suicides, 2.70 score, and 0.30 kills per round over 50 rule-agent rounds; on the
-visual regression seed, its longest opposite-direction loop was 5 moves rather
-than the safety-only controller's 75.
+The bundled checkpoint is the Day 18 target-curriculum stage trained with the
+current `2.5` multiplier. Against three rule-based agents the final controller
+averaged 3.62 score, 0.20 kills, and 0.20 suicides over 50 held-out rounds. On the original
+opening regression seed, the first bomb moved from step 135 to step 2 and the
+agent placed 11 bombs in the first 120 steps instead of zero.
 
 Training example:
 

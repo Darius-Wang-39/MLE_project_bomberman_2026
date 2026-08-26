@@ -1,0 +1,342 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 783,
+            "coins": 94,
+            "crates": 1260,
+            "invalid": 1,
+            "kills": 5,
+            "moves": 17269,
+            "rounds": 50,
+            "score": 119,
+            "steps": 20000,
+            "time": 51.99028444290161
+        },
+        "peaceful_agent_0": {
+            "invalid": 12634,
+            "moves": 7201,
+            "rounds": 50,
+            "score": 0,
+            "steps": 19835,
+            "time": 2.1497223377227783
+        },
+        "peaceful_agent_1": {
+            "invalid": 12420,
+            "moves": 7060,
+            "rounds": 50,
+            "score": 0,
+            "steps": 19480,
+            "time": 1.2958183288574219
+        },
+        "peaceful_agent_2": {
+            "invalid": 12534,
+            "moves": 7247,
+            "rounds": 50,
+            "score": 0,
+            "steps": 19781,
+            "time": 1.0619423389434814
+        }
+    },
+    "by_round": {
+        "Day18-target-curriculum-train | Round 01 (2026-08-26 15-30-51)": {
+            "coins": 3,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 02 (2026-08-26 15-30-56)": {
+            "coins": 4,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 03 (2026-08-26 15-31-00)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 04 (2026-08-26 15-31-04)": {
+            "coins": 3,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 05 (2026-08-26 15-31-08)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 06 (2026-08-26 15-31-12)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 07 (2026-08-26 15-31-15)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 08 (2026-08-26 15-31-19)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 09 (2026-08-26 15-31-22)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 10 (2026-08-26 15-31-26)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 11 (2026-08-26 15-31-29)": {
+            "coins": 4,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 12 (2026-08-26 15-31-35)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 13 (2026-08-26 15-31-38)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 14 (2026-08-26 15-31-42)": {
+            "coins": 5,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 15 (2026-08-26 15-31-47)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 16 (2026-08-26 15-31-50)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 17 (2026-08-26 15-31-54)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 18 (2026-08-26 15-31-57)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 19 (2026-08-26 15-32-00)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 20 (2026-08-26 15-32-04)": {
+            "coins": 4,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 21 (2026-08-26 15-32-09)": {
+            "coins": 1,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 22 (2026-08-26 15-32-13)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 23 (2026-08-26 15-32-17)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 24 (2026-08-26 15-32-20)": {
+            "coins": 4,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 25 (2026-08-26 15-32-26)": {
+            "coins": 6,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 26 (2026-08-26 15-32-31)": {
+            "coins": 7,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 27 (2026-08-26 15-32-36)": {
+            "coins": 6,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 28 (2026-08-26 15-32-41)": {
+            "coins": 4,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 29 (2026-08-26 15-32-46)": {
+            "coins": 7,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 30 (2026-08-26 15-32-51)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 31 (2026-08-26 15-32-54)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 32 (2026-08-26 15-32-58)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 33 (2026-08-26 15-33-01)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 34 (2026-08-26 15-33-05)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 35 (2026-08-26 15-33-09)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 36 (2026-08-26 15-33-12)": {
+            "coins": 5,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 37 (2026-08-26 15-33-17)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 38 (2026-08-26 15-33-21)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 39 (2026-08-26 15-33-24)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 40 (2026-08-26 15-33-28)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 41 (2026-08-26 15-33-32)": {
+            "coins": 6,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 42 (2026-08-26 15-33-36)": {
+            "coins": 5,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 43 (2026-08-26 15-33-42)": {
+            "coins": 6,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 44 (2026-08-26 15-33-47)": {
+            "coins": 3,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 45 (2026-08-26 15-33-52)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 46 (2026-08-26 15-33-55)": {
+            "coins": 5,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 47 (2026-08-26 15-34-01)": {
+            "coins": 4,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 48 (2026-08-26 15-34-06)": {
+            "coins": 2,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 49 (2026-08-26 15-34-11)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-target-curriculum-train | Round 50 (2026-08-26 15-34-14)": {
+            "coins": 0,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        }
+    }
+}

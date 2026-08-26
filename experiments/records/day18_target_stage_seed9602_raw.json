@@ -1,0 +1,57 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 48,
+            "coins": 3,
+            "crates": 29,
+            "invalid": 4,
+            "moves": 333,
+            "rounds": 1,
+            "score": 3,
+            "steps": 400,
+            "time": 1.2492094039916992
+        },
+        "rule_based_agent_0": {
+            "bombs": 27,
+            "coins": 2,
+            "crates": 26,
+            "invalid": 4,
+            "kills": 1,
+            "moves": 358,
+            "rounds": 1,
+            "score": 7,
+            "steps": 400,
+            "time": 0.29592275619506836
+        },
+        "rule_based_agent_1": {
+            "bombs": 16,
+            "coins": 4,
+            "crates": 37,
+            "invalid": 4,
+            "moves": 197,
+            "rounds": 1,
+            "score": 4,
+            "steps": 217,
+            "time": 0.12511730194091797
+        },
+        "rule_based_agent_2": {
+            "bombs": 14,
+            "crates": 24,
+            "invalid": 5,
+            "moves": 133,
+            "rounds": 1,
+            "score": 0,
+            "steps": 152,
+            "suicides": 1,
+            "time": 0.1082460880279541
+        }
+    },
+    "by_round": {
+        "Day18-target-stage-regression | Round 01 (2026-08-26 20-37-29)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        }
+    }
+}

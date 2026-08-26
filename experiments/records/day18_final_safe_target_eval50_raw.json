@@ -1,0 +1,358 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 1891,
+            "coins": 131,
+            "crates": 1492,
+            "invalid": 75,
+            "kills": 10,
+            "moves": 12764,
+            "rounds": 50,
+            "score": 181,
+            "steps": 15446,
+            "suicides": 10,
+            "time": 67.26742911338806
+        },
+        "rule_based_agent_0": {
+            "bombs": 912,
+            "coins": 108,
+            "crates": 1592,
+            "invalid": 332,
+            "kills": 5,
+            "moves": 9778,
+            "rounds": 50,
+            "score": 133,
+            "steps": 11064,
+            "suicides": 28,
+            "time": 9.79942011833191
+        },
+        "rule_based_agent_1": {
+            "bombs": 947,
+            "coins": 101,
+            "crates": 1569,
+            "invalid": 339,
+            "kills": 12,
+            "moves": 10276,
+            "rounds": 50,
+            "score": 161,
+            "steps": 11622,
+            "suicides": 30,
+            "time": 9.456261396408081
+        },
+        "rule_based_agent_2": {
+            "bombs": 937,
+            "coins": 107,
+            "crates": 1490,
+            "invalid": 339,
+            "kills": 5,
+            "moves": 10460,
+            "rounds": 50,
+            "score": 132,
+            "steps": 11788,
+            "suicides": 25,
+            "time": 9.446745872497559
+        }
+    },
+    "by_round": {
+        "Day18-final-safe-target-eval50 | Round 01 (2026-08-26 20-44-10)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 02 (2026-08-26 20-44-13)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-final-safe-target-eval50 | Round 03 (2026-08-26 20-44-15)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 04 (2026-08-26 20-44-17)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 05 (2026-08-26 20-44-20)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 220,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 06 (2026-08-26 20-44-21)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 07 (2026-08-26 20-44-24)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-final-safe-target-eval50 | Round 08 (2026-08-26 20-44-27)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 351,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 09 (2026-08-26 20-44-29)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 10 (2026-08-26 20-44-32)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 359,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 11 (2026-08-26 20-44-34)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 12 (2026-08-26 20-44-37)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 13 (2026-08-26 20-44-40)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 252,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 14 (2026-08-26 20-44-41)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 15 (2026-08-26 20-44-43)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 16 (2026-08-26 20-44-45)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 17 (2026-08-26 20-44-48)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 18 (2026-08-26 20-44-50)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 19 (2026-08-26 20-44-53)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 181,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 20 (2026-08-26 20-44-54)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 21 (2026-08-26 20-44-57)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 244,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 22 (2026-08-26 20-44-58)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 23 (2026-08-26 20-45-00)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 301,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 24 (2026-08-26 20-45-02)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 313,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 25 (2026-08-26 20-45-02)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 26 (2026-08-26 20-45-04)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-final-safe-target-eval50 | Round 27 (2026-08-26 20-45-08)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 28 (2026-08-26 20-45-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 29 (2026-08-26 20-45-12)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 30 (2026-08-26 20-45-14)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-final-safe-target-eval50 | Round 31 (2026-08-26 20-45-17)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 32 (2026-08-26 20-45-20)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 33 (2026-08-26 20-45-22)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 291,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 34 (2026-08-26 20-45-23)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 35 (2026-08-26 20-45-25)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 248,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 36 (2026-08-26 20-45-26)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 37 (2026-08-26 20-45-27)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 263,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 38 (2026-08-26 20-45-29)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 39 (2026-08-26 20-45-32)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 40 (2026-08-26 20-45-34)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 41 (2026-08-26 20-45-37)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day18-final-safe-target-eval50 | Round 42 (2026-08-26 20-45-40)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 43 (2026-08-26 20-45-42)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 44 (2026-08-26 20-45-43)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 45 (2026-08-26 20-45-46)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 255,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 46 (2026-08-26 20-45-47)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 47 (2026-08-26 20-45-49)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day18-final-safe-target-eval50 | Round 48 (2026-08-26 20-45-50)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 390,
+            "suicides": 3
+        },
+        "Day18-final-safe-target-eval50 | Round 49 (2026-08-26 20-45-51)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day18-final-safe-target-eval50 | Round 50 (2026-08-26 20-45-53)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        }
+    }
+}
