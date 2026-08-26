@@ -43,6 +43,7 @@ FEATURE_NAMES = (
     "hunt_center_progress",
     "bomb_trap_pressure",
     "armed_opponent_threat",
+    "safe_productive_bomb",
 )
 
 
@@ -383,6 +384,9 @@ class FeatureExtractor:
             row[18] = trap_pressure if action == "BOMB" and legal[index] else 0.0
             row[19] = (
                 self.armed_opponent_threat(game_state, target) if legal[index] else 0.0
+            )
+            row[20] = float(
+                action == "BOMB" and legal[index] and survival[index] > 0 and crates_in_blast > 0
             )
         return features
 

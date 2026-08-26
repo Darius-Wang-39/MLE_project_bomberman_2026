@@ -1,0 +1,57 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 15,
+            "coins": 4,
+            "crates": 30,
+            "invalid": 2,
+            "moves": 93,
+            "rounds": 1,
+            "score": 4,
+            "steps": 125,
+            "suicides": 1,
+            "time": 0.22904086112976074
+        },
+        "rule_based_agent_0": {
+            "bombs": 27,
+            "coins": 2,
+            "crates": 28,
+            "invalid": 17,
+            "kills": 1,
+            "moves": 356,
+            "rounds": 1,
+            "score": 7,
+            "steps": 400,
+            "time": 0.304370641708374
+        },
+        "rule_based_agent_1": {
+            "bombs": 27,
+            "crates": 26,
+            "invalid": 10,
+            "moves": 363,
+            "rounds": 1,
+            "score": 0,
+            "steps": 400,
+            "time": 0.29428815841674805
+        },
+        "rule_based_agent_2": {
+            "bombs": 23,
+            "coins": 3,
+            "crates": 39,
+            "invalid": 5,
+            "moves": 203,
+            "rounds": 1,
+            "score": 3,
+            "steps": 231,
+            "time": 0.1096189022064209
+        }
+    },
+    "by_round": {
+        "Round 01 (2026-08-26 14-39-56)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        }
+    }
+}

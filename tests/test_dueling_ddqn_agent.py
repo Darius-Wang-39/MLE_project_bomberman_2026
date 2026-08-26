@@ -15,6 +15,8 @@ from agent_code.dueling_ddqn_agent.train import (
     EVENT_REWARDS,
     HUNT_REVISIT_PENALTY,
     LOW_VALUE_BOMB_PENALTY,
+    MIDGAME_PRODUCTIVE_REVISIT_PENALTY,
+    SAFE_PRODUCTIVE_BOMB_REWARD,
     SUICIDE_PENALTY_MULTIPLIER,
     _bomb_quality_penalty,
     _hunt_stall_penalty,
@@ -53,7 +55,7 @@ class DuelingDDQNTests(unittest.TestCase):
     def test_appended_center_feature_checkpoint_migration(self):
         target = DuelingQNetwork(INPUT_DIM, len(ACTIONS)).state_dict()
         new_feature_count = len(FEATURE_NAMES)
-        old_feature_count = new_feature_count - 2
+        old_feature_count = new_feature_count - 3
         old_width = len(ACTIONS) * old_feature_count
         old = {key: value.clone() for key, value in target.items()}
         old_weight = torch.arange(
@@ -100,6 +102,19 @@ class DuelingDDQNTests(unittest.TestCase):
             0.0,
         )
 
+    def test_safe_productive_bomb_feature_requires_escape_and_crate(self):
+        extractor = FeatureExtractor()
+        productive = sample_state()
+        productive["field"][3, 2] = 1
+        features = extractor.action_features(productive)
+        feature_index = FEATURE_NAMES.index("safe_productive_bomb")
+        self.assertEqual(features[ACTIONS.index("BOMB"), feature_index], 1.0)
+
+        empty = sample_state()
+        self.assertEqual(
+            extractor.action_features(empty)[ACTIONS.index("BOMB"), feature_index], 0.0
+        )
+
     def test_low_value_bomb_penalty_spares_productive_bombs(self):
         extractor = FeatureExtractor()
         trainer = SimpleNamespace(feature_extractor=extractor)
@@ -110,7 +125,10 @@ class DuelingDDQNTests(unittest.TestCase):
 
         productive = sample_state()
         productive["field"][3, 2] = 1
-        self.assertEqual(_bomb_quality_penalty(trainer, productive, "BOMB"), 0.0)
+        self.assertEqual(
+            _bomb_quality_penalty(trainer, productive, "BOMB"),
+            SAFE_PRODUCTIVE_BOMB_REWARD,
+        )
 
     def test_hunt_center_progress_prefers_entering_central_box(self):
         extractor = FeatureExtractor()
@@ -157,10 +175,35 @@ class DuelingDDQNTests(unittest.TestCase):
         new_state = dict(old_state)
         new_state["self"] = ("me", 0, True, (3, 2))
 
-        self.assertEqual(_hunt_stall_penalty(trainer, old_state, new_state), 0.0)
+        self.assertEqual(_hunt_stall_penalty(trainer, old_state, "RIGHT", new_state), 0.0)
         back_state = dict(old_state)
         back_state["self"] = ("me", 0, True, (2, 2))
-        self.assertEqual(_hunt_stall_penalty(trainer, new_state, back_state), HUNT_REVISIT_PENALTY)
+        self.assertEqual(
+            _hunt_stall_penalty(trainer, new_state, "LEFT", back_state),
+            HUNT_REVISIT_PENALTY,
+        )
+
+    def test_midgame_revisit_penalty_activates_beside_safe_crate_bomb(self):
+        extractor = FeatureExtractor()
+        trainer = SimpleNamespace(
+            position_history=deque(maxlen=8),
+            history_round=None,
+            feature_extractor=extractor,
+        )
+        old_state = sample_state()
+        old_state["field"][4, 2] = 1
+        old_state["self"] = ("me", 0, True, (2, 2))
+        new_state = dict(old_state)
+        new_state["self"] = ("me", 0, True, (3, 2))
+
+        self.assertEqual(
+            _hunt_stall_penalty(trainer, old_state, "RIGHT", new_state), 0.0
+        )
+        back_state = dict(old_state)
+        self.assertEqual(
+            _hunt_stall_penalty(trainer, new_state, "LEFT", back_state),
+            MIDGAME_PRODUCTIVE_REVISIT_PENALTY,
+        )
 
     def test_network_output_shape(self):
         network = DuelingQNetwork(INPUT_DIM, len(ACTIONS))

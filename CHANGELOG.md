@@ -14,6 +14,33 @@ Each entry records:
 
 ## 2026-08-26
 
+### Day 16 — midgame crate-loop fix and visual regression
+
+- **Change:** Added an explicit `safe_productive_bomb` action feature, rewarded
+  safe bombs that can destroy at least one crate, and extended the recent-position
+  revisit penalty to the midgame case where the agent is safely able to open a
+  nearby crate. Promoted the rule-retention stage rather than the final training
+  stage, and launched a visible match against three rule-based agents.
+- **Method:** Migrated old 18- and 20-feature checkpoints to 21 features without
+  changing existing input weights. Trained 50 peaceful safe-crate rounds, 100
+  rule-retention rounds, and 50 mixed-retention rounds with disjoint seeds. The
+  requested suicide multiplier remains `2.5`. Promotion compared every stage
+  with the pre-fix checkpoint and replayed the originally observed seed `8901`.
+- **Result:** On seed `8901`, the longest exact opposite-direction loop fell
+  from 16 consecutive moves to 2 in the promoted rule-retention checkpoint. On
+  the same 30-round seed `9002` comparison, it scored 132 versus the old model's
+  109, collected 97 versus 94 coins, and made 7 versus 3 kills; suicides rose
+  from 20 to 23, so safety remains the next optimization target. The later mixed
+  stage was rejected after a 100-round check scored 348 versus the baseline's
+  394. All 23 tests pass. The visible seed `9101` replay has no invalid action
+  and its longest opposite-direction loop is 3 moves. The promoted checkpoint
+  SHA-256 is
+  `226ECF150BA869E3C9010067A04E840D7D7F42BA2C9A08CC2A32197125D84C67`.
+  The rebuilt 286,671-byte submission ZIP passed CRC and syntax checks and has
+  SHA-256
+  `8397E845C0EB86C6EF09D1DA34BC4738A72605DF3300E0D0DA69E2988D4AE8C0`.
+- **Commit:** this commit
+
 ### Day 15 — set future suicide multiplier to 2.5
 
 - **Change:** Changed the requested future-training suicide multiplier from

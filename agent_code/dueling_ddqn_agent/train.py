@@ -33,7 +33,9 @@ TAU = 0.005
 SHAPING_SCALE = 0.5
 HUNT_REVISIT_PENALTY = -0.12
 HUNT_HISTORY_LENGTH = 8
+MIDGAME_PRODUCTIVE_REVISIT_PENALTY = -0.20
 LOW_VALUE_BOMB_PENALTY = -0.25
+SAFE_PRODUCTIVE_BOMB_REWARD = 0.30
 TRAP_PRESSURE_THRESHOLD = 0.15
 SUICIDE_PENALTY_MULTIPLIER = 2.5
 PRIORITY_BETA_START = 0.4
@@ -73,8 +75,8 @@ def setup_training(self):
     self.history_round = None
 
 
-def _hunt_stall_penalty(self, old_game_state, new_game_state) -> float:
-    """Penalize repeated safe positions only after coins and crates are gone."""
+def _hunt_stall_penalty(self, old_game_state, action: str, new_game_state) -> float:
+    """Penalize safe loops in endgame or beside a productive bomb target."""
     if new_game_state is None:
         return 0.0
 
@@ -97,9 +99,20 @@ def _hunt_stall_penalty(self, old_game_state, new_game_state) -> float:
     )
     visits = list(self.position_history).count(new_position)
     self.position_history.append(new_position)
-    if not hunt_phase or in_danger or visits == 0:
+    if in_danger or visits == 0 or action == "BOMB":
         return 0.0
-    return HUNT_REVISIT_PENALTY * min(visits, 3)
+
+    if hunt_phase:
+        return HUNT_REVISIT_PENALTY * min(visits, 3)
+
+    bomb_index = ACTIONS.index("BOMB")
+    bomb_safe = bool(self.feature_extractor.safe_action_mask(old_game_state)[bomb_index])
+    field = old_game_state["field"]
+    blast = self.feature_extractor.blast_tiles(field, old_position)
+    productive = any(field[tile] == 1 for tile in blast)
+    if bomb_safe and productive:
+        return MIDGAME_PRODUCTIVE_REVISIT_PENALTY * min(visits, 3)
+    return 0.0
 
 
 def _bomb_quality_penalty(self, old_game_state, action: str) -> float:
@@ -110,6 +123,11 @@ def _bomb_quality_penalty(self, old_game_state, action: str) -> float:
     crate_yield = bomb_row[self.feature_extractor.feature_names.index("bomb_crate_yield")]
     opponent_yield = bomb_row[self.feature_extractor.feature_names.index("bomb_opponent_yield")]
     trap_pressure = bomb_row[self.feature_extractor.feature_names.index("bomb_trap_pressure")]
+    safe_productive = bomb_row[
+        self.feature_extractor.feature_names.index("safe_productive_bomb")
+    ]
+    if safe_productive > 0.0:
+        return SAFE_PRODUCTIVE_BOMB_REWARD
     if crate_yield > 0.0 or opponent_yield > 0.0 or trap_pressure >= TRAP_PRESSURE_THRESHOLD:
         return 0.0
     return LOW_VALUE_BOMB_PENALTY
@@ -124,7 +142,7 @@ def _reward(self, old_game_state, action: str, new_game_state, events: List[str]
     return (
         event_reward
         + shaping
-        + _hunt_stall_penalty(self, old_game_state, new_game_state)
+        + _hunt_stall_penalty(self, old_game_state, action, new_game_state)
         + _bomb_quality_penalty(self, old_game_state, action)
     )
 

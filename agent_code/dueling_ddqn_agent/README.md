@@ -17,14 +17,21 @@ Implemented components:
 - a soft `0.08` Q-value bias toward the central inclusive 11x11 box during the
   target-free opponent-hunting endgame;
 - opponent escape-pressure and armed-opponent threat features;
+- an explicit safe-productive-bomb feature for legal, escapable bombs that can
+  destroy a crate;
+- a `+0.30` training reward for safe productive bombs and a `-0.20` recent-tile
+  revisit penalty when the agent could safely open a nearby crate instead of
+  oscillating;
 - a contextual training penalty for bombs with neither resource yield nor
   meaningful opponent pressure;
 - a `2.5` suicide-penalty multiplier for future training, making the
   `KILLED_SELF` reward `-50` while leaving ordinary `GOT_KILLED` at `-15`.
 
-The bundled checkpoint was last fine-tuned with the Day 14 `3.0` multiplier.
-Changing the training default does not alter its inference policy until another
-training stage updates the weights.
+The bundled checkpoint is the Day 16 rule-retention stage trained with the
+current `2.5` multiplier. It reduced the observed fixed-seed midgame alternating
+loop from 16 moves to 2 while scoring 132 versus the prior checkpoint's 109 in
+the same 30-round rule-agent comparison. Its suicide count was 23 versus 20, so
+the loop correction is promoted with that remaining weakness documented.
 
 Training example:
 

@@ -1,0 +1,38 @@
+{
+  "experiment": "day16_midgame_safe_productive_bomb",
+  "date": "2026-08-26",
+  "starting_checkpoint": "experiments/checkpoints/day16_pre_loop_fix.pt",
+  "changes": {
+    "safe_productive_bomb_feature": true,
+    "safe_productive_bomb_reward": 0.30,
+    "midgame_productive_revisit_penalty": -0.20,
+    "history_length": 8,
+    "suicide_penalty_multiplier": 2.5
+  },
+  "training": [
+    {
+      "stage": "safe_crate_bombing",
+      "seed": 6801,
+      "rounds": 50,
+      "opponents": ["peaceful_agent", "peaceful_agent", "peaceful_agent"]
+    },
+    {
+      "stage": "rule_retention",
+      "seed": 6802,
+      "rounds": 100,
+      "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"]
+    },
+    {
+      "stage": "mixed_retention",
+      "seed": 6803,
+      "rounds": 50,
+      "opponents": ["peaceful_agent", "coin_collector_agent", "rule_based_agent"]
+    }
+  ],
+  "evaluation": {
+    "rule_seed": 9001,
+    "rule_rounds": 100,
+    "visual_regression_seed": 8901,
+    "promotion_rule": "Promote only if score remains competitive and the observed midgame alternating loop is materially shorter."
+  }
+}

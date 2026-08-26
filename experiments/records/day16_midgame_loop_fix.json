@@ -1,0 +1,53 @@
+{
+  "experiment": "day16_midgame_safe_productive_bomb",
+  "date": "2026-08-26",
+  "code": {
+    "feature_count": 21,
+    "safe_productive_bomb_feature": true,
+    "safe_productive_bomb_reward": 0.30,
+    "midgame_productive_revisit_penalty": -0.20,
+    "recent_position_history": 8,
+    "suicide_penalty_multiplier": 2.5
+  },
+  "training": {
+    "safe_crate_rounds": 50,
+    "rule_retention_rounds": 100,
+    "mixed_retention_rounds": 50,
+    "seeds": [6801, 6802, 6803]
+  },
+  "fixed_seed_regression": {
+    "seed": 8901,
+    "baseline_max_alternating_moves": 16,
+    "safe_crate_stage_max_alternating_moves": 3,
+    "rule_retention_stage_max_alternating_moves": 2,
+    "mixed_stage_max_alternating_moves": 3
+  },
+  "paired_rule_evaluation": {
+    "seed": 9002,
+    "rounds": 30,
+    "baseline": {"score": 109, "coins": 94, "kills": 3, "suicides": 20},
+    "safe_crate_stage": {"score": 97, "coins": 77, "kills": 4, "suicides": 19},
+    "rule_retention_stage": {"score": 132, "coins": 97, "kills": 7, "suicides": 23}
+  },
+  "rejected_final_stage_check": {
+    "seed": 9001,
+    "rounds": 100,
+    "mixed_stage_score": 348,
+    "baseline_score": 394,
+    "reason": "The final training stage fixed the loop but regressed held-out score by 11.7 percent."
+  },
+  "promotion": {
+    "checkpoint": "experiments/checkpoints/day16_rule_retention_stage.pt",
+    "sha256": "226ECF150BA869E3C9010067A04E840D7D7F42BA2C9A08CC2A32197125D84C67",
+    "reason": "Best measured compromise: shortest loop and highest paired 30-round score; suicide safety remains a documented weakness."
+  },
+  "visual_match": {
+    "seed": 9101,
+    "replay": "replays/day16_visual_promoted_seed9101.pt",
+    "agent_steps": 221,
+    "bombs": 25,
+    "waits": 22,
+    "invalid_actions": 0,
+    "max_alternating_moves": 3
+  }
+}
