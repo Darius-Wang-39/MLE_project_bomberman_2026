@@ -47,8 +47,8 @@ def sample_state():
 
 class DuelingDDQNTests(unittest.TestCase):
     def test_suicide_penalty_uses_requested_multiplier(self):
-        self.assertEqual(SUICIDE_PENALTY_MULTIPLIER, 3.0)
-        self.assertEqual(EVENT_REWARDS[e.KILLED_SELF], -60.0)
+        self.assertEqual(SUICIDE_PENALTY_MULTIPLIER, 2.5)
+        self.assertEqual(EVENT_REWARDS[e.KILLED_SELF], -50.0)
 
     def test_appended_center_feature_checkpoint_migration(self):
         target = DuelingQNetwork(INPUT_DIM, len(ACTIONS)).state_dict()

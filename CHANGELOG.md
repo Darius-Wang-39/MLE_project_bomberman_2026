@@ -12,6 +12,24 @@ Each entry records:
 - **Result**: measurable outcome or current status.
 - **Commit**: the related Git commit, added after committing when practical.
 
+## 2026-08-26
+
+### Day 15 — set future suicide multiplier to 2.5
+
+- **Change:** Changed the requested future-training suicide multiplier from
+  `3.0` to `2.5`, so `KILLED_SELF` now contributes `-50` instead of `-60`.
+- **Method:** Updated the single reward constant, its locking unit test, agent
+  documentation, and a staged-training plan. Historical Day 14 records remain
+  unchanged. The active checkpoint is explicitly documented as still trained
+  with `3.0`; reward-code changes affect behaviour only after retraining.
+- **Result:** Future training is configured for `2.5`. The recommended next run
+  is at most 300 rounds in 50-round chunks, with a separate 100-round held-out
+  evaluation after every chunk and promotion of the best checkpoint rather
+  than automatically keeping the last one. All 21 tests pass. The rebuilt
+  283,498-byte submission archive passed CRC and syntax checks and has SHA-256
+  `48C745AF5CE21D4E524362D0F2457F1A54C5D9BBD5E089E6EFE9417DB7A41B4F`.
+- **Commit:** this commit
+
 ## 2026-08-24
 
 ### Day 14 — 3.0 suicide-penalty multiplier and visual match

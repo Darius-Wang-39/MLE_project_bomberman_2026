@@ -1,13 +1,13 @@
 {
   "agent": "dueling_ddqn_agent",
   "archive": "dueling_ddqn_agent.zip",
-  "archive_bytes": 283401,
-  "archive_sha256": "e2c247a0667d7bfad2c67e8080684c0012f984049e52e9d16f2a75a697a1223c",
+  "archive_bytes": 283498,
+  "archive_sha256": "48c745af5ce21d4e524362d0f2457f1a54c5d9bbd5e089e6efe9417db7a41b4f",
   "files": [
     {
       "path": "dueling_ddqn_agent/README.md",
-      "bytes": 1273,
-      "sha256": "ae459b6d45205b07b7e049af6a7965c8c1c810dd60d98b6521bf36847b0cfbe7"
+      "bytes": 1478,
+      "sha256": "244602de95ccfedd28d69f3421dcc22caec7bcfdb7608c8244a486b10ac13e07"
     },
     {
       "path": "dueling_ddqn_agent/callbacks.py",
@@ -42,7 +42,7 @@
     {
       "path": "dueling_ddqn_agent/train.py",
       "bytes": 9938,
-      "sha256": "d07616ae6cf02d10d7ce46286811053ef80a322d91a275319536bdb575c781dc"
+      "sha256": "07f2383e311a245480a49e65c6836c220ad0dcf7024998c3aa3c26237ebb73ce"
     }
   ],
   "verification": {

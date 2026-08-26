@@ -1,0 +1,32 @@
+{
+  "experiment": "day15_suicide_penalty_2_5",
+  "date": "2026-08-26",
+  "reward_change": {
+    "suicide_penalty_multiplier_before": 3.0,
+    "suicide_penalty_multiplier_after": 2.5,
+    "killed_self_reward_before": -60.0,
+    "killed_self_reward_after": -50.0,
+    "got_killed_reward_unchanged": -15.0
+  },
+  "checkpoint_status": "The active checkpoint remains the Day 14 model trained with multiplier 3.0. This configuration affects future training only.",
+  "recommended_training_protocol": {
+    "chunk_rounds": 50,
+    "maximum_initial_budget_rounds": 300,
+    "evaluation_rounds_per_checkpoint": 100,
+    "promotion_metrics": [
+      "mean_score",
+      "suicides_per_round",
+      "kills_per_round",
+      "invalid_per_round"
+    ],
+    "stop_rule": "Stop when two consecutive 50-round chunks fail to improve held-out score or suicide rate; retain the best checkpoint rather than the last checkpoint."
+  },
+  "verification": {
+    "unit_tests_passed": 21,
+    "submission_archive": "submission/dueling_ddqn_agent.zip",
+    "submission_bytes": 283498,
+    "submission_sha256": "48C745AF5CE21D4E524362D0F2457F1A54C5D9BBD5E089E6EFE9417DB7A41B4F",
+    "zip_crc": "passed",
+    "python_syntax": "passed"
+  }
+}

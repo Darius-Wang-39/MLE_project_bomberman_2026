@@ -19,8 +19,12 @@ Implemented components:
 - opponent escape-pressure and armed-opponent threat features;
 - a contextual training penalty for bombs with neither resource yield nor
   meaningful opponent pressure;
-- a `3.0` suicide-penalty multiplier, making the `KILLED_SELF` training reward
-  `-60` while leaving ordinary `GOT_KILLED` at `-15`.
+- a `2.5` suicide-penalty multiplier for future training, making the
+  `KILLED_SELF` reward `-50` while leaving ordinary `GOT_KILLED` at `-15`.
+
+The bundled checkpoint was last fine-tuned with the Day 14 `3.0` multiplier.
+Changing the training default does not alter its inference policy until another
+training stage updates the weights.
 
 Training example:
 
