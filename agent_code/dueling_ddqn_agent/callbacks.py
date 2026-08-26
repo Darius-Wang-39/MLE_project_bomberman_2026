@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import math
 import random
+from collections import deque
 from pathlib import Path
 
 import numpy as np
 import torch
 
-from .features import ACTIONS, FEATURE_NAMES, FeatureExtractor
+from .features import ACTIONS, FEATURE_NAMES, MOVE_DELTAS, FeatureExtractor
 from .model import DuelingQNetwork
 
 
@@ -19,6 +20,8 @@ EPSILON_START = 0.60
 EPSILON_MIN = 0.05
 EPSILON_DECAY_STEPS = 120_000.0
 HUNT_CENTER_Q_BIAS = 0.08
+REVISIT_Q_PENALTY = 0.60
+REVISIT_HISTORY_LENGTH = 8
 
 
 def migrate_policy_input(policy_state, target_state):
@@ -62,6 +65,8 @@ def setup(self):
     self.learner_updates = 0
     self.loaded_optimizer_state = None
     self.hunt_center_q_bias = HUNT_CENTER_Q_BIAS
+    self.recent_positions = deque(maxlen=REVISIT_HISTORY_LENGTH)
+    self.position_round = None
     checkpoint_path = Path(MODEL_FILE)
     self.checkpoint_migrated = False
     if checkpoint_path.exists():
@@ -98,15 +103,38 @@ def act(self, game_state: dict) -> str:
     allowed_indices = np.flatnonzero(allowed)
     if allowed_indices.size == 0:
         return "WAIT"
+    action_features = self.feature_extractor.action_features(game_state)
+    position = tuple(game_state["self"][-1])
+    if self.position_round != game_state["round"]:
+        self.recent_positions.clear()
+        self.position_round = game_state["round"]
+    revisit_penalties = np.zeros(len(ACTIONS), dtype=np.float32)
+    danger_index = FEATURE_NAMES.index("target_danger")
+    if not allowed[ACTIONS.index("BOMB")]:
+        for index, action in enumerate(ACTIONS):
+            if action == "BOMB" or action_features[index, danger_index] > 0.0:
+                continue
+            target = (
+                position[0] + MOVE_DELTAS[action][0],
+                position[1] + MOVE_DELTAS[action][1],
+            )
+            revisit_penalties[index] = REVISIT_Q_PENALTY * min(
+                self.recent_positions.count(target), 3
+            )
+    self.recent_positions.append(position)
+
     if self.train and self.rng.random() < exploration_rate(self):
         return ACTIONS[self.rng.choice(allowed_indices.tolist())]
 
-    action_features = self.feature_extractor.action_features(game_state)
     state = torch.from_numpy(action_features.astype(np.float32).reshape(-1)).unsqueeze(0).to(self.device)
     with torch.no_grad():
         q_values = self.policy_net(state).squeeze(0).cpu().numpy()
     center_index = FEATURE_NAMES.index("hunt_center_progress")
-    q_values = q_values + self.hunt_center_q_bias * action_features[:, center_index]
+    q_values = (
+        q_values
+        + self.hunt_center_q_bias * action_features[:, center_index]
+        - revisit_penalties
+    )
     masked_q = np.where(allowed, q_values, -np.inf)
     best = np.flatnonzero(np.isclose(masked_q, np.max(masked_q)))
     return ACTIONS[self.rng.choice(best.tolist())]

@@ -1,0 +1,28 @@
+{
+  "experiment": "day17_robust_bomb_safety",
+  "date": "2026-08-26",
+  "starting_checkpoint": "experiments/checkpoints/day17_pre_robust_safety.pt",
+  "safety": {
+    "minimum_bomb_escape_branches": 2,
+    "planning_horizon": 6,
+    "chain_reactions": true,
+    "opponent_tiles_block_planning": true,
+    "unsafe_bomb_fallback_disabled": true,
+    "revisit_q_penalty_when_bomb_rejected": 0.60,
+    "revisit_history_length": 8,
+    "suicide_penalty_multiplier": 2.5
+  },
+  "training": {
+    "rounds": 100,
+    "seed": 9301,
+    "opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"]
+  },
+  "evaluation": {
+    "rounds": 50,
+    "seed": 9401,
+    "paired_checkpoints": [
+      "experiments/checkpoints/day17_pre_robust_safety.pt",
+      "experiments/checkpoints/day17_rule_safety_stage.pt"
+    ]
+  }
+}

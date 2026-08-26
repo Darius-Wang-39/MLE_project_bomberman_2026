@@ -1,0 +1,358 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 1274,
+            "coins": 51,
+            "crates": 789,
+            "invalid": 63,
+            "kills": 10,
+            "moves": 11362,
+            "rounds": 50,
+            "score": 101,
+            "steps": 15574,
+            "suicides": 16,
+            "time": 35.896225929260254
+        },
+        "rule_based_agent_0": {
+            "bombs": 986,
+            "coins": 127,
+            "crates": 1744,
+            "invalid": 312,
+            "kills": 10,
+            "moves": 10534,
+            "rounds": 50,
+            "score": 177,
+            "steps": 11901,
+            "suicides": 26,
+            "time": 8.960036516189575
+        },
+        "rule_based_agent_1": {
+            "bombs": 889,
+            "coins": 118,
+            "crates": 1736,
+            "invalid": 298,
+            "kills": 5,
+            "moves": 9751,
+            "rounds": 50,
+            "score": 143,
+            "steps": 10997,
+            "suicides": 24,
+            "time": 8.135886669158936
+        },
+        "rule_based_agent_2": {
+            "bombs": 1053,
+            "coins": 152,
+            "crates": 1840,
+            "invalid": 328,
+            "kills": 10,
+            "moves": 12169,
+            "rounds": 50,
+            "score": 202,
+            "steps": 13662,
+            "suicides": 18,
+            "time": 10.368586301803589
+        }
+    },
+    "by_round": {
+        "Day17-final-rule50 | Round 01 (2026-08-26 15-13-56)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 02 (2026-08-26 15-13-57)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 03 (2026-08-26 15-13-59)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 393,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 04 (2026-08-26 15-14-01)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 05 (2026-08-26 15-14-02)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 06 (2026-08-26 15-14-04)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 07 (2026-08-26 15-14-05)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 08 (2026-08-26 15-14-07)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 284,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 09 (2026-08-26 15-14-08)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 329,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 10 (2026-08-26 15-14-09)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 11 (2026-08-26 15-14-10)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 12 (2026-08-26 15-14-12)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 13 (2026-08-26 15-14-13)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 395,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 14 (2026-08-26 15-14-14)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 15 (2026-08-26 15-14-15)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-rule50 | Round 16 (2026-08-26 15-14-18)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 17 (2026-08-26 15-14-19)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 261,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 18 (2026-08-26 15-14-20)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 251,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 19 (2026-08-26 15-14-21)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 20 (2026-08-26 15-14-23)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 21 (2026-08-26 15-14-24)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 308,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 22 (2026-08-26 15-14-26)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 23 (2026-08-26 15-14-27)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 247,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 24 (2026-08-26 15-14-28)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 391,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 25 (2026-08-26 15-14-29)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 26 (2026-08-26 15-14-31)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 27 (2026-08-26 15-14-32)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 28 (2026-08-26 15-14-34)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-rule50 | Round 29 (2026-08-26 15-14-36)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 30 (2026-08-26 15-14-37)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 248,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 31 (2026-08-26 15-14-38)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-rule50 | Round 32 (2026-08-26 15-14-40)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 33 (2026-08-26 15-14-42)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 34 (2026-08-26 15-14-44)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 35 (2026-08-26 15-14-45)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 36 (2026-08-26 15-14-46)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 319,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 37 (2026-08-26 15-14-48)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 38 (2026-08-26 15-14-50)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 39 (2026-08-26 15-14-51)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 40 (2026-08-26 15-14-52)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 41 (2026-08-26 15-14-54)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 42 (2026-08-26 15-14-56)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 302,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 43 (2026-08-26 15-14-56)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 317,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 44 (2026-08-26 15-14-58)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 45 (2026-08-26 15-15-00)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 46 (2026-08-26 15-15-01)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 285,
+            "suicides": 3
+        },
+        "Day17-final-rule50 | Round 47 (2026-08-26 15-15-02)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-rule50 | Round 48 (2026-08-26 15-15-04)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 49 (2026-08-26 15-15-06)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 253,
+            "suicides": 2
+        },
+        "Day17-final-rule50 | Round 50 (2026-08-26 15-15-06)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        }
+    }
+}

@@ -1,0 +1,85 @@
+{
+  "experiment": "day17_robust_bomb_safety",
+  "date": "2026-08-26",
+  "implementation": {
+    "minimum_bomb_escape_branches": 2,
+    "chain_reaction_relaxation": true,
+    "opponent_position_blocking": true,
+    "unsafe_bomb_removed_from_fallback": true,
+    "revisit_q_penalty_when_bomb_rejected": 0.60,
+    "unit_tests": 25
+  },
+  "training": {
+    "seed": 9301,
+    "rounds": 100,
+    "score": 171,
+    "suicides": 38,
+    "bombs": 1649
+  },
+  "paired_evaluation": {
+    "seed": 9401,
+    "rounds": 50,
+    "before_training": {
+      "score": 121,
+      "mean_score": 2.42,
+      "coins": 71,
+      "kills": 10,
+      "suicides": 17,
+      "suicides_per_round": 0.34,
+      "bombs": 1007,
+      "invalid_actions": 82
+    },
+    "after_training": {
+      "score": 112,
+      "mean_score": 2.24,
+      "coins": 72,
+      "kills": 8,
+      "suicides": 13,
+      "suicides_per_round": 0.26,
+      "bombs": 987,
+      "invalid_actions": 46,
+      "mean_action_ms": 2.29
+    },
+    "relative_suicide_reduction": 0.2353,
+    "relative_score_change": -0.0744
+  },
+  "promotion": {
+    "checkpoint": "experiments/checkpoints/day17_rule_safety_stage.pt",
+    "sha256": "59355CD064EA4BE9996A7DA1A490CFC9772494DB6DFB1D5E894CDA550D87ACB8",
+    "decision": "Promoted: 23.5 percent fewer suicides and 43.9 percent fewer invalid actions on the paired evaluation, accepting a 7.4 percent score reduction."
+  },
+  "final_balanced_controller": {
+    "seed": 9401,
+    "rounds": 50,
+    "score": 135,
+    "mean_score": 2.70,
+    "coins": 60,
+    "kills": 15,
+    "suicides": 17,
+    "suicides_per_round": 0.34,
+    "bombs": 983,
+    "invalid_actions": 38,
+    "mean_action_ms": 2.47,
+    "loop_regression_seed": 9501,
+    "loop_before_controller": 75,
+    "loop_after_controller": 5,
+    "decision": "Selected over the safety-only runtime policy to recover score and eliminate the severe oscillation while retaining a much lower suicide rate than the previous Day 16 observation."
+  },
+  "visual_match": {
+    "seed": 9602,
+    "replay": "replays/day17_final_visual_seed9602.pt",
+    "round_steps": 400,
+    "agent_actions": 400,
+    "survived_to_round_end": true,
+    "bombs": 33,
+    "waits": 26,
+    "invalid_actions": 0,
+    "max_alternating_moves": 3
+  },
+  "submission": {
+    "archive_bytes": 288265,
+    "sha256": "80769C272D7F861903BCF2E76C5AF08B0313073BB8C4852580C19AB7C0F2E7E8",
+    "zip_crc": "passed",
+    "python_syntax": "passed"
+  }
+}

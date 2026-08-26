@@ -1,0 +1,358 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 983,
+            "coins": 60,
+            "crates": 761,
+            "invalid": 38,
+            "kills": 15,
+            "moves": 10575,
+            "rounds": 50,
+            "score": 135,
+            "steps": 14269,
+            "suicides": 17,
+            "time": 35.17770457267761
+        },
+        "rule_based_agent_0": {
+            "bombs": 1054,
+            "coins": 143,
+            "crates": 1872,
+            "invalid": 339,
+            "kills": 12,
+            "moves": 11907,
+            "rounds": 50,
+            "score": 203,
+            "steps": 13360,
+            "suicides": 20,
+            "time": 11.15575385093689
+        },
+        "rule_based_agent_1": {
+            "bombs": 900,
+            "coins": 113,
+            "crates": 1692,
+            "invalid": 258,
+            "kills": 6,
+            "moves": 9578,
+            "rounds": 50,
+            "score": 143,
+            "steps": 10789,
+            "suicides": 29,
+            "time": 7.95184326171875
+        },
+        "rule_based_agent_2": {
+            "bombs": 1000,
+            "coins": 131,
+            "crates": 1771,
+            "invalid": 333,
+            "kills": 7,
+            "moves": 11271,
+            "rounds": 50,
+            "score": 166,
+            "steps": 12674,
+            "suicides": 22,
+            "time": 9.583991765975952
+        }
+    },
+    "by_round": {
+        "Day17-final-v2-rule50 | Round 01 (2026-08-26 15-16-12)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 02 (2026-08-26 15-16-14)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 288,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 03 (2026-08-26 15-16-16)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 04 (2026-08-26 15-16-17)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 05 (2026-08-26 15-16-19)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 229,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 06 (2026-08-26 15-16-20)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 339,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 07 (2026-08-26 15-16-21)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-v2-rule50 | Round 08 (2026-08-26 15-16-23)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 09 (2026-08-26 15-16-24)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 258,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 10 (2026-08-26 15-16-25)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 282,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 11 (2026-08-26 15-16-26)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-v2-rule50 | Round 12 (2026-08-26 15-16-27)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 309,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 13 (2026-08-26 15-16-28)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 14 (2026-08-26 15-16-30)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 350,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 15 (2026-08-26 15-16-32)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-v2-rule50 | Round 16 (2026-08-26 15-16-34)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 255,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 17 (2026-08-26 15-16-35)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 249,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 18 (2026-08-26 15-16-36)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 355,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 19 (2026-08-26 15-16-37)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 232,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 20 (2026-08-26 15-16-38)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 21 (2026-08-26 15-16-40)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 22 (2026-08-26 15-16-42)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 330,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 23 (2026-08-26 15-16-42)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 24 (2026-08-26 15-16-45)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 278,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 25 (2026-08-26 15-16-46)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 237,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 26 (2026-08-26 15-16-47)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 27 (2026-08-26 15-16-49)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 292,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 28 (2026-08-26 15-16-50)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 314,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 29 (2026-08-26 15-16-51)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-v2-rule50 | Round 30 (2026-08-26 15-16-53)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 31 (2026-08-26 15-16-54)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 32 (2026-08-26 15-16-56)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 239,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 33 (2026-08-26 15-16-58)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-v2-rule50 | Round 34 (2026-08-26 15-17-00)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 35 (2026-08-26 15-17-01)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 36 (2026-08-26 15-17-04)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 325,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 37 (2026-08-26 15-17-05)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 38 (2026-08-26 15-17-06)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 39 (2026-08-26 15-17-08)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 40 (2026-08-26 15-17-09)": {
+            "coins": 6,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 41 (2026-08-26 15-17-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 395,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 42 (2026-08-26 15-17-12)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 253,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 43 (2026-08-26 15-17-13)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 44 (2026-08-26 15-17-15)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-final-v2-rule50 | Round 45 (2026-08-26 15-17-16)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 46 (2026-08-26 15-17-18)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 242,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 47 (2026-08-26 15-17-19)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-final-v2-rule50 | Round 48 (2026-08-26 15-17-20)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 222,
+            "suicides": 3
+        },
+        "Day17-final-v2-rule50 | Round 49 (2026-08-26 15-17-21)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-final-v2-rule50 | Round 50 (2026-08-26 15-17-23)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 392,
+            "suicides": 3
+        }
+    }
+}

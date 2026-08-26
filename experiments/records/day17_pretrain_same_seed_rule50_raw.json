@@ -1,0 +1,358 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 1007,
+            "coins": 71,
+            "crates": 609,
+            "invalid": 82,
+            "kills": 10,
+            "moves": 9155,
+            "rounds": 50,
+            "score": 121,
+            "steps": 14869,
+            "suicides": 17,
+            "time": 32.260926723480225
+        },
+        "rule_based_agent_0": {
+            "bombs": 1026,
+            "coins": 131,
+            "crates": 1918,
+            "invalid": 341,
+            "kills": 9,
+            "moves": 11160,
+            "rounds": 50,
+            "score": 176,
+            "steps": 12578,
+            "suicides": 22,
+            "time": 9.711414337158203
+        },
+        "rule_based_agent_1": {
+            "bombs": 917,
+            "coins": 121,
+            "crates": 1764,
+            "invalid": 320,
+            "kills": 14,
+            "moves": 9826,
+            "rounds": 50,
+            "score": 191,
+            "steps": 11135,
+            "suicides": 28,
+            "time": 7.827810049057007
+        },
+        "rule_based_agent_2": {
+            "bombs": 925,
+            "coins": 124,
+            "crates": 1805,
+            "invalid": 309,
+            "kills": 13,
+            "moves": 9860,
+            "rounds": 50,
+            "score": 189,
+            "steps": 11161,
+            "suicides": 26,
+            "time": 7.940122365951538
+        }
+    },
+    "by_round": {
+        "Day17-pretrain-same-seed-rule50 | Round 01 (2026-08-26 15-08-33)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 02 (2026-08-26 15-08-34)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 250,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 03 (2026-08-26 15-08-35)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 295,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 04 (2026-08-26 15-08-36)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 05 (2026-08-26 15-08-37)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 06 (2026-08-26 15-08-39)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 07 (2026-08-26 15-08-40)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 254,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 08 (2026-08-26 15-08-41)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 09 (2026-08-26 15-08-42)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 10 (2026-08-26 15-08-44)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 11 (2026-08-26 15-08-46)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 384,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 12 (2026-08-26 15-08-47)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 13 (2026-08-26 15-08-48)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 351,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 14 (2026-08-26 15-08-50)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 261,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 15 (2026-08-26 15-08-50)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 342,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 16 (2026-08-26 15-08-51)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 241,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 17 (2026-08-26 15-08-52)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 18 (2026-08-26 15-08-54)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 19 (2026-08-26 15-08-55)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 310,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 20 (2026-08-26 15-08-56)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 21 (2026-08-26 15-08-58)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 388,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 22 (2026-08-26 15-08-59)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 23 (2026-08-26 15-09-01)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 24 (2026-08-26 15-09-02)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 25 (2026-08-26 15-09-03)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 296,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 26 (2026-08-26 15-09-04)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 27 (2026-08-26 15-09-06)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 28 (2026-08-26 15-09-07)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 29 (2026-08-26 15-09-09)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 30 (2026-08-26 15-09-10)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 236,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 31 (2026-08-26 15-09-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 388,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 32 (2026-08-26 15-09-12)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 286,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 33 (2026-08-26 15-09-13)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 34 (2026-08-26 15-09-15)": {
+            "coins": 9,
+            "kills": 3,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 35 (2026-08-26 15-09-17)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 243,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 36 (2026-08-26 15-09-18)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 37 (2026-08-26 15-09-19)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 38 (2026-08-26 15-09-21)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 39 (2026-08-26 15-09-22)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 40 (2026-08-26 15-09-24)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 41 (2026-08-26 15-09-26)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 42 (2026-08-26 15-09-27)": {
+            "coins": 9,
+            "kills": 4,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 43 (2026-08-26 15-09-29)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 44 (2026-08-26 15-09-31)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 45 (2026-08-26 15-09-32)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 354,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 46 (2026-08-26 15-09-33)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 47 (2026-08-26 15-09-35)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 261,
+            "suicides": 3
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 48 (2026-08-26 15-09-35)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 49 (2026-08-26 15-09-37)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 287,
+            "suicides": 2
+        },
+        "Day17-pretrain-same-seed-rule50 | Round 50 (2026-08-26 15-09-38)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 247,
+            "suicides": 2
+        }
+    }
+}

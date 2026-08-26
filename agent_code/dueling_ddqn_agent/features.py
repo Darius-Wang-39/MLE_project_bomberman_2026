@@ -21,6 +21,7 @@ CARDINAL_DELTAS = tuple(MOVE_DELTAS[action] for action in ACTIONS[:4])
 HUNT_CENTER_MIN = 3
 HUNT_CENTER_MAX = 13
 HUNT_CENTER_WEIGHT = 0.0
+MIN_BOMB_ESCAPE_BRANCHES = 2
 
 FEATURE_NAMES = (
     "bias",
@@ -117,7 +118,24 @@ class FeatureExtractor:
         if add_own_bomb:
             position = tuple(game_state["self"][-1])
             schedule.append((self.blast_tiles(field, position), self.bomb_timer + 1, position))
-        return schedule
+
+        # A bomb caught in an earlier blast explodes at the same time as the
+        # triggering bomb. Relax repeatedly because one early explosion can
+        # trigger another chain member.
+        explosion_times = [explosion_time for _, explosion_time, _ in schedule]
+        changed = True
+        while changed:
+            changed = False
+            for source_index, (source_blast, _, _) in enumerate(schedule):
+                source_time = explosion_times[source_index]
+                for target_index, (_, _, target_position) in enumerate(schedule):
+                    if target_position in source_blast and source_time < explosion_times[target_index]:
+                        explosion_times[target_index] = source_time
+                        changed = True
+        return [
+            (blast, explosion_times[index], position)
+            for index, (blast, _, position) in enumerate(schedule)
+        ]
 
     def _is_dangerous(
         self,
@@ -153,6 +171,7 @@ class FeatureExtractor:
         start = tuple(game_state["self"][-1])
         first_position = _add(start, MOVE_DELTAS[action])
         schedule = self._bomb_schedule(game_state, add_own_bomb=action == "BOMB")
+        opponent_positions = {tuple(other[-1]) for other in game_state["others"]}
 
         if self._is_dangerous(first_position, 1, schedule, explosion_map):
             return 0
@@ -163,7 +182,7 @@ class FeatureExtractor:
             for position in positions:
                 for delta in CARDINAL_DELTAS + ((0, 0),):
                     target = _add(position, delta)
-                    if field[target] != 0:
+                    if field[target] != 0 or target in opponent_positions:
                         continue
                     if self._bomb_blocks(target, time_step, schedule):
                         continue
@@ -174,6 +193,50 @@ class FeatureExtractor:
             if not positions:
                 return 0
         return len(positions)
+
+    def bomb_escape_branch_count(self, game_state: Dict) -> int:
+        """Count independent first-step escape choices after dropping a bomb."""
+        bomb_index = ACTIONS.index("BOMB")
+        if not self.legal_action_mask(game_state)[bomb_index]:
+            return 0
+
+        field = game_state["field"]
+        explosion_map = game_state["explosion_map"]
+        start = tuple(game_state["self"][-1])
+        opponents = {tuple(other[-1]) for other in game_state["others"]}
+        schedule = self._bomb_schedule(game_state, add_own_bomb=True)
+        branches = 0
+
+        for delta in CARDINAL_DELTAS:
+            target = _add(start, delta)
+            if field[target] != 0 or target in opponents:
+                continue
+            if self._bomb_blocks(target, 2, schedule):
+                continue
+            if self._is_dangerous(target, 2, schedule, explosion_map):
+                continue
+
+            positions = {target}
+            for time_step in range(3, self.horizon + 1):
+                next_positions: Set[Tuple[int, int]] = set()
+                for position in positions:
+                    for next_delta in CARDINAL_DELTAS + ((0, 0),):
+                        next_target = _add(position, next_delta)
+                        if field[next_target] != 0 or next_target in opponents:
+                            continue
+                        if self._bomb_blocks(next_target, time_step, schedule):
+                            continue
+                        if self._is_dangerous(
+                            next_target, time_step, schedule, explosion_map
+                        ):
+                            continue
+                        next_positions.add(next_target)
+                positions = next_positions
+                if not positions:
+                    break
+            if positions:
+                branches += 1
+        return branches
 
     def _reachable_positions(
         self,
@@ -242,7 +305,17 @@ class FeatureExtractor:
             dtype=int,
         )
         safe = legal & (survival > 0)
-        return safe if safe.any() else legal
+        bomb_index = ACTIONS.index("BOMB")
+        if safe[bomb_index] and self.bomb_escape_branch_count(game_state) < MIN_BOMB_ESCAPE_BRANCHES:
+            safe[bomb_index] = False
+        if safe.any():
+            return safe
+
+        # When every simulated continuation is dangerous, do not add another
+        # bomb unless it is literally the only legal action.
+        fallback = legal.copy()
+        fallback[bomb_index] = False
+        return fallback if fallback.any() else legal
 
     def _distance_map(
         self,
@@ -386,7 +459,11 @@ class FeatureExtractor:
                 self.armed_opponent_threat(game_state, target) if legal[index] else 0.0
             )
             row[20] = float(
-                action == "BOMB" and legal[index] and survival[index] > 0 and crates_in_blast > 0
+                action == "BOMB"
+                and legal[index]
+                and survival[index] > 0
+                and self.bomb_escape_branch_count(game_state) >= MIN_BOMB_ESCAPE_BRANCHES
+                and crates_in_blast > 0
             )
         return features
 

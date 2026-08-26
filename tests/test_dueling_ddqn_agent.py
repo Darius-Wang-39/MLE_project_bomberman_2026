@@ -8,7 +8,12 @@ import numpy as np
 import torch
 
 from agent_code.dueling_ddqn_agent.callbacks import HUNT_CENTER_Q_BIAS, INPUT_DIM, migrate_policy_input
-from agent_code.dueling_ddqn_agent.features import ACTIONS, FEATURE_NAMES, FeatureExtractor
+from agent_code.dueling_ddqn_agent.features import (
+    ACTIONS,
+    FEATURE_NAMES,
+    MIN_BOMB_ESCAPE_BRANCHES,
+    FeatureExtractor,
+)
 from agent_code.dueling_ddqn_agent.model import DuelingQNetwork
 from agent_code.dueling_ddqn_agent.replay import PrioritizedReplayBuffer, Transition
 from agent_code.dueling_ddqn_agent.train import (
@@ -114,6 +119,33 @@ class DuelingDDQNTests(unittest.TestCase):
         self.assertEqual(
             extractor.action_features(empty)[ACTIONS.index("BOMB"), feature_index], 0.0
         )
+
+    def test_bomb_requires_two_independent_escape_branches(self):
+        extractor = FeatureExtractor()
+        state = sample_state()
+        state["field"][1, 2] = 1
+        state["field"][2, 1] = -1
+        state["field"][2, 3] = -1
+
+        self.assertEqual(extractor.bomb_escape_branch_count(state), 1)
+        self.assertEqual(MIN_BOMB_ESCAPE_BRANCHES, 2)
+        self.assertFalse(extractor.safe_action_mask(state)[ACTIONS.index("BOMB")])
+        self.assertEqual(
+            extractor.action_features(state)[
+                ACTIONS.index("BOMB"), FEATURE_NAMES.index("safe_productive_bomb")
+            ],
+            0.0,
+        )
+
+    def test_bomb_schedule_models_chain_reaction(self):
+        extractor = FeatureExtractor()
+        state = sample_state()
+        state["bombs"] = [((4, 2), 2)]
+        schedule = extractor._bomb_schedule(state, add_own_bomb=True)
+        times = {position: explosion_time for _, explosion_time, position in schedule}
+
+        self.assertEqual(times[(4, 2)], 3)
+        self.assertEqual(times[(2, 2)], 3)
 
     def test_low_value_bomb_penalty_spares_productive_bombs(self):
         extractor = FeatureExtractor()

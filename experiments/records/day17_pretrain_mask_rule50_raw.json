@@ -1,0 +1,358 @@
+{
+    "by_agent": {
+        "dueling_ddqn_agent": {
+            "bombs": 890,
+            "coins": 57,
+            "crates": 632,
+            "invalid": 69,
+            "kills": 3,
+            "moves": 8234,
+            "rounds": 50,
+            "score": 72,
+            "steps": 13519,
+            "suicides": 20,
+            "time": 28.9712495803833
+        },
+        "rule_based_agent_0": {
+            "bombs": 1011,
+            "coins": 131,
+            "crates": 1826,
+            "invalid": 332,
+            "kills": 11,
+            "moves": 10602,
+            "rounds": 50,
+            "score": 186,
+            "steps": 12026,
+            "suicides": 28,
+            "time": 9.069779872894287
+        },
+        "rule_based_agent_1": {
+            "bombs": 902,
+            "coins": 113,
+            "crates": 1899,
+            "invalid": 298,
+            "kills": 7,
+            "moves": 9458,
+            "rounds": 50,
+            "score": 148,
+            "steps": 10711,
+            "suicides": 33,
+            "time": 7.751455783843994
+        },
+        "rule_based_agent_2": {
+            "bombs": 944,
+            "coins": 145,
+            "crates": 1813,
+            "invalid": 303,
+            "kills": 9,
+            "moves": 10129,
+            "rounds": 50,
+            "score": 190,
+            "steps": 11438,
+            "suicides": 31,
+            "time": 8.537923812866211
+        }
+    },
+    "by_round": {
+        "Day17-pretrain-mask-rule50 | Round 01 (2026-08-26 14-59-55)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 274,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 02 (2026-08-26 14-59-55)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 273,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 03 (2026-08-26 14-59-56)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 223,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 04 (2026-08-26 14-59-57)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 05 (2026-08-26 14-59-59)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 06 (2026-08-26 15-00-00)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 365,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 07 (2026-08-26 15-00-01)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 08 (2026-08-26 15-00-02)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 319,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 09 (2026-08-26 15-00-03)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 10 (2026-08-26 15-00-05)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 227,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 11 (2026-08-26 15-00-06)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 12 (2026-08-26 15-00-07)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 13 (2026-08-26 15-00-08)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 14 (2026-08-26 15-00-10)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 15 (2026-08-26 15-00-11)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 252,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 16 (2026-08-26 15-00-12)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 277,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 17 (2026-08-26 15-00-13)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 277,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 18 (2026-08-26 15-00-14)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 19 (2026-08-26 15-00-16)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 327,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 20 (2026-08-26 15-00-16)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 344,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 21 (2026-08-26 15-00-17)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 253,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 22 (2026-08-26 15-00-18)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 23 (2026-08-26 15-00-20)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 24 (2026-08-26 15-00-21)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 25 (2026-08-26 15-00-23)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 26 (2026-08-26 15-00-24)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 27 (2026-08-26 15-00-26)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 391,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 28 (2026-08-26 15-00-27)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 394,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 29 (2026-08-26 15-00-29)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 30 (2026-08-26 15-00-30)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 265,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 31 (2026-08-26 15-00-31)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 32 (2026-08-26 15-00-32)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 33 (2026-08-26 15-00-34)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 34 (2026-08-26 15-00-35)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 284,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 35 (2026-08-26 15-00-36)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 271,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 36 (2026-08-26 15-00-37)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 245,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 37 (2026-08-26 15-00-38)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 333,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 38 (2026-08-26 15-00-40)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 39 (2026-08-26 15-00-41)": {
+            "coins": 8,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 40 (2026-08-26 15-00-43)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 41 (2026-08-26 15-00-44)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 42 (2026-08-26 15-00-46)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 43 (2026-08-26 15-00-47)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 44 (2026-08-26 15-00-48)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 45 (2026-08-26 15-00-50)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 46 (2026-08-26 15-00-52)": {
+            "coins": 9,
+            "kills": 0,
+            "steps": 237,
+            "suicides": 3
+        },
+        "Day17-pretrain-mask-rule50 | Round 47 (2026-08-26 15-00-52)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 277,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 48 (2026-08-26 15-00-53)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Day17-pretrain-mask-rule50 | Round 49 (2026-08-26 15-00-54)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Day17-pretrain-mask-rule50 | Round 50 (2026-08-26 15-00-55)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 264,
+            "suicides": 2
+        }
+    }
+}

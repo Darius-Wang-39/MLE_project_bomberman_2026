@@ -14,6 +14,34 @@ Each entry records:
 
 ## 2026-08-26
 
+### Day 17 — robust bomb safety and retraining
+
+- **Change:** Replaced the one-path bomb-safety test with a hard requirement for
+  at least two independent first-step escape branches. The planner now advances
+  bombs triggered by chain reactions, treats current opponent tiles as blocked,
+  and refuses to re-enable an unsafe bomb in its fallback mask.
+- **Method:** Preserved the Day 16 model, added two focused safety tests, and
+  continued it for 100 rounds against three rule-based agents on seed `9301`.
+  Promotion used a paired 50-round evaluation on unseen seed `9401`, loading the
+  exact pre-training and post-training checkpoints under identical code.
+- **Result:** In the paired evaluation, suicides fell from 17/50 (`0.34` per
+  round) to 13/50 (`0.26`, a 23.5% reduction), and invalid actions fell from 82
+  to 46. Mean score changed from 2.42 to 2.24 and kills from 10 to 8; the 7.4%
+  score tradeoff confirmed the safety training worked. A first visual run then
+  exposed a 75-move narrow-area oscillation, so a `0.60` recent-position Q
+  penalty was added only while the robust mask rejects `BOMB`. It cut the same
+  replay regression to 5 moves. The final balanced 50-round controller averaged
+  2.70 score, 0.30 kills, 0.34 suicides, and 2.47 ms/action, with 38 invalid
+  actions. All 25 tests pass. The promoted checkpoint SHA-256 is
+  `59355CD064EA4BE9996A7DA1A490CFC9772494DB6DFB1D5E894CDA550D87ACB8`.
+  In the visible seed `9602` match, the promoted pink agent survived all 400
+  steps, made 33 bombs with zero invalid actions, and its longest exact
+  opposite-direction loop was three moves.
+  The rebuilt 288,265-byte submission ZIP passed CRC and syntax checks and has
+  SHA-256
+  `80769C272D7F861903BCF2E76C5AF08B0313073BB8C4852580C19AB7C0F2E7E8`.
+- **Commit:** this commit
+
 ### Day 16 — midgame crate-loop fix and visual regression
 
 - **Change:** Added an explicit `safe_productive_bomb` action feature, rewarded
