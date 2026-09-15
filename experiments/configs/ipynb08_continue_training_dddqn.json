@@ -1,0 +1,67 @@
+{
+  "experiment": "ipynb08_continue_training_dddqn",
+  "base_agent": "dueling_hunt_center_04",
+  "working_agent": "dueling_hunt_center_04_mix_train",
+  "training_seed": 1701,
+  "rounds": 1000,
+  "checkpoint_every": 200,
+  "microbatch_rounds": 20,
+  "mixture": {
+    "A": 0.4,
+    "B": 0.3,
+    "C": 0.2,
+    "D": 0.1
+  },
+  "lineups": {
+    "A": [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    "B": [
+      "rule_based_agent",
+      "rule_based_agent",
+      "frozen_ddqn_day7"
+    ],
+    "C": [
+      "rule_based_agent",
+      "frozen_ddqn_day7",
+      "dueling_ddqn_agent"
+    ],
+    "D_options": [
+      [
+        "rule_based_agent",
+        "frozen_ddqn_day7",
+        "frozen_ddqn_day7"
+      ],
+      [
+        "rule_based_agent",
+        "dueling_ddqn_agent",
+        "dueling_ddqn_agent"
+      ]
+    ]
+  },
+  "dev_seeds": [
+    8101,
+    8102,
+    8103,
+    8104,
+    8105,
+    8101
+  ],
+  "final_holdout_seeds": [
+    18101,
+    18102,
+    18103,
+    18104,
+    18105,
+    18106
+  ],
+  "selection_rule": {
+    "target_paired_mean_score_gain": 0.3,
+    "coins_must_not_decrease": true,
+    "max_relative_suicide_increase": 0.2,
+    "invalid_must_not_increase": true,
+    "mean_action_ms_limit": 500.0
+  }
+}

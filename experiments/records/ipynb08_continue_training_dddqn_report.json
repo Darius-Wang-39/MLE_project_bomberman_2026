@@ -1,0 +1,209 @@
+{
+  "experiment": "ipynb08_continue_training_dddqn",
+  "created_utc": "2026-09-15T11:58:08.331534+00:00",
+  "protocol": {
+    "experiment": "ipynb08_continue_training_dddqn",
+    "base_agent": "dueling_hunt_center_04",
+    "working_agent": "dueling_hunt_center_04_mix_train",
+    "training_seed": 1701,
+    "rounds": 1000,
+    "checkpoint_every": 200,
+    "microbatch_rounds": 20,
+    "mixture": {
+      "A": 0.4,
+      "B": 0.3,
+      "C": 0.2,
+      "D": 0.1
+    },
+    "lineups": {
+      "A": [
+        "rule_based_agent",
+        "rule_based_agent",
+        "rule_based_agent"
+      ],
+      "B": [
+        "rule_based_agent",
+        "rule_based_agent",
+        "frozen_ddqn_day7"
+      ],
+      "C": [
+        "rule_based_agent",
+        "frozen_ddqn_day7",
+        "dueling_ddqn_agent"
+      ],
+      "D_options": [
+        [
+          "rule_based_agent",
+          "frozen_ddqn_day7",
+          "frozen_ddqn_day7"
+        ],
+        [
+          "rule_based_agent",
+          "dueling_ddqn_agent",
+          "dueling_ddqn_agent"
+        ]
+      ]
+    },
+    "dev_seeds": [
+      8101,
+      8102,
+      8103,
+      8104,
+      8105,
+      8101
+    ],
+    "final_holdout_seeds": [
+      18101,
+      18102,
+      18103,
+      18104,
+      18105,
+      18106
+    ],
+    "selection_rule": {
+      "target_paired_mean_score_gain": 0.3,
+      "coins_must_not_decrease": true,
+      "max_relative_suicide_increase": 0.2,
+      "invalid_must_not_increase": true,
+      "mean_action_ms_limit": 500.0
+    }
+  },
+  "checkpoints": [
+    {
+      "agent": "dueling_hunt_center_04",
+      "files": 6,
+      "rounds": 120,
+      "mean_score": 3.3,
+      "coins_per_round": 2.466666666666667,
+      "crates_per_round": 28.033333333333335,
+      "kills_per_round": 0.16666666666666666,
+      "suicides_per_round": 0.26666666666666666,
+      "invalid_per_round": 2.55,
+      "mean_action_ms": 2.4795641040553216,
+      "total_steps": 39483,
+      "rounds_done": 0,
+      "paired_score_gain_vs_0000": 0.0,
+      "paired_score_gain_ci95": [
+        0.0,
+        0.0
+      ],
+      "gain_target_met": false,
+      "safety_guardrails_pass": true,
+      "clear_gain_vs_previous": true
+    },
+    {
+      "agent": "hunt_center_04_mix_0200",
+      "files": 6,
+      "rounds": 120,
+      "mean_score": 3.8833333333333333,
+      "coins_per_round": 2.675,
+      "crates_per_round": 32.041666666666664,
+      "kills_per_round": 0.24166666666666667,
+      "suicides_per_round": 0.11666666666666667,
+      "invalid_per_round": 5.008333333333334,
+      "mean_action_ms": 2.539275573908383,
+      "total_steps": 40138,
+      "rounds_done": 200,
+      "paired_score_gain_vs_0000": 0.5833333333333334,
+      "paired_score_gain_ci95": [
+        -0.075,
+        1.2583333333333333
+      ],
+      "gain_target_met": true,
+      "safety_guardrails_pass": false,
+      "clear_gain_vs_previous": true
+    },
+    {
+      "agent": "hunt_center_04_mix_0400",
+      "files": 6,
+      "rounds": 120,
+      "mean_score": 3.691666666666667,
+      "coins_per_round": 2.775,
+      "crates_per_round": 31.675,
+      "kills_per_round": 0.18333333333333332,
+      "suicides_per_round": 0.125,
+      "invalid_per_round": 4.933333333333334,
+      "mean_action_ms": 2.562088332450862,
+      "total_steps": 39393,
+      "rounds_done": 400,
+      "paired_score_gain_vs_0000": 0.39166666666666666,
+      "paired_score_gain_ci95": [
+        -0.24166666666666667,
+        1.025
+      ],
+      "gain_target_met": true,
+      "safety_guardrails_pass": false,
+      "clear_gain_vs_previous": false
+    },
+    {
+      "agent": "hunt_center_04_mix_0600",
+      "files": 6,
+      "rounds": 120,
+      "mean_score": 3.6166666666666667,
+      "coins_per_round": 2.533333333333333,
+      "crates_per_round": 31.108333333333334,
+      "kills_per_round": 0.21666666666666667,
+      "suicides_per_round": 0.125,
+      "invalid_per_round": 4.766666666666667,
+      "mean_action_ms": 2.4908344139415908,
+      "total_steps": 40894,
+      "rounds_done": 600,
+      "paired_score_gain_vs_0000": 0.31666666666666665,
+      "paired_score_gain_ci95": [
+        -0.30833333333333335,
+        0.9585416666666636
+      ],
+      "gain_target_met": true,
+      "safety_guardrails_pass": false,
+      "clear_gain_vs_previous": false
+    },
+    {
+      "agent": "hunt_center_04_mix_0800",
+      "files": 6,
+      "rounds": 120,
+      "mean_score": 3.8666666666666667,
+      "coins_per_round": 2.7416666666666667,
+      "crates_per_round": 30.958333333333332,
+      "kills_per_round": 0.225,
+      "suicides_per_round": 0.15,
+      "invalid_per_round": 4.441666666666666,
+      "mean_action_ms": 2.542892573381,
+      "total_steps": 38935,
+      "rounds_done": 800,
+      "paired_score_gain_vs_0000": 0.5666666666666667,
+      "paired_score_gain_ci95": [
+        -0.05,
+        1.1916666666666667
+      ],
+      "gain_target_met": true,
+      "safety_guardrails_pass": false,
+      "clear_gain_vs_previous": false
+    },
+    {
+      "agent": "hunt_center_04_mix_1000",
+      "files": 6,
+      "rounds": 120,
+      "mean_score": 3.5833333333333335,
+      "coins_per_round": 2.75,
+      "crates_per_round": 31.091666666666665,
+      "kills_per_round": 0.16666666666666666,
+      "suicides_per_round": 0.08333333333333333,
+      "invalid_per_round": 5.275,
+      "mean_action_ms": 2.521546235876994,
+      "total_steps": 40285,
+      "rounds_done": 1000,
+      "paired_score_gain_vs_0000": 0.2833333333333333,
+      "paired_score_gain_ci95": [
+        -0.35,
+        0.9166666666666666
+      ],
+      "gain_target_met": false,
+      "safety_guardrails_pass": false,
+      "clear_gain_vs_previous": false
+    }
+  ],
+  "plateau_detected_at_round": 600,
+  "selected_rounds": 0,
+  "selected_agent": "dueling_hunt_center_04",
+  "final_holdout_has_run": false
+}

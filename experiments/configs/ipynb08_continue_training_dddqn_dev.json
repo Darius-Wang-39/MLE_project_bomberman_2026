@@ -1,0 +1,53 @@
+{
+  "split": "development",
+  "enabled": false,
+  "rounds_per_lineup": 20,
+  "seeds": [
+    8101,
+    8102,
+    8103,
+    8104,
+    8105,
+    8101
+  ],
+  "lineups": {
+    "rule3": [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    "rule2_day7": [
+      "rule_based_agent",
+      "rule_based_agent",
+      "frozen_ddqn_day7"
+    ],
+    "rule_day7_dddqn": [
+      "rule_based_agent",
+      "frozen_ddqn_day7",
+      "dueling_ddqn_agent"
+    ],
+    "rule_day7x2": [
+      "rule_based_agent",
+      "frozen_ddqn_day7",
+      "frozen_ddqn_day7"
+    ],
+    "rule_dddqnx2": [
+      "rule_based_agent",
+      "dueling_ddqn_agent",
+      "dueling_ddqn_agent"
+    ],
+    "day7_dddqnx2": [
+      "frozen_ddqn_day7",
+      "dueling_ddqn_agent",
+      "dueling_ddqn_agent"
+    ]
+  },
+  "candidates": [
+    "dueling_hunt_center_04",
+    "hunt_center_04_mix_0200",
+    "hunt_center_04_mix_0400",
+    "hunt_center_04_mix_0600",
+    "hunt_center_04_mix_0800",
+    "hunt_center_04_mix_1000"
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "rounds_done": 800,
+  "candidate": "hunt_center_04_mix_0800",
+  "split": "final_holdout",
+  "runs": [
+    {
+      "lineup": "rule3",
+      "seed": 18101,
+      "stats": "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/01_rule3.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "hunt_center_04_mix_0800",
+        "rule_based_agent",
+        "rule_based_agent",
+        "rule_based_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "18101",
+        "--save-stats",
+        "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/01_rule3.json"
+      ]
+    },
+    {
+      "lineup": "rule2_day7",
+      "seed": 18102,
+      "stats": "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/02_rule2_day7.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "hunt_center_04_mix_0800",
+        "rule_based_agent",
+        "rule_based_agent",
+        "frozen_ddqn_day7",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "18102",
+        "--save-stats",
+        "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/02_rule2_day7.json"
+      ]
+    },
+    {
+      "lineup": "rule_day7_dddqn",
+      "seed": 18103,
+      "stats": "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/03_rule_day7_dddqn.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "hunt_center_04_mix_0800",
+        "rule_based_agent",
+        "frozen_ddqn_day7",
+        "dueling_ddqn_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "18103",
+        "--save-stats",
+        "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/03_rule_day7_dddqn.json"
+      ]
+    },
+    {
+      "lineup": "rule_day7x2",
+      "seed": 18104,
+      "stats": "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/04_rule_day7x2.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "hunt_center_04_mix_0800",
+        "rule_based_agent",
+        "frozen_ddqn_day7",
+        "frozen_ddqn_day7",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "18104",
+        "--save-stats",
+        "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/04_rule_day7x2.json"
+      ]
+    },
+    {
+      "lineup": "rule_dddqnx2",
+      "seed": 18105,
+      "stats": "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/05_rule_dddqnx2.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "hunt_center_04_mix_0800",
+        "rule_based_agent",
+        "dueling_ddqn_agent",
+        "dueling_ddqn_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "18105",
+        "--save-stats",
+        "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/05_rule_dddqnx2.json"
+      ]
+    },
+    {
+      "lineup": "day7_dddqnx2",
+      "seed": 18106,
+      "stats": "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/06_day7_dddqnx2.json",
+      "command": [
+        "main.py",
+        "play",
+        "--no-gui",
+        "--agents",
+        "hunt_center_04_mix_0800",
+        "frozen_ddqn_day7",
+        "dueling_ddqn_agent",
+        "dueling_ddqn_agent",
+        "--scenario",
+        "classic",
+        "--n-rounds",
+        "20",
+        "--seed",
+        "18106",
+        "--save-stats",
+        "results/ipynb08_continue_training_dddqn/final_holdout/hunt_center_04_mix_0800/06_day7_dddqnx2.json"
+      ]
+    }
+  ],
+  "metrics": {
+    "agent": "hunt_center_04_mix_0800",
+    "files": 6,
+    "rounds": 120,
+    "mean_score": 3.5833333333333335,
+    "coins_per_round": 2.75,
+    "crates_per_round": 31.675,
+    "kills_per_round": 0.16666666666666666,
+    "suicides_per_round": 0.15,
+    "invalid_per_round": 5.15,
+    "mean_action_ms": 2.5296065231396105,
+    "total_steps": 40626
+  },
+  "used_utc": "2026-09-15T12:04:03.526528+00:00"
+}

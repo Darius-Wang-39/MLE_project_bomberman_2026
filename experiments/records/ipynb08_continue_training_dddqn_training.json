@@ -1,0 +1,767 @@
+{
+  "experiment": "ipynb08_continue_training_dddqn",
+  "protocol": {
+    "experiment": "ipynb08_continue_training_dddqn",
+    "base_agent": "dueling_hunt_center_04",
+    "working_agent": "dueling_hunt_center_04_mix_train",
+    "training_seed": 1701,
+    "rounds": 1000,
+    "checkpoint_every": 200,
+    "microbatch_rounds": 20,
+    "mixture": {
+      "A": 0.4,
+      "B": 0.3,
+      "C": 0.2,
+      "D": 0.1
+    },
+    "lineups": {
+      "A": [
+        "rule_based_agent",
+        "rule_based_agent",
+        "rule_based_agent"
+      ],
+      "B": [
+        "rule_based_agent",
+        "rule_based_agent",
+        "frozen_ddqn_day7"
+      ],
+      "C": [
+        "rule_based_agent",
+        "frozen_ddqn_day7",
+        "dueling_ddqn_agent"
+      ],
+      "D_options": [
+        [
+          "rule_based_agent",
+          "frozen_ddqn_day7",
+          "frozen_ddqn_day7"
+        ],
+        [
+          "rule_based_agent",
+          "dueling_ddqn_agent",
+          "dueling_ddqn_agent"
+        ]
+      ]
+    },
+    "dev_seeds": [
+      8101,
+      8102,
+      8103,
+      8104,
+      8105,
+      8101
+    ],
+    "final_holdout_seeds": [
+      18101,
+      18102,
+      18103,
+      18104,
+      18105,
+      18106
+    ],
+    "selection_rule": {
+      "target_paired_mean_score_gain": 0.3,
+      "coins_must_not_decrease": true,
+      "max_relative_suicide_increase": 0.2,
+      "invalid_must_not_increase": true,
+      "mean_action_ms_limit": 500.0
+    }
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "completed_rounds": 200,
+      "schedule": [
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 1,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "dueling_ddqn_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1802
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 2,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1803
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 3,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 1804
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 4,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1805
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 5,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1806
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 6,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "frozen_ddqn_day7"
+          ],
+          "seed": 1807
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 7,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1808
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 8,
+          "type": "D",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 1809
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 9,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "frozen_ddqn_day7"
+          ],
+          "seed": 1810
+        },
+        {
+          "stage": 1,
+          "stage_end": 200,
+          "block": 10,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "dueling_ddqn_agent"
+          ],
+          "seed": 1811
+        }
+      ],
+      "checkpoint": "experiments/checkpoints/hunt_center_04_mix_0200.pt",
+      "checkpoint_sha256": "d15f1194cb56ae017cb4cb3493438e47b0a740db0979fed58b1658afb6f3e793",
+      "frozen_agent": "hunt_center_04_mix_0200"
+    },
+    {
+      "stage": 2,
+      "completed_rounds": 400,
+      "schedule": [
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 1,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1902
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 2,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 1903
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 3,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "dueling_ddqn_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1904
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 4,
+          "type": "D",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "dueling_ddqn_agent",
+            "dueling_ddqn_agent"
+          ],
+          "seed": 1905
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 5,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1906
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 6,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "frozen_ddqn_day7"
+          ],
+          "seed": 1907
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 7,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1908
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 8,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 1909
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 9,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 1910
+        },
+        {
+          "stage": 2,
+          "stage_end": 400,
+          "block": 10,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "dueling_ddqn_agent"
+          ],
+          "seed": 1911
+        }
+      ],
+      "checkpoint": "experiments/checkpoints/hunt_center_04_mix_0400.pt",
+      "checkpoint_sha256": "d3786725fd530b51e0cda5a4e6513da2d2eac3ef7f0dbbf21ce31743d14dd386",
+      "frozen_agent": "hunt_center_04_mix_0400"
+    },
+    {
+      "stage": 3,
+      "completed_rounds": 600,
+      "schedule": [
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 1,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2002
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 2,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "dueling_ddqn_agent",
+            "rule_based_agent",
+            "frozen_ddqn_day7"
+          ],
+          "seed": 2003
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 3,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 2004
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 4,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2005
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 5,
+          "type": "D",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 2006
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 6,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2007
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 7,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "dueling_ddqn_agent"
+          ],
+          "seed": 2008
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 8,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 2009
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 9,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2010
+        },
+        {
+          "stage": 3,
+          "stage_end": 600,
+          "block": 10,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2011
+        }
+      ],
+      "checkpoint": "experiments/checkpoints/hunt_center_04_mix_0600.pt",
+      "checkpoint_sha256": "f0a7060448eca87665826895f352a4401e13b96a3820cd34181abb6a720cad69",
+      "frozen_agent": "hunt_center_04_mix_0600"
+    },
+    {
+      "stage": 4,
+      "completed_rounds": 800,
+      "schedule": [
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 1,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2102
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 2,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2103
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 3,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "dueling_ddqn_agent",
+            "frozen_ddqn_day7"
+          ],
+          "seed": 2104
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 4,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2105
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 5,
+          "type": "D",
+          "rounds": 20,
+          "opponents": [
+            "dueling_ddqn_agent",
+            "dueling_ddqn_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2106
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 6,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "dueling_ddqn_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 2107
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 7,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2108
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 8,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 2109
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 9,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2110
+        },
+        {
+          "stage": 4,
+          "stage_end": 800,
+          "block": 10,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2111
+        }
+      ],
+      "checkpoint": "experiments/checkpoints/hunt_center_04_mix_0800.pt",
+      "checkpoint_sha256": "f5e48e89f67f0819bb4c51012a0764bbcef1349b570b979fd838a3144b360f21",
+      "frozen_agent": "hunt_center_04_mix_0800"
+    },
+    {
+      "stage": 5,
+      "completed_rounds": 1000,
+      "schedule": [
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 1,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2202
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 2,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2203
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 3,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "dueling_ddqn_agent",
+            "rule_based_agent",
+            "frozen_ddqn_day7"
+          ],
+          "seed": 2204
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 4,
+          "type": "D",
+          "rounds": 20,
+          "opponents": [
+            "dueling_ddqn_agent",
+            "dueling_ddqn_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2205
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 5,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2206
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 6,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "frozen_ddqn_day7",
+            "rule_based_agent"
+          ],
+          "seed": 2207
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 7,
+          "type": "C",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "dueling_ddqn_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2208
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 8,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2209
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 9,
+          "type": "A",
+          "rounds": 20,
+          "opponents": [
+            "rule_based_agent",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2210
+        },
+        {
+          "stage": 5,
+          "stage_end": 1000,
+          "block": 10,
+          "type": "B",
+          "rounds": 20,
+          "opponents": [
+            "frozen_ddqn_day7",
+            "rule_based_agent",
+            "rule_based_agent"
+          ],
+          "seed": 2211
+        }
+      ],
+      "checkpoint": "experiments/checkpoints/hunt_center_04_mix_1000.pt",
+      "checkpoint_sha256": "7923c99ff2e82029aeb63e1c975eed8febaa14ccbc137c4e7610d299d74b2a56",
+      "frozen_agent": "hunt_center_04_mix_1000"
+    }
+  ]
+}

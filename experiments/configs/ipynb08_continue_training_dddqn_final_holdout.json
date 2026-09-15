@@ -1,0 +1,47 @@
+{
+  "split": "final_holdout",
+  "enabled": false,
+  "run_once": true,
+  "candidate": null,
+  "rounds_per_lineup": 20,
+  "seeds": [
+    18101,
+    18102,
+    18103,
+    18104,
+    18105,
+    18106
+  ],
+  "lineups": {
+    "rule3": [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    "rule2_day7": [
+      "rule_based_agent",
+      "rule_based_agent",
+      "frozen_ddqn_day7"
+    ],
+    "rule_day7_dddqn": [
+      "rule_based_agent",
+      "frozen_ddqn_day7",
+      "dueling_ddqn_agent"
+    ],
+    "rule_day7x2": [
+      "rule_based_agent",
+      "frozen_ddqn_day7",
+      "frozen_ddqn_day7"
+    ],
+    "rule_dddqnx2": [
+      "rule_based_agent",
+      "dueling_ddqn_agent",
+      "dueling_ddqn_agent"
+    ],
+    "day7_dddqnx2": [
+      "frozen_ddqn_day7",
+      "dueling_ddqn_agent",
+      "dueling_ddqn_agent"
+    ]
+  }
+}
