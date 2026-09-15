@@ -1,0 +1,1 @@
+{"alpha":0.003,"n_step":8,"training_rounds":200,"validation_seed":54001,"validation_rounds":50,"mean_score":3.32,"suicides_per_round":0.22,"survival_rate":0.64,"source":"linear_q_a003_n8","frozen":true}

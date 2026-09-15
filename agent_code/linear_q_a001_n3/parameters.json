@@ -1,0 +1,1 @@
+{"alpha":0.001,"n_step":3,"epsilon_start":0.12,"epsilon_min":0.01,"epsilon_decay_updates":50000,"schedule_start_updates":61973}
