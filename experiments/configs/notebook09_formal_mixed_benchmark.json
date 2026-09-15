@@ -1,0 +1,31 @@
+{
+  "experiment": "notebook09_formal_mixed_benchmark",
+  "scenario": "classic",
+  "rounds_per_seed": 30,
+  "seeds": [
+    64001,
+    64002,
+    64003,
+    64004,
+    64005
+  ],
+  "lineup_order": [
+    "<candidate>",
+    "external_feature_is_everything",
+    "external_deep_learning_killer",
+    "rule_based_agent"
+  ],
+  "candidates": [
+    "dueling_hunt_center_04",
+    "hunt_center_04_mix_0800",
+    "dueling_ddqn_agent",
+    "frozen_sarsa_best",
+    "frozen_linear_q_final"
+  ],
+  "opponents": [
+    "external_feature_is_everything",
+    "external_deep_learning_killer",
+    "rule_based_agent"
+  ],
+  "training": false
+}
