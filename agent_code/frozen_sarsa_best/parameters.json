@@ -1,0 +1,1 @@
+{"algorithm":"linear SARSA(lambda)","lambda":0.4,"alpha_final":0.001,"training_episodes":153,"selection_seed":52301,"selection_rounds":20,"mean_score":3.8,"win_rate":0.45,"suicides_per_round":0.35,"survival_rate":0.65,"source":"frozen_sarsa_l04_stage2","frozen":true}

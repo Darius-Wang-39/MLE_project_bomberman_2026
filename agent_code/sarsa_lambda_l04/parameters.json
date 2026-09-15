@@ -1,0 +1,1 @@
+{"algorithm":"linear SARSA(lambda)","gamma":0.95,"lambda":0.4,"alpha":0.001,"epsilon_start":0.05,"epsilon_min":0.01,"epsilon_decay_episodes":40,"schedule_start_episode":113,"bomb_escape_reward":0.35,"unsafe_bomb_penalty":-2.0}

@@ -1,0 +1,1 @@
+{"algorithm":"linear SARSA(lambda)","lambda":0.4,"training_episodes":113,"validation_seed":52101,"validation_rounds":20,"mean_score":3.8,"win_rate":0.55,"suicides_per_round":0.25,"frozen":true}

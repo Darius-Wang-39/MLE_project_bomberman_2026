@@ -1,0 +1,1 @@
+{"algorithm":"linear SARSA(lambda)","lambda":0.4,"alpha":0.001,"training_episodes":153,"frozen":true}
