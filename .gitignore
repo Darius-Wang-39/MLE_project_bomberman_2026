@@ -72,6 +72,9 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# macOS metadata
+.DS_Store
+
 # pyenv
 .python-version
 
@@ -111,6 +114,10 @@ screenshots/*.webm
 
 replays/
 results/
+
+
+# Local adapters generated from the separate previous-cohort checkout
+agent_code/external_*/
 
 # Local isolated submission smoke-test directories
 agent_code/submission_smoke_agent/

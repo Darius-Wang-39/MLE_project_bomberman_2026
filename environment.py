@@ -277,7 +277,24 @@ class GenericWorld:
             a.note_stat("rounds")
         self.round_statistics[self.round_id] = {
             "steps": self.step,
-            **{key: sum(a.statistics[key] for a in self.agents) for key in ["coins", "kills", "suicides"]}
+            **{key: sum(a.statistics[key] for a in self.agents) for key in ["coins", "kills", "suicides"]},
+            # Keep the existing aggregate fields above for backward compatibility,
+            # and add per-agent round outcomes for tournament comparisons.
+            "agents": {
+                a.name: {
+                    "score": a.score,
+                    "coins": a.statistics["coins"],
+                    "crates": a.statistics["crates"],
+                    "bombs": a.statistics["bombs"],
+                    "kills": a.statistics["kills"],
+                    "suicides": a.statistics["suicides"],
+                    "invalid": a.statistics["invalid"],
+                    "steps": a.statistics["steps"],
+                    "time": a.statistics["time"],
+                    "survived": not a.dead,
+                }
+                for a in self.agents
+            },
         }
 
     def time_to_stop(self):
