@@ -1,0 +1,665 @@
+{
+  "by_agent": {
+    "candidate": {
+      "bombs": 510,
+      "coins": 15,
+      "crates": 233,
+      "invalid": 53,
+      "moves": 3272,
+      "rounds": 10,
+      "score": 15,
+      "steps": 4000,
+      "time": 20.33283257484436
+    },
+    "deep_learning_killer": {
+      "bombs": 122,
+      "coins": 35,
+      "crates": 370,
+      "invalid": 26,
+      "kills": 2,
+      "moves": 3273,
+      "rounds": 10,
+      "score": 45,
+      "steps": 3444,
+      "suicides": 1,
+      "time": 39.84474205970764
+    },
+    "feature_is_everything": {
+      "bombs": 123,
+      "coins": 25,
+      "crates": 358,
+      "invalid": 67,
+      "kills": 2,
+      "moves": 3586,
+      "rounds": 10,
+      "score": 35,
+      "steps": 3796,
+      "time": 63.87945556640625
+    },
+    "rule_based_agent": {
+      "bombs": 181,
+      "coins": 15,
+      "crates": 287,
+      "invalid": 63,
+      "kills": 1,
+      "moves": 2186,
+      "rounds": 10,
+      "score": 20,
+      "steps": 2430,
+      "suicides": 4,
+      "time": 2.156034469604492
+    }
+  },
+  "by_round": {
+    "Round 01 (2026-09-16 23-46-54)": {
+      "agents": {
+        "candidate": {
+          "bombs": 51,
+          "coins": 2,
+          "crates": 28,
+          "invalid": 18,
+          "kills": 0,
+          "score": 2,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 1.9845938682556152
+        },
+        "deep_learning_killer": {
+          "bombs": 15,
+          "coins": 4,
+          "crates": 39,
+          "invalid": 4,
+          "kills": 0,
+          "score": 4,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 5.094390630722046
+        },
+        "feature_is_everything": {
+          "bombs": 7,
+          "coins": 2,
+          "crates": 23,
+          "invalid": 9,
+          "kills": 0,
+          "score": 2,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 7.273120880126953
+        },
+        "rule_based_agent": {
+          "bombs": 25,
+          "coins": 1,
+          "crates": 35,
+          "invalid": 16,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 0.37145423889160156
+        }
+      },
+      "coins": 9,
+      "kills": 0,
+      "steps": 400,
+      "suicides": 0
+    },
+    "Round 02 (2026-09-16 23-47-09)": {
+      "agents": {
+        "candidate": {
+          "bombs": 49,
+          "coins": 0,
+          "crates": 15,
+          "invalid": 9,
+          "kills": 0,
+          "score": 0,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 2.0278351306915283
+        },
+        "deep_learning_killer": {
+          "bombs": 12,
+          "coins": 3,
+          "crates": 36,
+          "invalid": 2,
+          "kills": 0,
+          "score": 3,
+          "steps": 161,
+          "suicides": 1,
+          "survived": false,
+          "time": 1.9531822204589844
+        },
+        "feature_is_everything": {
+          "bombs": 11,
+          "coins": 3,
+          "crates": 34,
+          "invalid": 12,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.865138053894043
+        },
+        "rule_based_agent": {
+          "bombs": 35,
+          "coins": 3,
+          "crates": 28,
+          "invalid": 13,
+          "kills": 0,
+          "score": 3,
+          "steps": 359,
+          "suicides": 1,
+          "survived": false,
+          "time": 0.2858903408050537
+        }
+      },
+      "coins": 9,
+      "kills": 0,
+      "steps": 400,
+      "suicides": 2
+    },
+    "Round 03 (2026-09-16 23-47-21)": {
+      "agents": {
+        "candidate": {
+          "bombs": 55,
+          "coins": 1,
+          "crates": 25,
+          "invalid": 6,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 1.8801782131195068
+        },
+        "deep_learning_killer": {
+          "bombs": 13,
+          "coins": 4,
+          "crates": 42,
+          "invalid": 2,
+          "kills": 0,
+          "score": 4,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 5.278772830963135
+        },
+        "feature_is_everything": {
+          "bombs": 10,
+          "coins": 3,
+          "crates": 31,
+          "invalid": 8,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.722705364227295
+        },
+        "rule_based_agent": {
+          "bombs": 15,
+          "coins": 1,
+          "crates": 26,
+          "invalid": 3,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 0.4933018684387207
+        }
+      },
+      "coins": 9,
+      "kills": 0,
+      "steps": 400,
+      "suicides": 0
+    },
+    "Round 04 (2026-09-16 23-47-35)": {
+      "agents": {
+        "candidate": {
+          "bombs": 49,
+          "coins": 1,
+          "crates": 26,
+          "invalid": 0,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 2.097734212875366
+        },
+        "deep_learning_killer": {
+          "bombs": 7,
+          "coins": 5,
+          "crates": 28,
+          "invalid": 0,
+          "kills": 0,
+          "score": 5,
+          "steps": 83,
+          "suicides": 0,
+          "survived": false,
+          "time": 0.7377350330352783
+        },
+        "feature_is_everything": {
+          "bombs": 18,
+          "coins": 2,
+          "crates": 41,
+          "invalid": 15,
+          "kills": 1,
+          "score": 7,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.906646728515625
+        },
+        "rule_based_agent": {
+          "bombs": 30,
+          "coins": 1,
+          "crates": 32,
+          "invalid": 6,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 0.3769502639770508
+        }
+      },
+      "coins": 9,
+      "kills": 1,
+      "steps": 400,
+      "suicides": 0
+    },
+    "Round 05 (2026-09-16 23-47-46)": {
+      "agents": {
+        "candidate": {
+          "bombs": 48,
+          "coins": 1,
+          "crates": 24,
+          "invalid": 1,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 2.2673141956329346
+        },
+        "deep_learning_killer": {
+          "bombs": 13,
+          "coins": 3,
+          "crates": 35,
+          "invalid": 3,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 4.459522485733032
+        },
+        "feature_is_everything": {
+          "bombs": 11,
+          "coins": 3,
+          "crates": 32,
+          "invalid": 2,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.609250545501709
+        },
+        "rule_based_agent": {
+          "bombs": 10,
+          "coins": 2,
+          "crates": 26,
+          "invalid": 2,
+          "kills": 0,
+          "score": 2,
+          "steps": 99,
+          "suicides": 1,
+          "survived": false,
+          "time": 0.054056644439697266
+        }
+      },
+      "coins": 9,
+      "kills": 0,
+      "steps": 400,
+      "suicides": 1
+    },
+    "Round 06 (2026-09-16 23-47-59)": {
+      "agents": {
+        "candidate": {
+          "bombs": 50,
+          "coins": 2,
+          "crates": 24,
+          "invalid": 6,
+          "kills": 0,
+          "score": 2,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 2.1128652095794678
+        },
+        "deep_learning_killer": {
+          "bombs": 9,
+          "coins": 2,
+          "crates": 33,
+          "invalid": 2,
+          "kills": 0,
+          "score": 2,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 4.663470506668091
+        },
+        "feature_is_everything": {
+          "bombs": 16,
+          "coins": 5,
+          "crates": 47,
+          "invalid": 3,
+          "kills": 0,
+          "score": 5,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.979270696640015
+        },
+        "rule_based_agent": {
+          "bombs": 10,
+          "coins": 0,
+          "crates": 26,
+          "invalid": 5,
+          "kills": 0,
+          "score": 0,
+          "steps": 120,
+          "suicides": 1,
+          "survived": false,
+          "time": 0.08685040473937988
+        }
+      },
+      "coins": 9,
+      "kills": 0,
+      "steps": 400,
+      "suicides": 1
+    },
+    "Round 07 (2026-09-16 23-48-13)": {
+      "agents": {
+        "candidate": {
+          "bombs": 53,
+          "coins": 3,
+          "crates": 22,
+          "invalid": 6,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 1.9411988258361816
+        },
+        "deep_learning_killer": {
+          "bombs": 13,
+          "coins": 3,
+          "crates": 46,
+          "invalid": 3,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 4.313327789306641
+        },
+        "feature_is_everything": {
+          "bombs": 12,
+          "coins": 2,
+          "crates": 39,
+          "invalid": 5,
+          "kills": 1,
+          "score": 7,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.374527454376221
+        },
+        "rule_based_agent": {
+          "bombs": 5,
+          "coins": 1,
+          "crates": 20,
+          "invalid": 1,
+          "kills": 0,
+          "score": 1,
+          "steps": 47,
+          "suicides": 0,
+          "survived": false,
+          "time": 0.02367997169494629
+        }
+      },
+      "coins": 9,
+      "kills": 1,
+      "steps": 400,
+      "suicides": 0
+    },
+    "Round 08 (2026-09-16 23-48-26)": {
+      "agents": {
+        "candidate": {
+          "bombs": 50,
+          "coins": 1,
+          "crates": 22,
+          "invalid": 1,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 1.9813759326934814
+        },
+        "deep_learning_killer": {
+          "bombs": 12,
+          "coins": 4,
+          "crates": 30,
+          "invalid": 1,
+          "kills": 1,
+          "score": 9,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 4.317259311676025
+        },
+        "feature_is_everything": {
+          "bombs": 14,
+          "coins": 3,
+          "crates": 39,
+          "invalid": 0,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 6.063291788101196
+        },
+        "rule_based_agent": {
+          "bombs": 9,
+          "coins": 1,
+          "crates": 37,
+          "invalid": 4,
+          "kills": 0,
+          "score": 1,
+          "steps": 82,
+          "suicides": 1,
+          "survived": false,
+          "time": 0.04437732696533203
+        }
+      },
+      "coins": 9,
+      "kills": 1,
+      "steps": 400,
+      "suicides": 1
+    },
+    "Round 09 (2026-09-16 23-48-39)": {
+      "agents": {
+        "candidate": {
+          "bombs": 53,
+          "coins": 3,
+          "crates": 27,
+          "invalid": 5,
+          "kills": 0,
+          "score": 3,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 2.0002734661102295
+        },
+        "deep_learning_killer": {
+          "bombs": 14,
+          "coins": 2,
+          "crates": 45,
+          "invalid": 0,
+          "kills": 1,
+          "score": 7,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 4.376425743103027
+        },
+        "feature_is_everything": {
+          "bombs": 11,
+          "coins": 1,
+          "crates": 29,
+          "invalid": 4,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 5.986544132232666
+        },
+        "rule_based_agent": {
+          "bombs": 10,
+          "coins": 3,
+          "crates": 26,
+          "invalid": 4,
+          "kills": 0,
+          "score": 3,
+          "steps": 123,
+          "suicides": 0,
+          "survived": false,
+          "time": 0.07096385955810547
+        }
+      },
+      "coins": 9,
+      "kills": 1,
+      "steps": 400,
+      "suicides": 0
+    },
+    "Round 10 (2026-09-16 23-48-51)": {
+      "agents": {
+        "candidate": {
+          "bombs": 52,
+          "coins": 1,
+          "crates": 20,
+          "invalid": 1,
+          "kills": 0,
+          "score": 1,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 2.039463520050049
+        },
+        "deep_learning_killer": {
+          "bombs": 14,
+          "coins": 5,
+          "crates": 36,
+          "invalid": 9,
+          "kills": 0,
+          "score": 5,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 4.650655508041382
+        },
+        "feature_is_everything": {
+          "bombs": 13,
+          "coins": 1,
+          "crates": 43,
+          "invalid": 9,
+          "kills": 0,
+          "score": 1,
+          "steps": 196,
+          "suicides": 0,
+          "survived": false,
+          "time": 4.098959922790527
+        },
+        "rule_based_agent": {
+          "bombs": 32,
+          "coins": 2,
+          "crates": 31,
+          "invalid": 9,
+          "kills": 1,
+          "score": 7,
+          "steps": 400,
+          "suicides": 0,
+          "survived": true,
+          "time": 0.3485095500946045
+        }
+      },
+      "coins": 9,
+      "kills": 1,
+      "steps": 400,
+      "suicides": 0
+    }
+  },
+  "evaluation": {
+    "training": false,
+    "flags": [
+      true,
+      false
+    ],
+    "initial_conditions": [
+      {
+        "seed": 918100,
+        "sha256": "8af74d97540ddfb29d10bd0633c047e02b3b2499e47b2fbed0288a75d7f26bdf"
+      },
+      {
+        "seed": 918101,
+        "sha256": "ee3569074edca4025fb3394651e088c4c2325cb3fbc7b151c717280b5ff285cc"
+      },
+      {
+        "seed": 918102,
+        "sha256": "5105282661235e3a2c312e144db0caf06681ae38db5ccf5a95d07cce1fd4add5"
+      },
+      {
+        "seed": 918103,
+        "sha256": "48f01a66e4ed6644be31346613568f05931daac2804c5ee09a0df5418661e4a3"
+      },
+      {
+        "seed": 918104,
+        "sha256": "aaa943d09f44195188bbbf97de3987e41f1eea8a2effea176d26606ae8ca9504"
+      },
+      {
+        "seed": 918105,
+        "sha256": "c37224e6b67c7d17b71c904bc6350a52ca6f4ad3a7f289fa139b6058a32d71f9"
+      },
+      {
+        "seed": 918106,
+        "sha256": "f16ed92a1aa991732e63fb056f31c09d5e3b4c3c09f7fc07423b4275c8cebbf8"
+      },
+      {
+        "seed": 918107,
+        "sha256": "4fba7d77a1a756e50634e37f3d165810b0ac4c86a1973062532ec6bd6127c43b"
+      },
+      {
+        "seed": 918108,
+        "sha256": "8362cea5e35a5217e6013313db5269171ead8aa8ceb106c8e0cb5a6a1602b8bc"
+      },
+      {
+        "seed": 918109,
+        "sha256": "2c6327d6124e3a0c743303df6640816b3a24de7a0ed83219a328249245e346e1"
+      }
+    ],
+    "checkpoint": "unchanged original weights"
+  }
+}

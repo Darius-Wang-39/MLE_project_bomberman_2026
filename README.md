@@ -14,6 +14,12 @@ pushing or merging them.
   from `dueling_hunt_center_04`, objective bias 1.00 and center bias 0.04.
   This is the default watch/package target, not a newly trained model.
   See the dated Chinese teammate handoff in [CHANGELOG.md](CHANGELOG.md).
+- `dueling_priority23`: **experimental, not the default submission**. Implements
+  resource-efficiency and contested-exit variants with separate switches.
+  A 200-round continuation and validation/holdout comparisons are archived in
+  [the P2/P3 report](experiments/records/priority23_20260917/REPORT.md).
+  The source directory contains starting weights; trained 100/200-round
+  checkpoints are in that report directory's `checkpoints/` subfolder.
 - `linear_q_agent`: fast, interpretable linear Q-learning baseline with exact
   D4 symmetry through shared action-relative features and five-step returns.
 - `dueling_ddqn_agent`: compact Dueling Double DQN with five-step returns,

@@ -1,0 +1,18 @@
+{
+  "selection_date": "2026-09-17",
+  "selection_rule": "Equal-weight mean score of two validation lineups; 10 rounds each; independent holdout not used for selection",
+  "validation_means": {
+    "baseline": 3.0,
+    "p2": 3.0,
+    "p3": 3.45,
+    "both": 3.3,
+    "trained100": 2.1,
+    "trained200": 2.65
+  },
+  "selected_challenger": "p3",
+  "selected_flags": [false, true],
+  "selected_checkpoint": "original frozen checkpoint; no additional training",
+  "holdout_seed": 919000,
+  "holdout_rounds_per_lineup": 20,
+  "automatically_promote": false
+}

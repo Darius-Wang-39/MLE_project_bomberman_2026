@@ -1,0 +1,119 @@
+{
+  "base_commit": "3491aac5c774b3b672ba0e17b5cdd3a94576d885",
+  "senior_commit": "a7fe5041b02548ce4438e502ca3adb11576bae75",
+  "flags": {
+    "baseline": [
+      false,
+      false
+    ],
+    "p2": [
+      true,
+      false
+    ],
+    "p3": [
+      false,
+      true
+    ],
+    "both": [
+      true,
+      true
+    ]
+  },
+  "training_rounds": 200,
+  "training_lineups_25_rounds_each": [
+    [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    [
+      "rule_based_agent",
+      "dueling_engine_aligned",
+      "peaceful_agent"
+    ],
+    [
+      "rule_based_agent",
+      "dueling_engine_aligned",
+      "rule_based_agent"
+    ],
+    [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    [
+      "rule_based_agent",
+      "rule_based_agent",
+      "rule_based_agent"
+    ],
+    [
+      "rule_based_agent",
+      "dueling_engine_aligned",
+      "peaceful_agent"
+    ],
+    [
+      "rule_based_agent",
+      "dueling_engine_aligned",
+      "rule_based_agent"
+    ]
+  ],
+  "training_seed": 917000,
+  "validation_seed": 918000,
+  "holdout_seed": 919000,
+  "validation_rounds_per_lineup": 10,
+  "holdout_rounds_per_lineup": 20,
+  "checkpoint_every": 100,
+  "learning_rate": 0.0003,
+  "fresh_replay_and_optimizer": true,
+  "new_features_zero_input_weights": true,
+  "unchanged": "reward constants, objective Q bias 1.0, center Q bias 0.04, architecture hidden layers",
+  "selection": "validation equal-weight mean score across two lineups; include baseline and all frozen/100/200 candidates",
+  "promotion": "not automatic; selected candidate must be compared to baseline on fresh holdout, with suicide/invalid regressions disclosed",
+  "source_hashes": {
+    "agents.py": "eb8eff495666a8c51ede5f66f3785abbd0a24e60c3a8417432ada88b05e332a4",
+    "environment.py": "7dc67ad8d8c2f7c5792769daca168aa5f9f1bd140cbfdf68aff1b5c63729cd85",
+    "events.py": "bfbf114140e58f14679b3a992b45c93138d79d8b16fcc6d413f571a29136c75f",
+    "fallbacks.py": "f4bf32e0a9218c74521b2add7f6fb357cbbefa4d52fed56e7a2b358456516973",
+    "items.py": "f3e23827ab4edb58efba66b8f38e0dd68f8bb721964518e020e9766a39bb16f2",
+    "main.py": "0e223947b44b2e1d1b0bbeb647dcae6f65535c3fe88999c2084bca1226c8ec95",
+    "replay.py": "89b0f37b2526c48360f29ede1a5010c4aa5e4644add77325bc6ec14bc9c1baaa",
+    "settings.py": "3bddbf25c10a47b37e18e3838a1faaef711af2f53313397dd17158a6ac407fca",
+    "test.py": "4abc0b84a493f5fc58932067af38d0303f76d3b028bed5998438fd795a315fbb",
+    "evaluation\\engine_timing_ablation.py": "322e4075be298af3cf94ba6a05a26dae109cb3116023b62f8280f2588ea01fef",
+    "evaluation\\priority23_experiment.py": "e0e3531814c9cc93b1c5056dcdddea3cd337e30ea044f40cb8071595e166818b",
+    "evaluation\\run_external_benchmark.py": "dfb5a2aed50ceb022709433444512caa374fec657d80d5655fc1ba91f3b14287",
+    "evaluation\\run_internal_vs_external.py": "ff5d50fdb6604b82041f299be6512e19a5eb54620b14527792f8f98d46fd7f91",
+    "evaluation\\run_locked_suite.py": "f05c3c8451321a9efe8673c7624d0ab633f3b8122970965cc9315879f1e64100",
+    "evaluation\\run_notebook09_formal_suite.py": "e620175f8341b7eac4dd91a0aaaad06f2c87d9e0bc6af8ed7f0968c0de1ab7b7",
+    "evaluation\\summarize_stats.py": "566ad53d1a86e4453011cba5e5bbf4cb58af08ca2a2e149ee2a05174ca0b10d5",
+    "evaluation\\summarize_timing_ablation.py": "c4f4c44c5c0098aacd026aa8336d834e07585dc8403b40751584cfc677a29c55",
+    "agent_code\\deep_learning_killer\\callbacks.py": "2873c7d973546e7e3b5af0e132dc1053f151c8a66ad3db4a3b98c1e80f0fe52c",
+    "agent_code\\deep_learning_killer\\features.py": "8e6ec829e89455e67fb1a67b80f017dca4f3d958401d902207fcd6c0e7be3062",
+    "agent_code\\deep_learning_killer\\symmetry.py": "9bc0f98f60884c6bb58f53f416aab07bef63f752ef0e435b8dc7595e4d6f5a7e",
+    "agent_code\\deep_learning_killer\\table.py": "6c2a50e3b13ad41cfd75f26e47692146da9d3847a5a43a58ea4794b505994138",
+    "agent_code\\deep_learning_killer\\train.py": "bcd574e0d726b362247fc410d5e4115d6dad4f2bac3e365292a39086cf0eb16c",
+    "agent_code\\dueling_engine_aligned\\callbacks.py": "4bf3cd355d30caccd2e71fc20db25d50284291e75173eefc46e6d25c69733cea",
+    "agent_code\\dueling_engine_aligned\\features.py": "50e70bb1bf024a3d2b32400db1fc82a31c07dad523922f91ce7e0daf5bc7839a",
+    "agent_code\\dueling_engine_aligned\\model.py": "4802edb5c662267a0013eee70ef1d4568c867c1241071f2e90f19eb8dabf8506",
+    "agent_code\\dueling_priority23\\base_features.py": "5cf4c152c037c758f0bd760e154bd5a656488edd37675deeb7d5c4a75e84d020",
+    "agent_code\\dueling_priority23\\callbacks.py": "4bf3cd355d30caccd2e71fc20db25d50284291e75173eefc46e6d25c69733cea",
+    "agent_code\\dueling_priority23\\features.py": "44017a83a9a690f12b2d074b2de43eab90b47a0150be9477aa7a23b8a9ccdfc3",
+    "agent_code\\dueling_priority23\\model.py": "4802edb5c662267a0013eee70ef1d4568c867c1241071f2e90f19eb8dabf8506",
+    "agent_code\\dueling_priority23\\replay.py": "13f111b421ed9fdb54102bf2def7ea3e0548d32e55536151ec6caee605c3cac1",
+    "agent_code\\dueling_priority23\\symmetry.py": "58e4681cc1528daf557b1a131ab5f85a28b099afbccc1bc7d842967ae79029ba",
+    "agent_code\\dueling_priority23\\train.py": "542fe6402fc3ef93e996c1bcd4c2149522e1979effa0c2aee05cfe8755f9538c",
+    "agent_code\\feature_is_everything\\callbacks.py": "d6e8427b66ab3c41ad3310e30ce00b4e6f36c455ce9386f4c6a1c4de5f10be79",
+    "agent_code\\feature_is_everything\\features.py": "af6c138a2029915ab27cbb52985c25a1a0189149af34a7e2095ed6dbbd9db5fc",
+    "agent_code\\feature_is_everything\\model.py": "9302b7789ffbc8daa5e32ef62f0e6730381897697e253e9356bda5bf2dd5e7bb",
+    "agent_code\\feature_is_everything\\symmetry.py": "7b481126d7c6f4f959ca8e139695f97dc5d49cf6c9e3c828a53702a663b3bed7",
+    "agent_code\\feature_is_everything\\train.py": "33b68a89a2be5b4dc33393af54a237493a3be1faf88de042cf5b1b69244ab512",
+    "agent_code\\peaceful_agent\\callbacks.py": "0033213487bd71959f425e1c498f280073bd7706e7c0b5d23136c72ed87b708c",
+    "agent_code\\rule_based_agent\\callbacks.py": "5fa209d1f31549573b87985ddee7dfa2984c15838e97620d740f1ec2a8773fca"
+  },
+  "initial_weight_sha256": "709cca4351f3bc5893f766b01b8c9335fa299d25331a275ae281b123df31009a"
+}

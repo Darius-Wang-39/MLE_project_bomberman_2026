@@ -1,0 +1,36 @@
+[
+  {
+    "lineup": "rule3",
+    "agent": "candidate",
+    "rounds": 10,
+    "mean_score": 4.0,
+    "win_rate": 0.5,
+    "mean_rank": 1.9,
+    "mean_score_margin": 1.5,
+    "coins_per_round": 3.0,
+    "crates_per_round": 29.0,
+    "bombs_per_round": 45.3,
+    "kills_per_round": 0.2,
+    "suicides_per_round": 0.2,
+    "invalid_per_round": 2.3,
+    "survival_rate": 0.8,
+    "mean_action_ms": 4.328190511272799
+  },
+  {
+    "lineup": "mixed",
+    "agent": "candidate",
+    "rounds": 10,
+    "mean_score": 2.9,
+    "win_rate": 0.3,
+    "mean_rank": 2.5,
+    "mean_score_margin": -0.13333333333333322,
+    "coins_per_round": 1.4,
+    "crates_per_round": 21.6,
+    "bombs_per_round": 43.0,
+    "kills_per_round": 0.3,
+    "suicides_per_round": 0.1,
+    "invalid_per_round": 4.4,
+    "survival_rate": 0.8,
+    "mean_action_ms": 4.389645805738729
+  }
+]

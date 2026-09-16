@@ -1,0 +1,371 @@
+{
+  "validation": [
+    {
+      "tag": "baseline",
+      "mean_score": 3.0,
+      "lineups": [
+        {
+          "lineup": "rule3",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 3.8,
+          "win_rate": 0.4,
+          "mean_rank": 2.1,
+          "mean_score_margin": 0.7333333333333334,
+          "coins_per_round": 2.8,
+          "crates_per_round": 29.2,
+          "bombs_per_round": 45.5,
+          "kills_per_round": 0.2,
+          "suicides_per_round": 0.1,
+          "invalid_per_round": 2.1,
+          "survival_rate": 0.8,
+          "mean_action_ms": 3.945237698055474
+        },
+        {
+          "lineup": "mixed",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 2.2,
+          "win_rate": 0.2,
+          "mean_rank": 2.6,
+          "mean_score_margin": -0.8666666666666666,
+          "coins_per_round": 1.7,
+          "crates_per_round": 21.1,
+          "bombs_per_round": 41.5,
+          "kills_per_round": 0.1,
+          "suicides_per_round": 0.0,
+          "invalid_per_round": 3.5,
+          "survival_rate": 0.8,
+          "mean_action_ms": 4.02666663097466
+        }
+      ]
+    },
+    {
+      "tag": "p2",
+      "mean_score": 3.0,
+      "lineups": [
+        {
+          "lineup": "rule3",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 4.5,
+          "win_rate": 0.5,
+          "mean_rank": 1.7,
+          "mean_score_margin": 1.8333333333333333,
+          "coins_per_round": 3.0,
+          "crates_per_round": 28.5,
+          "bombs_per_round": 38.0,
+          "kills_per_round": 0.3,
+          "suicides_per_round": 0.0,
+          "invalid_per_round": 1.2,
+          "survival_rate": 0.7,
+          "mean_action_ms": 5.092374486266451
+        },
+        {
+          "lineup": "mixed",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 1.5,
+          "win_rate": 0.0,
+          "mean_rank": 2.8,
+          "mean_score_margin": -1.8333333333333333,
+          "coins_per_round": 1.5,
+          "crates_per_round": 23.3,
+          "bombs_per_round": 51.0,
+          "kills_per_round": 0.0,
+          "suicides_per_round": 0.0,
+          "invalid_per_round": 5.3,
+          "survival_rate": 1.0,
+          "mean_action_ms": 5.08320814371109
+        }
+      ]
+    },
+    {
+      "tag": "p3",
+      "mean_score": 3.45,
+      "lineups": [
+        {
+          "lineup": "rule3",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 4.0,
+          "win_rate": 0.5,
+          "mean_rank": 1.9,
+          "mean_score_margin": 1.5,
+          "coins_per_round": 3.0,
+          "crates_per_round": 29.0,
+          "bombs_per_round": 45.3,
+          "kills_per_round": 0.2,
+          "suicides_per_round": 0.2,
+          "invalid_per_round": 2.3,
+          "survival_rate": 0.8,
+          "mean_action_ms": 4.328190511272799
+        },
+        {
+          "lineup": "mixed",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 2.9,
+          "win_rate": 0.3,
+          "mean_rank": 2.5,
+          "mean_score_margin": -0.13333333333333322,
+          "coins_per_round": 1.4,
+          "crates_per_round": 21.6,
+          "bombs_per_round": 43.0,
+          "kills_per_round": 0.3,
+          "suicides_per_round": 0.1,
+          "invalid_per_round": 4.4,
+          "survival_rate": 0.8,
+          "mean_action_ms": 4.389645805738729
+        }
+      ]
+    },
+    {
+      "tag": "both",
+      "mean_score": 3.3,
+      "lineups": [
+        {
+          "lineup": "rule3",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 3.9,
+          "win_rate": 0.5,
+          "mean_rank": 1.8,
+          "mean_score_margin": 1.3666666666666667,
+          "coins_per_round": 2.9,
+          "crates_per_round": 30.3,
+          "bombs_per_round": 44.1,
+          "kills_per_round": 0.2,
+          "suicides_per_round": 0.0,
+          "invalid_per_round": 2.2,
+          "survival_rate": 0.9,
+          "mean_action_ms": 5.203727871366404
+        },
+        {
+          "lineup": "mixed",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 2.7,
+          "win_rate": 0.2,
+          "mean_rank": 2.7,
+          "mean_score_margin": -0.39999999999999986,
+          "coins_per_round": 1.2,
+          "crates_per_round": 23.1,
+          "bombs_per_round": 50.1,
+          "kills_per_round": 0.3,
+          "suicides_per_round": 0.0,
+          "invalid_per_round": 5.1,
+          "survival_rate": 1.0,
+          "mean_action_ms": 5.107095003128052
+        }
+      ]
+    },
+    {
+      "tag": "trained100",
+      "mean_score": 2.1,
+      "lineups": [
+        {
+          "lineup": "rule3",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 2.7,
+          "win_rate": 0.2,
+          "mean_rank": 2.5,
+          "mean_score_margin": -0.9,
+          "coins_per_round": 2.2,
+          "crates_per_round": 30.6,
+          "bombs_per_round": 23.3,
+          "kills_per_round": 0.1,
+          "suicides_per_round": 0.3,
+          "invalid_per_round": 2.7,
+          "survival_rate": 0.6,
+          "mean_action_ms": 5.695271414595765
+        },
+        {
+          "lineup": "mixed",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 1.5,
+          "win_rate": 0.0,
+          "mean_rank": 3.3,
+          "mean_score_margin": -2.9666666666666663,
+          "coins_per_round": 1.5,
+          "crates_per_round": 23.1,
+          "bombs_per_round": 17.1,
+          "kills_per_round": 0.0,
+          "suicides_per_round": 0.1,
+          "invalid_per_round": 4.7,
+          "survival_rate": 0.2,
+          "mean_action_ms": 6.109629358564105
+        }
+      ]
+    },
+    {
+      "tag": "trained200",
+      "mean_score": 2.65,
+      "lineups": [
+        {
+          "lineup": "rule3",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 3.3,
+          "win_rate": 0.5,
+          "mean_rank": 2.0,
+          "mean_score_margin": 0.5666666666666664,
+          "coins_per_round": 2.8,
+          "crates_per_round": 27.5,
+          "bombs_per_round": 24.1,
+          "kills_per_round": 0.1,
+          "suicides_per_round": 0.2,
+          "invalid_per_round": 4.8,
+          "survival_rate": 0.6,
+          "mean_action_ms": 5.557517104719036
+        },
+        {
+          "lineup": "mixed",
+          "agent": "candidate",
+          "rounds": 10,
+          "mean_score": 2.0,
+          "win_rate": 0.1,
+          "mean_rank": 2.7,
+          "mean_score_margin": -1.6666666666666665,
+          "coins_per_round": 1.5,
+          "crates_per_round": 23.6,
+          "bombs_per_round": 31.6,
+          "kills_per_round": 0.1,
+          "suicides_per_round": 0.0,
+          "invalid_per_round": 7.3,
+          "survival_rate": 0.7,
+          "mean_action_ms": 5.58655722099438
+        }
+      ]
+    }
+  ],
+  "selected_including_baseline": "p3",
+  "best_modified_challenger": "p3",
+  "validation_initial_conditions_matched": true,
+  "holdout": {
+    "baseline": [
+      {
+        "lineup": "rule3",
+        "agent": "candidate",
+        "rounds": 20,
+        "mean_score": 3.75,
+        "win_rate": 0.4,
+        "mean_rank": 1.95,
+        "mean_score_margin": 0.8333333333333333,
+        "coins_per_round": 3.0,
+        "crates_per_round": 32.2,
+        "bombs_per_round": 44.35,
+        "kills_per_round": 0.15,
+        "suicides_per_round": 0.15,
+        "invalid_per_round": 2.05,
+        "survival_rate": 0.8,
+        "mean_action_ms": 3.9695306817465013
+      },
+      {
+        "lineup": "mixed",
+        "agent": "candidate",
+        "rounds": 20,
+        "mean_score": 2.55,
+        "win_rate": 0.25,
+        "mean_rank": 2.4,
+        "mean_score_margin": -0.6,
+        "coins_per_round": 1.3,
+        "crates_per_round": 22.85,
+        "bombs_per_round": 47.3,
+        "kills_per_round": 0.25,
+        "suicides_per_round": 0.1,
+        "invalid_per_round": 3.85,
+        "survival_rate": 0.85,
+        "mean_action_ms": 3.859389604271624
+      }
+    ],
+    "challenger": [
+      {
+        "lineup": "rule3",
+        "agent": "candidate",
+        "rounds": 20,
+        "mean_score": 3.95,
+        "win_rate": 0.35,
+        "mean_rank": 2.1,
+        "mean_score_margin": 0.7666666666666666,
+        "coins_per_round": 3.2,
+        "crates_per_round": 30.35,
+        "bombs_per_round": 45.35,
+        "kills_per_round": 0.15,
+        "suicides_per_round": 0.1,
+        "invalid_per_round": 2.2,
+        "survival_rate": 0.8,
+        "mean_action_ms": 4.143079513078313
+      },
+      {
+        "lineup": "mixed",
+        "agent": "candidate",
+        "rounds": 20,
+        "mean_score": 2.55,
+        "win_rate": 0.2,
+        "mean_rank": 2.4,
+        "mean_score_margin": -0.85,
+        "coins_per_round": 1.3,
+        "crates_per_round": 23.25,
+        "bombs_per_round": 47.85,
+        "kills_per_round": 0.25,
+        "suicides_per_round": 0.2,
+        "invalid_per_round": 4.45,
+        "survival_rate": 0.75,
+        "mean_action_ms": 4.147637062272738
+      }
+    ],
+    "differences": {
+      "rule3": {
+        "paired_mean_score_difference": 0.2,
+        "descriptive_bootstrap95": [
+          -0.6,
+          1.15
+        ]
+      },
+      "mixed": {
+        "paired_mean_score_difference": 0.0,
+        "descriptive_bootstrap95": [
+          -0.75,
+          0.75
+        ]
+      }
+    },
+    "initial_conditions_matched": true
+  },
+  "training": {
+    "rounds": 200,
+    "engine_recorded_actions": 63329,
+    "checkpoints": [
+      {
+        "rounds": 100,
+        "flags": [
+          true,
+          true
+        ],
+        "sha256": "98bd9fb32841a6b875bea725d16e88777b3ef3b13b34623b49e8ec461ef0993d",
+        "environment_steps_counter": 322781,
+        "added_counter_steps": 32680,
+        "learner_updates": 76435,
+        "added_updates": 7919,
+        "input_width": 156
+      },
+      {
+        "rounds": 200,
+        "flags": [
+          true,
+          true
+        ],
+        "sha256": "929af0be9a22e9933de93d44a450647e343e7384c683973655f708015fccb01a",
+        "environment_steps_counter": 353566,
+        "added_counter_steps": 63465,
+        "learner_updates": 84131,
+        "added_updates": 15615,
+        "input_width": 156
+      }
+    ],
+    "counter_note": "Trainer counter includes terminal callbacks; it is not a count of distinct game actions."
+  }
+}
