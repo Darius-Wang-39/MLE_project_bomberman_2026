@@ -1,0 +1,631 @@
+"""Action-relative, teacher-compliant features for the linear Q agent."""
+
+from __future__ import annotations
+
+from collections import deque
+from typing import Dict, Iterable, List, Sequence, Set, Tuple
+
+import numpy as np
+
+
+ACTIONS = ("UP", "RIGHT", "DOWN", "LEFT", "WAIT", "BOMB")
+MOVE_DELTAS = {
+    "UP": (0, -1),
+    "RIGHT": (1, 0),
+    "DOWN": (0, 1),
+    "LEFT": (-1, 0),
+    "WAIT": (0, 0),
+    "BOMB": (0, 0),
+}
+CARDINAL_DELTAS = tuple(MOVE_DELTAS[action] for action in ACTIONS[:4])
+HUNT_CENTER_MIN = 3
+HUNT_CENTER_MAX = 13
+HUNT_CENTER_WEIGHT = 0.0
+MIN_BOMB_ESCAPE_BRANCHES = 2
+OPENING_SINGLE_BRANCH_MAX_STEP = 120
+OPENING_SINGLE_BRANCH_MIN_SURVIVAL = 1
+OPENING_SINGLE_BRANCH_MIN_OPPONENT_DISTANCE = 5
+
+FEATURE_NAMES = (
+    "bias",
+    "is_move",
+    "is_wait",
+    "is_bomb",
+    "is_legal",
+    "escape_space",
+    "target_danger",
+    "danger_reduction",
+    "coin_progress",
+    "crate_progress",
+    "opponent_progress",
+    "bomb_crate_yield",
+    "bomb_opponent_yield",
+    "bomb_escape",
+    "local_freedom",
+    "wait_in_danger",
+    "late_round_bomb",
+    "hunt_center_progress",
+    "bomb_trap_pressure",
+    "armed_opponent_threat",
+    "safe_productive_bomb",
+    "objective_target",
+)
+
+
+def _add(position: Tuple[int, int], delta: Tuple[int, int]) -> Tuple[int, int]:
+    return position[0] + delta[0], position[1] + delta[1]
+
+
+class FeatureExtractor:
+    """Compute one feature vector per action.
+
+    Directional actions share the same feature weights. No feature identifies an
+    absolute direction or directly returns a hand-written best action.
+    """
+
+    def __init__(
+        self,
+        bomb_power: int = 3,
+        bomb_timer: int = 4,
+        explosion_duration: int = 2,
+        horizon: int = 6,
+        hunt_center_min: int = HUNT_CENTER_MIN,
+        hunt_center_max: int = HUNT_CENTER_MAX,
+        hunt_center_weight: float = HUNT_CENTER_WEIGHT,
+    ):
+        self.bomb_power = bomb_power
+        self.bomb_timer = bomb_timer
+        self.explosion_duration = explosion_duration
+        self.horizon = horizon
+        self.hunt_center_min = hunt_center_min
+        self.hunt_center_max = hunt_center_max
+        self.hunt_center_weight = hunt_center_weight
+        self._productive_target_cache_key = None
+        self._productive_target_cache: Set[Tuple[int, int]] = set()
+
+    @property
+    def feature_count(self) -> int:
+        return len(FEATURE_NAMES)
+
+    @property
+    def feature_names(self):
+        return FEATURE_NAMES
+
+    def blast_tiles(self, field: np.ndarray, origin: Tuple[int, int]) -> Set[Tuple[int, int]]:
+        """Match the supplied framework: stone walls stop blasts; crates do not."""
+        tiles = {origin}
+        for dx, dy in CARDINAL_DELTAS:
+            for distance in range(1, self.bomb_power + 1):
+                tile = origin[0] + dx * distance, origin[1] + dy * distance
+                if field[tile] == -1:
+                    break
+                tiles.add(tile)
+        return tiles
+
+    def legal_action_mask(self, game_state: Dict) -> np.ndarray:
+        field = game_state["field"]
+        position = tuple(game_state["self"][-1])
+        bombs = {tuple(bomb_position) for bomb_position, _ in game_state["bombs"]}
+        others = {tuple(other[-1]) for other in game_state["others"]}
+        mask = np.ones(len(ACTIONS), dtype=bool)
+        for index, action in enumerate(ACTIONS[:4]):
+            target = _add(position, MOVE_DELTAS[action])
+            mask[index] = field[target] == 0 and target not in bombs and target not in others
+        mask[ACTIONS.index("WAIT")] = True
+        mask[ACTIONS.index("BOMB")] = bool(game_state["self"][2]) and position not in bombs
+        return mask
+
+    def _bomb_schedule(self, game_state: Dict, add_own_bomb: bool) -> List[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]]:
+        field = game_state["field"]
+        schedule = []
+        for position, timer in game_state["bombs"]:
+            position = tuple(position)
+            schedule.append((self.blast_tiles(field, position), int(timer) + 1, position))
+        if add_own_bomb:
+            position = tuple(game_state["self"][-1])
+            schedule.append((self.blast_tiles(field, position), self.bomb_timer + 1, position))
+
+        # GenericWorld.update_bombs only checks each bomb's own timer: this
+        # course engine has no chain reactions, even inside another blast.
+        return schedule
+
+    def _is_dangerous(
+        self,
+        position: Tuple[int, int],
+        time_step: int,
+        schedule: Sequence[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]],
+        explosion_map: np.ndarray,
+    ) -> bool:
+        # get_state_for_agent exports timer - 1. The engine advances existing
+        # explosions before testing damage, so no extra future turn is added.
+        if explosion_map[position] > 0 and time_step <= int(explosion_map[position]):
+            return True
+        return any(
+            position in blast and explosion_time <= time_step < explosion_time + self.explosion_duration
+            for blast, explosion_time, _ in schedule
+        )
+
+    def _bomb_blocks(
+        self,
+        position: Tuple[int, int],
+        time_step: int,
+        schedule: Sequence[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]],
+    ) -> bool:
+        # Movement resolves BEFORE bombs detonate, including the zero-timer turn.
+        return any(position == bomb_position and time_step <= explosion_time for _, explosion_time, bomb_position in schedule)
+
+    def survival_count(self, game_state: Dict, action: str) -> int:
+        """Count distinct positions reachable at the planning horizon after an action."""
+        legal = self.legal_action_mask(game_state)
+        action_index = ACTIONS.index(action)
+        if not legal[action_index]:
+            return 0
+
+        field = game_state["field"]
+        explosion_map = game_state["explosion_map"]
+        start = tuple(game_state["self"][-1])
+        first_position = _add(start, MOVE_DELTAS[action])
+        schedule = self._bomb_schedule(game_state, add_own_bomb=action == "BOMB")
+        opponent_positions = {tuple(other[-1]) for other in game_state["others"]}
+
+        if self._is_dangerous(first_position, 1, schedule, explosion_map):
+            return 0
+
+        positions = {first_position}
+        for time_step in range(2, self.horizon + 1):
+            next_positions: Set[Tuple[int, int]] = set()
+            for position in positions:
+                for delta in CARDINAL_DELTAS + ((0, 0),):
+                    target = _add(position, delta)
+                    if field[target] != 0 or target in opponent_positions:
+                        continue
+                    if self._bomb_blocks(target, time_step, schedule):
+                        continue
+                    if self._is_dangerous(target, time_step, schedule, explosion_map):
+                        continue
+                    next_positions.add(target)
+            positions = next_positions
+            if not positions:
+                return 0
+        return len(positions)
+
+    def bomb_escape_branch_count(self, game_state: Dict) -> int:
+        """Count independent first-step escape choices after dropping a bomb."""
+        bomb_index = ACTIONS.index("BOMB")
+        if not self.legal_action_mask(game_state)[bomb_index]:
+            return 0
+
+        field = game_state["field"]
+        explosion_map = game_state["explosion_map"]
+        start = tuple(game_state["self"][-1])
+        opponents = {tuple(other[-1]) for other in game_state["others"]}
+        schedule = self._bomb_schedule(game_state, add_own_bomb=True)
+        branches = 0
+
+        for delta in CARDINAL_DELTAS:
+            target = _add(start, delta)
+            if field[target] != 0 or target in opponents:
+                continue
+            if self._bomb_blocks(target, 2, schedule):
+                continue
+            if self._is_dangerous(target, 2, schedule, explosion_map):
+                continue
+
+            positions = {target}
+            for time_step in range(3, self.horizon + 1):
+                next_positions: Set[Tuple[int, int]] = set()
+                for position in positions:
+                    for next_delta in CARDINAL_DELTAS + ((0, 0),):
+                        next_target = _add(position, next_delta)
+                        if field[next_target] != 0 or next_target in opponents:
+                            continue
+                        if self._bomb_blocks(next_target, time_step, schedule):
+                            continue
+                        if self._is_dangerous(
+                            next_target, time_step, schedule, explosion_map
+                        ):
+                            continue
+                        next_positions.add(next_target)
+                positions = next_positions
+                if not positions:
+                    break
+            if positions:
+                branches += 1
+        return branches
+
+    def bomb_safety_is_acceptable(
+        self,
+        game_state: Dict,
+        survival_count: int | None = None,
+        branch_count: int | None = None,
+    ) -> bool:
+        """Use two escape branches normally, but allow a quiet opening bomb."""
+        if survival_count is None:
+            survival_count = self.survival_count(game_state, "BOMB")
+        if survival_count <= 0:
+            return False
+        if branch_count is None:
+            branch_count = self.bomb_escape_branch_count(game_state)
+        if branch_count >= MIN_BOMB_ESCAPE_BRANCHES:
+            return True
+
+        field = game_state["field"]
+        position = tuple(game_state["self"][-1])
+        productive = any(field[tile] == 1 for tile in self.blast_tiles(field, position))
+        opponent_distances = [
+            abs(position[0] - int(other[-1][0])) + abs(position[1] - int(other[-1][1]))
+            for other in game_state["others"]
+        ]
+        nearest_opponent = min(opponent_distances, default=99)
+        return bool(
+            branch_count == 1
+            and productive
+            and int(game_state.get("step", 1)) <= OPENING_SINGLE_BRANCH_MAX_STEP
+            and not game_state["bombs"]
+            and not np.any(game_state["explosion_map"] > 0)
+            and survival_count >= OPENING_SINGLE_BRANCH_MIN_SURVIVAL
+            and nearest_opponent >= OPENING_SINGLE_BRANCH_MIN_OPPONENT_DISTANCE
+        )
+
+    def _reachable_positions(
+        self,
+        game_state: Dict,
+        start: Tuple[int, int],
+        schedule: Sequence[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]],
+        horizon: int,
+    ) -> Set[Tuple[int, int]]:
+        """Return positions an opponent could occupy after ``horizon`` steps."""
+        field = game_state["field"]
+        explosion_map = game_state["explosion_map"]
+        positions = {start}
+        for time_step in range(1, horizon + 1):
+            next_positions: Set[Tuple[int, int]] = set()
+            for position in positions:
+                for delta in CARDINAL_DELTAS + ((0, 0),):
+                    target = _add(position, delta)
+                    if field[target] != 0:
+                        continue
+                    if self._bomb_blocks(target, time_step, schedule):
+                        continue
+                    if self._is_dangerous(target, time_step, schedule, explosion_map):
+                        continue
+                    next_positions.add(target)
+            positions = next_positions
+            if not positions:
+                break
+        return positions
+
+    def bomb_trap_pressure(self, game_state: Dict) -> float:
+        """Estimate how much a new bomb reduces opponents' escape options."""
+        if not game_state["others"] or not game_state["self"][2]:
+            return 0.0
+        baseline = self._bomb_schedule(game_state, add_own_bomb=False)
+        candidate = self._bomb_schedule(game_state, add_own_bomb=True)
+        pressure = 0.0
+        for other in game_state["others"]:
+            start = tuple(other[-1])
+            without_bomb = self._reachable_positions(
+                game_state, start, baseline, self.bomb_timer + 1
+            )
+            if not without_bomb:
+                continue
+            with_bomb = self._reachable_positions(
+                game_state, start, candidate, self.bomb_timer + 1
+            )
+            reduction = 1.0 - min(len(with_bomb) / float(len(without_bomb)), 1.0)
+            pressure = max(pressure, reduction)
+        return float(np.clip(pressure, 0.0, 1.0))
+
+    def armed_opponent_threat(
+        self, game_state: Dict, position: Tuple[int, int]
+    ) -> float:
+        """Measure exposure to a hypothetical bomb from an armed opponent."""
+        field = game_state["field"]
+        threats = sum(
+            bool(other[2]) and position in self.blast_tiles(field, tuple(other[-1]))
+            for other in game_state["others"]
+        )
+        return min(threats / 3.0, 1.0)
+
+    def safe_action_mask(self, game_state: Dict) -> np.ndarray:
+        legal = self.legal_action_mask(game_state)
+        survival = np.array(
+            [self.survival_count(game_state, action) if legal[index] else 0 for index, action in enumerate(ACTIONS)],
+            dtype=int,
+        )
+        safe = legal & (survival > 0)
+        bomb_index = ACTIONS.index("BOMB")
+        if safe[bomb_index] and not self.bomb_safety_is_acceptable(
+            game_state,
+            survival_count=int(survival[bomb_index]),
+        ):
+            safe[bomb_index] = False
+        if safe.any():
+            return safe
+
+        # When every simulated continuation is dangerous, do not add another
+        # bomb unless it is literally the only legal action.
+        fallback = legal.copy()
+        fallback[bomb_index] = False
+        return fallback if fallback.any() else legal
+
+    def _distance_map(
+        self,
+        field: np.ndarray,
+        targets: Iterable[Tuple[int, int]],
+        blocked: Set[Tuple[int, int]],
+    ) -> np.ndarray:
+        distances = np.full(field.shape, np.inf, dtype=float)
+        queue = deque()
+        for target in set(targets):
+            if field[target] == 0:
+                distances[target] = 0.0
+                queue.append(target)
+        while queue:
+            position = queue.popleft()
+            for delta in CARDINAL_DELTAS:
+                neighbor = _add(position, delta)
+                if field[neighbor] != 0 or neighbor in blocked:
+                    continue
+                candidate = distances[position] + 1.0
+                if candidate < distances[neighbor]:
+                    distances[neighbor] = candidate
+                    queue.append(neighbor)
+        return distances
+
+    def _target_maps(self, game_state: Dict):
+        field = game_state["field"]
+        bomb_positions = {tuple(position) for position, _ in game_state["bombs"]}
+        opponent_positions = {tuple(other[-1]) for other in game_state["others"]}
+        blocked = bomb_positions | opponent_positions
+
+        coin_map = self._distance_map(field, map(tuple, game_state["coins"]), blocked)
+
+        crate_targets = set()
+        for x, y in np.argwhere(field == 1):
+            for delta in CARDINAL_DELTAS:
+                neighbor = _add((int(x), int(y)), delta)
+                if field[neighbor] == 0:
+                    crate_targets.add(neighbor)
+        crate_map = self._distance_map(field, crate_targets, blocked)
+
+        opponent_targets = set()
+        for opponent in opponent_positions:
+            for delta in CARDINAL_DELTAS:
+                neighbor = _add(opponent, delta)
+                if field[neighbor] == 0:
+                    opponent_targets.add(neighbor)
+        opponent_map = self._distance_map(field, opponent_targets, bomb_positions)
+        return coin_map, crate_map, opponent_map
+
+    def productive_bomb_targets(self, game_state: Dict) -> Set[Tuple[int, int]]:
+        """Return crate-bombing tiles with at least one static escape branch."""
+        field = game_state["field"]
+        cache_key = field.tobytes()
+        if cache_key == self._productive_target_cache_key:
+            return set(self._productive_target_cache)
+
+        targets: Set[Tuple[int, int]] = set()
+        empty_explosions = np.zeros_like(field, dtype=float)
+        identity = game_state["self"][:2]
+        for x, y in np.argwhere(field == 0):
+            position = (int(x), int(y))
+            if not any(field[tile] == 1 for tile in self.blast_tiles(field, position)):
+                continue
+            hypothetical = {
+                "round": game_state.get("round", 1),
+                "step": 1,
+                "field": field,
+                "self": (*identity, True, position),
+                "others": [],
+                "bombs": [],
+                "coins": [],
+                "explosion_map": empty_explosions,
+            }
+            survival = self.survival_count(hypothetical, "BOMB")
+            if survival >= OPENING_SINGLE_BRANCH_MIN_SURVIVAL and self.bomb_escape_branch_count(hypothetical) >= 1:
+                targets.add(position)
+
+        self._productive_target_cache_key = cache_key
+        self._productive_target_cache = set(targets)
+        return targets
+
+    def productive_bomb_target_map(self, game_state: Dict) -> np.ndarray:
+        field = game_state["field"]
+        blocked = {tuple(position) for position, _ in game_state["bombs"]}
+        blocked.update(tuple(other[-1]) for other in game_state["others"])
+        return self._distance_map(field, self.productive_bomb_targets(game_state), blocked)
+
+    @staticmethod
+    def _progress(distance_map: np.ndarray, current: Tuple[int, int], target: Tuple[int, int]) -> float:
+        before = distance_map[current]
+        after = distance_map[target]
+        if not np.isfinite(before) or not np.isfinite(after):
+            return 0.0
+        return float(np.clip(before - after, -1.0, 1.0))
+
+    def _danger_score(self, game_state: Dict, position: Tuple[int, int]) -> float:
+        if game_state["explosion_map"][position] > 0:
+            return 1.0
+        schedule = self._bomb_schedule(game_state, add_own_bomb=False)
+        times = [explosion_time for blast, explosion_time, _ in schedule if position in blast]
+        return 0.0 if not times else 1.0 / float(1 + min(times))
+
+    def _local_freedom(self, game_state: Dict, position: Tuple[int, int]) -> float:
+        field = game_state["field"]
+        bombs = {tuple(bomb_position) for bomb_position, _ in game_state["bombs"]}
+        others = {tuple(other[-1]) for other in game_state["others"]}
+        free = sum(
+            field[_add(position, delta)] == 0
+            and _add(position, delta) not in bombs
+            and _add(position, delta) not in others
+            for delta in CARDINAL_DELTAS
+        )
+        return free / 4.0
+
+    def _hunt_phase(self, game_state: Dict) -> bool:
+        return (
+            not game_state["coins"]
+            and not np.any(game_state["field"] == 1)
+            and bool(game_state["others"])
+        )
+
+    def center_box_distance(self, position: Tuple[int, int]) -> int:
+        """Manhattan distance to the inclusive central 11x11 box."""
+        x, y = position
+        dx = max(self.hunt_center_min - x, 0, x - self.hunt_center_max)
+        dy = max(self.hunt_center_min - y, 0, y - self.hunt_center_max)
+        return int(dx + dy)
+
+    def action_features(self, game_state: Dict) -> np.ndarray:
+        legal = self.legal_action_mask(game_state)
+        survival = np.array(
+            [self.survival_count(game_state, action) if legal[index] else 0 for index, action in enumerate(ACTIONS)],
+            dtype=float,
+        )
+        coin_map, crate_map, opponent_map = self._target_maps(game_state)
+        productive_bomb_map = self.productive_bomb_target_map(game_state)
+        field = game_state["field"]
+        current = tuple(game_state["self"][-1])
+        current_danger = self._danger_score(game_state, current)
+        late_round = min(float(game_state.get("step", 1)) / 400.0, 1.0)
+        hunt_phase = self._hunt_phase(game_state)
+        current_center_distance = self.center_box_distance(current)
+        features = np.zeros((len(ACTIONS), self.feature_count), dtype=np.float64)
+
+        blast = self.blast_tiles(field, current)
+        crates_in_blast = sum(field[tile] == 1 for tile in blast) / 12.0
+        opponents = {tuple(other[-1]) for other in game_state["others"]}
+        opponents_in_blast = sum(tile in opponents for tile in blast) / 3.0
+        trap_pressure = self.bomb_trap_pressure(game_state)
+        bomb_branches = self.bomb_escape_branch_count(game_state)
+        bomb_safety_acceptable = self.bomb_safety_is_acceptable(
+            game_state,
+            survival_count=int(survival[ACTIONS.index("BOMB")]),
+            branch_count=bomb_branches,
+        )
+
+        for index, action in enumerate(ACTIONS):
+            target = _add(current, MOVE_DELTAS[action])
+            target_danger = self._danger_score(game_state, target) if legal[index] else 1.0
+            row = features[index]
+            row[0] = 1.0
+            row[1] = float(action in ACTIONS[:4])
+            row[2] = float(action == "WAIT")
+            row[3] = float(action == "BOMB")
+            row[4] = float(legal[index])
+            row[5] = min(survival[index] / 20.0, 1.0)
+            row[6] = target_danger
+            row[7] = np.clip(current_danger - target_danger, -1.0, 1.0)
+            row[8] = self._progress(coin_map, current, target) if legal[index] else 0.0
+            row[9] = self._progress(crate_map, current, target) if legal[index] else 0.0
+            row[10] = self._progress(opponent_map, current, target) if legal[index] else 0.0
+            row[11] = crates_in_blast if action == "BOMB" else 0.0
+            row[12] = opponents_in_blast if action == "BOMB" else 0.0
+            row[13] = float(action == "BOMB" and survival[index] > 0)
+            row[14] = self._local_freedom(game_state, target) if legal[index] else 0.0
+            row[15] = float(action == "WAIT") * current_danger
+            row[16] = float(action == "BOMB") * late_round
+            row[17] = (
+                float(current_center_distance - self.center_box_distance(target))
+                if legal[index] and hunt_phase
+                else 0.0
+            )
+            row[18] = trap_pressure if action == "BOMB" and legal[index] else 0.0
+            row[19] = (
+                self.armed_opponent_threat(game_state, target) if legal[index] else 0.0
+            )
+            row[20] = float(
+                action == "BOMB"
+                and legal[index]
+                and survival[index] > 0
+                and bomb_safety_acceptable
+                and crates_in_blast > 0
+            )
+
+        safe = self.safe_action_mask(game_state)
+        objective = np.zeros(len(ACTIONS), dtype=bool)
+        safe_indices = np.flatnonzero(safe)
+        bomb_index = ACTIONS.index("BOMB")
+        if current_danger > 0.0 and safe_indices.size:
+            escape_score = features[:, 7] + features[:, 5]
+            best = np.max(escape_score[safe_indices])
+            objective = safe & np.isclose(escape_score, best)
+        elif game_state["coins"]:
+            coin_score = features[:, 8]
+            best = np.max(coin_score[safe_indices]) if safe_indices.size else 0.0
+            if best > 0.0:
+                objective = safe & np.isclose(coin_score, best)
+        if not objective.any() and safe[bomb_index] and crates_in_blast > 0.0:
+            objective[bomb_index] = True
+        if not objective.any():
+            crate_score = np.array(
+                [
+                    self._progress(productive_bomb_map, current, _add(current, MOVE_DELTAS[action]))
+                    if legal[index]
+                    else 0.0
+                    for index, action in enumerate(ACTIONS)
+                ],
+                dtype=float,
+            )
+            best = np.max(crate_score[safe_indices]) if safe_indices.size else 0.0
+            if best > 0.0:
+                objective = safe & np.isclose(crate_score, best)
+        if (
+            not objective.any()
+            and not np.any(field == 1)
+            and bool(game_state["others"])
+        ):
+            opponent_score = features[:, 10]
+            best = np.max(opponent_score[safe_indices]) if safe_indices.size else 0.0
+            if best > 0.0:
+                objective = safe & np.isclose(opponent_score, best)
+        features[:, 21] = objective.astype(np.float64)
+        return features
+
+    def state_potential(self, game_state: Dict | None) -> float:
+        """State-only potential used for policy-invariant dense shaping."""
+        if game_state is None:
+            return 0.0
+        coin_map, crate_map, opponent_map = self._target_maps(game_state)
+        position = tuple(game_state["self"][-1])
+
+        # Use a positive closeness potential so merely waiting at a target does
+        # not receive a positive shaping reward under gamma < 1. Coins remain
+        # the first objective, then crates, and opponents become the explicit
+        # objective only in the otherwise target-free endgame.
+        hunt_phase = self._hunt_phase(game_state)
+        if game_state["coins"]:
+            target_distance = coin_map[position]
+            distance_scale = 20.0
+            target_weight = 1.0
+        elif np.any(game_state["field"] == 1):
+            target_distance = crate_map[position]
+            distance_scale = 20.0
+            target_weight = 1.0
+        elif hunt_phase:
+            target_distance = opponent_map[position]
+            distance_scale = 30.0
+            target_weight = 2.0
+        else:
+            target_distance = np.inf
+            distance_scale = 1.0
+            target_weight = 0.0
+
+        distance_term = 0.0
+        if np.isfinite(target_distance):
+            closeness = 1.0 - min(float(target_distance), distance_scale) / distance_scale
+            distance_term = target_weight * closeness
+        center_term = 0.0
+        if hunt_phase:
+            playable_max_x = game_state["field"].shape[0] - 2
+            playable_max_y = game_state["field"].shape[1] - 2
+            max_dx = max(self.hunt_center_min - 1, playable_max_x - self.hunt_center_max)
+            max_dy = max(self.hunt_center_min - 1, playable_max_y - self.hunt_center_max)
+            max_center_distance = max(max_dx + max_dy, 1)
+            center_closeness = 1.0 - min(
+                self.center_box_distance(position), max_center_distance
+            ) / float(max_center_distance)
+            center_term = self.hunt_center_weight * center_closeness
+        danger_term = -self._danger_score(game_state, position)
+        return distance_term + center_term + danger_term

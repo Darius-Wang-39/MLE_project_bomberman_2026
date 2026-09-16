@@ -12,6 +12,39 @@ Each entry records:
 - **Result**: measurable outcome or current status.
 - **Commit**: the related Git commit, added after committing when practical.
 
+## 2026-09-16
+
+### Engine timing correction and frozen-weight objective-bias ablation
+
+- **Change:** Added the isolated `dueling_engine_aligned` inference candidate,
+  copied from `dueling_hunt_center_04` with identical weights. Removed predicted
+  chain explosions (absent from this engine), corrected existing-flame lifetime,
+  and kept bomb tiles blocked through the detonation turn's movement phase.
+  Historical agents, training rewards and the current submission remain unchanged.
+- **Method:** A predeclared 2x2 evaluation crossed old/corrected prediction with
+  objective Q bias 1.0/0.0. The learned objective feature, center bias 0.04 and
+  repeat-position penalty stayed unchanged. Each arm played 20 rule3 games and
+  20 mixed games against `feature_is_everything`, `deep_learning_killer` and
+  `rule_based_agent` (160 games total), with paired initial-state hashes verified.
+  No retraining. Added seven regression tests against actual engine methods;
+  all 45 tests pass. All four evaluation processes finished successfully, and
+  before/after checkpoint hashes match.
+- **Result:** Mean scores (rule3 / mixed): baseline 4.40 / 2.35; corrected timing
+  4.35 / 3.25; objective bias disabled 3.10 / 2.15; both changes 3.40 / 1.95.
+  Corrected timing increased mixed tied-first rate from 20% to 40%, with the
+  same 0.15 suicide events/game; rule3 suicide events rose from 0.15 to 0.20.
+  Disabling the objective bias raised suicide events to 0.50 / 0.35 without
+  the timing fix, or 0.45 / 0.35 with it. Retain the objective bias; the timing
+  candidate merits a larger independent validation but is not auto-promoted.
+  Mixed score difference +0.90 has a descriptive paired bootstrap 95% interval
+  [0.15, 1.80], without multiple-comparison correction. This small suite does not
+  establish general tournament superiority or solve suicide behavior.
+- **Record:** `experiments/records/engine_timing_ablation_20260916/REPORT.md`,
+  `summary.json`, locked `protocol.json`, and all eight raw match JSON files.
+  Reproduce with `evaluation/engine_timing_ablation.py` and
+  `evaluation/summarize_timing_ablation.py`. The baseline engine commit is
+  `d514b60`; the exact source/weight hashes are recorded in the protocol.
+
 ## 2026-08-26
 
 ### Day 18 — senior target guidance and active opening recovery

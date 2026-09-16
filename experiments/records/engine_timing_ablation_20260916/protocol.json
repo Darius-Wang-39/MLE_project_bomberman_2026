@@ -1,0 +1,88 @@
+{
+  "base_commit": "d514b60c057bdd66a126f8ec07477ead354a87d2",
+  "senior_commit": "a7fe5041b02548ce4438e502ca3adb11576bae75",
+  "arms": {
+    "baseline": [
+      "dueling_hunt_center_04",
+      1.0
+    ],
+    "timing": [
+      "dueling_engine_aligned",
+      1.0
+    ],
+    "no_bias": [
+      "dueling_hunt_center_04",
+      0.0
+    ],
+    "both": [
+      "dueling_engine_aligned",
+      0.0
+    ]
+  },
+  "lineups": {
+    "rule3": [
+      916201,
+      [
+        "rule_based_agent",
+        "rule_based_agent",
+        "rule_based_agent"
+      ]
+    ],
+    "mixed": [
+      916301,
+      [
+        "feature_is_everything",
+        "deep_learning_killer",
+        "rule_based_agent"
+      ]
+    ]
+  },
+  "rounds_per_lineup": 20,
+  "training": false,
+  "center_bias": 0.04,
+  "seeds": "base seed + zero-based round index; reset environment and policy RNG each round",
+  "pairing": "same initial map, hidden coins, player positions and candidate display name",
+  "primary_metric": "mean game score, reported separately for both lineups",
+  "secondary_metrics": "tied-first rate, suicides, invalid actions, coins, bombs, kills",
+  "replay_selection": "last predeclared round of each lineup, never chosen for a favorable result",
+  "weight_hashes": {
+    "agent_code\\deep_learning_killer\\q_table.json": "4e80d983116465347ee8e27b502872020d9c6731e6252795590c6c604ca5adba",
+    "agent_code\\dueling_engine_aligned\\dueling_ddqn_model.pt": "709cca4351f3bc5893f766b01b8c9335fa299d25331a275ae281b123df31009a",
+    "agent_code\\dueling_hunt_center_04\\dueling_ddqn_model.pt": "709cca4351f3bc5893f766b01b8c9335fa299d25331a275ae281b123df31009a",
+    "agent_code\\feature_is_everything\\my-saved-model.pt": "0fb1df0b3c3f255db121e8ba7c6061d1293f55d3e7ae12772259643ee2060577"
+  },
+  "source_hashes": {
+    "agents.py": "eb8eff495666a8c51ede5f66f3785abbd0a24e60c3a8417432ada88b05e332a4",
+    "environment.py": "7dc67ad8d8c2f7c5792769daca168aa5f9f1bd140cbfdf68aff1b5c63729cd85",
+    "events.py": "bfbf114140e58f14679b3a992b45c93138d79d8b16fcc6d413f571a29136c75f",
+    "fallbacks.py": "f4bf32e0a9218c74521b2add7f6fb357cbbefa4d52fed56e7a2b358456516973",
+    "items.py": "f3e23827ab4edb58efba66b8f38e0dd68f8bb721964518e020e9766a39bb16f2",
+    "main.py": "0e223947b44b2e1d1b0bbeb647dcae6f65535c3fe88999c2084bca1226c8ec95",
+    "replay.py": "89b0f37b2526c48360f29ede1a5010c4aa5e4644add77325bc6ec14bc9c1baaa",
+    "settings.py": "3bddbf25c10a47b37e18e3838a1faaef711af2f53313397dd17158a6ac407fca",
+    "test.py": "4abc0b84a493f5fc58932067af38d0303f76d3b028bed5998438fd795a315fbb",
+    "evaluation\\engine_timing_ablation.py": "322e4075be298af3cf94ba6a05a26dae109cb3116023b62f8280f2588ea01fef",
+    "evaluation\\run_external_benchmark.py": "dfb5a2aed50ceb022709433444512caa374fec657d80d5655fc1ba91f3b14287",
+    "evaluation\\run_internal_vs_external.py": "ff5d50fdb6604b82041f299be6512e19a5eb54620b14527792f8f98d46fd7f91",
+    "evaluation\\run_locked_suite.py": "f05c3c8451321a9efe8673c7624d0ab633f3b8122970965cc9315879f1e64100",
+    "evaluation\\run_notebook09_formal_suite.py": "e620175f8341b7eac4dd91a0aaaad06f2c87d9e0bc6af8ed7f0968c0de1ab7b7",
+    "evaluation\\summarize_stats.py": "566ad53d1a86e4453011cba5e5bbf4cb58af08ca2a2e149ee2a05174ca0b10d5",
+    "agent_code\\deep_learning_killer\\callbacks.py": "2873c7d973546e7e3b5af0e132dc1053f151c8a66ad3db4a3b98c1e80f0fe52c",
+    "agent_code\\deep_learning_killer\\features.py": "8e6ec829e89455e67fb1a67b80f017dca4f3d958401d902207fcd6c0e7be3062",
+    "agent_code\\deep_learning_killer\\symmetry.py": "9bc0f98f60884c6bb58f53f416aab07bef63f752ef0e435b8dc7595e4d6f5a7e",
+    "agent_code\\deep_learning_killer\\table.py": "6c2a50e3b13ad41cfd75f26e47692146da9d3847a5a43a58ea4794b505994138",
+    "agent_code\\deep_learning_killer\\train.py": "bcd574e0d726b362247fc410d5e4115d6dad4f2bac3e365292a39086cf0eb16c",
+    "agent_code\\dueling_engine_aligned\\callbacks.py": "4bf3cd355d30caccd2e71fc20db25d50284291e75173eefc46e6d25c69733cea",
+    "agent_code\\dueling_engine_aligned\\features.py": "54258d8eacd5c9120818782a578a26ea45218927150352972fc43b411a4cdafd",
+    "agent_code\\dueling_engine_aligned\\model.py": "4802edb5c662267a0013eee70ef1d4568c867c1241071f2e90f19eb8dabf8506",
+    "agent_code\\dueling_hunt_center_04\\callbacks.py": "4bf3cd355d30caccd2e71fc20db25d50284291e75173eefc46e6d25c69733cea",
+    "agent_code\\dueling_hunt_center_04\\features.py": "eb14eab0bffa046a2bb0ca98fd84a4c74a91b357a9e9fe42f2c01c78a9f704c7",
+    "agent_code\\dueling_hunt_center_04\\model.py": "4802edb5c662267a0013eee70ef1d4568c867c1241071f2e90f19eb8dabf8506",
+    "agent_code\\feature_is_everything\\callbacks.py": "d6e8427b66ab3c41ad3310e30ce00b4e6f36c455ce9386f4c6a1c4de5f10be79",
+    "agent_code\\feature_is_everything\\features.py": "af6c138a2029915ab27cbb52985c25a1a0189149af34a7e2095ed6dbbd9db5fc",
+    "agent_code\\feature_is_everything\\model.py": "9302b7789ffbc8daa5e32ef62f0e6730381897697e253e9356bda5bf2dd5e7bb",
+    "agent_code\\feature_is_everything\\symmetry.py": "7b481126d7c6f4f959ca8e139695f97dc5d49cf6c9e3c828a53702a663b3bed7",
+    "agent_code\\feature_is_everything\\train.py": "33b68a89a2be5b4dc33393af54a237493a3be1faf88de042cf5b1b69244ab512",
+    "agent_code\\rule_based_agent\\callbacks.py": "5fa209d1f31549573b87985ddee7dfa2984c15838e97620d740f1ec2a8773fca"
+  }
+}
