@@ -11,7 +11,7 @@ if errorlevel 1 (
 )
 
 if not exist replays mkdir replays
-python main.py play --agents dueling_ddqn_agent rule_based_agent rule_based_agent rule_based_agent --scenario classic --n-rounds 1 --seed 240824 --update-interval 0.15 --save-replay replays/visual_demo.pt --match-name visual-demo
+python main.py play --agents dueling_engine_aligned rule_based_agent rule_based_agent rule_based_agent --scenario classic --n-rounds 1 --seed 240824 --update-interval 0.15 --save-replay replays/visual_demo.pt --match-name visual-demo
 
 if errorlevel 1 pause
 endlocal

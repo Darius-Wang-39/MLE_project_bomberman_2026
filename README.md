@@ -9,6 +9,11 @@ pushing or merging them.
 
 ## Agents
 
+- **Current adopted inference agent (2026-09-16): `dueling_engine_aligned`.**
+  Corrects three prediction/official-engine mismatches, with unchanged weights
+  from `dueling_hunt_center_04`, objective bias 1.00 and center bias 0.04.
+  This is the default watch/package target, not a newly trained model.
+  See the dated Chinese teammate handoff in [CHANGELOG.md](CHANGELOG.md).
 - `linear_q_agent`: fast, interpretable linear Q-learning baseline with exact
   D4 symmetry through shared action-relative features and five-step returns.
 - `dueling_ddqn_agent`: compact Dueling Double DQN with five-step returns,
@@ -33,7 +38,7 @@ separate; raw framework output under `results/` stays local.
 
 On Windows, double-click `watch_agent.cmd` to watch the frozen Dueling DDQN
 play one seeded classic round against three supplied rule-based agents. The pink
-player is `dueling_ddqn_agent` (the framework assigns colors by popping the
+player is `dueling_engine_aligned` (the framework assigns colors by popping the
 configured list). The match is also saved locally as
 `replays/visual_demo.pt` for replay. The GUI requires `pygame`; install it with
 `python -m pip install pygame` if the launcher reports that it is missing.
@@ -41,12 +46,19 @@ configured list). The match is also saved locally as
 The equivalent cross-platform command is:
 
 ```bash
-python main.py play --agents dueling_ddqn_agent rule_based_agent rule_based_agent rule_based_agent --scenario classic --n-rounds 1 --seed 240824 --update-interval 0.15 --save-replay replays/visual_demo.pt --match-name visual-demo
+python main.py play --agents dueling_engine_aligned rule_based_agent rule_based_agent rule_based_agent --scenario classic --n-rounds 1 --seed 240824 --update-interval 0.15 --save-replay replays/visual_demo.pt --match-name visual-demo
 ```
 
-The frozen competition archive and its per-file checksum manifest are under
-[`submission/`](submission/). Rebuild them with
-`python tools/package_submission.py agent_code/dueling_ddqn_agent --output
-submission/dueling_ddqn_agent.zip --manifest
-submission/dueling_ddqn_agent_manifest.json`.
+The current agent archive is `submission/dueling_engine_aligned.zip`; older
+archives are retained for comparison and are not the adopted version. Rebuild:
+
+```bash
+python tools/package_submission.py agent_code/dueling_engine_aligned --output submission/dueling_engine_aligned.zip --manifest submission/dueling_engine_aligned_manifest.json
+```
+
+This directory is inference-only: do not pass `--train 1` for it. The quick-check
+training examples above refer to older trainable agents, not this adopted
+inference snapshot. Before continuing training, explicitly port the same three
+timing fixes into the intended training agent and test it; historical directories
+were deliberately not rewritten. No archive has been uploaded to MaMPF.
 

@@ -1,0 +1,38 @@
+{
+  "agent": "dueling_engine_aligned",
+  "archive": "dueling_engine_aligned.zip",
+  "archive_bytes": 276884,
+  "archive_sha256": "bceeaa102109915c285ffd27174d16c58693dc7d580237e9dbff7627ea8303a4",
+  "files": [
+    {
+      "path": "dueling_engine_aligned/README.md",
+      "bytes": 1813,
+      "sha256": "300f6940a8151f59f30a4cc695e580ef38bd0c278c9433030e8d63757e42c13f"
+    },
+    {
+      "path": "dueling_engine_aligned/callbacks.py",
+      "bytes": 5953,
+      "sha256": "4bf3cd355d30caccd2e71fc20db25d50284291e75173eefc46e6d25c69733cea"
+    },
+    {
+      "path": "dueling_engine_aligned/dueling_ddqn_model.pt",
+      "bytes": 377119,
+      "sha256": "709cca4351f3bc5893f766b01b8c9335fa299d25331a275ae281b123df31009a"
+    },
+    {
+      "path": "dueling_engine_aligned/features.py",
+      "bytes": 27576,
+      "sha256": "50e70bb1bf024a3d2b32400db1fc82a31c07dad523922f91ce7e0daf5bc7839a"
+    },
+    {
+      "path": "dueling_engine_aligned/model.py",
+      "bytes": 970,
+      "sha256": "4802edb5c662267a0013eee70ef1d4568c867c1241071f2e90f19eb8dabf8506"
+    }
+  ],
+  "verification": {
+    "zip_crc": "passed",
+    "python_syntax": "passed",
+    "cache_and_logs_excluded": true
+  }
+}

@@ -14,6 +14,43 @@ Each entry records:
 
 ## 2026-09-16
 
+### 采用引擎预测修正版 — 给队友的交接说明
+
+- **日期 / Date：** 2026-09-16。用户确认采用前一条实验记录中的预测修复。
+- **改动 / Change：** 当前默认观看、打包目录改为
+  `agent_code/dueling_engine_aligned`，`watch_agent.cmd` 和首页说明同步更新。
+  在 `features.py` 三处添加 `ENGINE-TIMING-FIX 2026-09-16` 标记，便于搜索定位。
+  当前压缩包为 `submission/dueling_engine_aligned.zip`；旧目录和旧压缩包保留，
+  不要误将旧版当成修正版。未上传 MaMPF，也未直接联系队友。
+- **原因 / Why：** 项目说明第 2 页规定正式比赛使用老师的原始框架，第 3 页
+  指定 `ukoethe/bomberman_rl`。重新获取官方仓库后核对提交 `0f55c1d`：本地
+  移动、炸弹更新、火焰更新、伤害判定、状态输出与官方关键函数一致；本地
+  `environment.py` 的差别仅是额外成绩统计。此次修的是 agent 的预测，
+  不是修改老师的游戏规则。未核验比赛服务器内部部署号或 Discord 私有公告。
+- **办法 / Method：**
+
+  | 定位 | 原预测的问题 | 修正后的行为 |
+  |---|---|---|
+  | `_bomb_schedule` | 预测炸弹会被另一颗炸弹提前连锁引爆 | 每颗炸弹按自身倒计时引爆 |
+  | `_is_dangerous` | 现有火焰剩余危险时间额外加 1 步 | 使用 `explosion_map` 的剩余危险步数，不额外加 1 |
+  | `_bomb_blocks` | 引爆当回合提前把炸弹格当作可通行 | 使用 `<= explosion_time`；先移动、后引爆，该回合仍阻路 |
+
+- **保持不变 / Unchanged：** 模型权重、网络结构、目标输入特征、训练奖励均不变；
+  手工目标 Q 加分保留 `1.00`，中心 Q 加分保留 `0.04`。没有重新训练。
+- **结果 / Result：** 沿用上次已完成的 160 局配对对照：只修预测后规则组
+  均分 4.40 → 4.35，混合对手组 2.35 → 3.25。混合组自杀仍为 3/20 局，
+  规则组为 3/20 → 4/20，不能说已经解决自杀。45 项测试通过；这是规则
+  一致性修复的采用，不是经过大规模验证的比赛最优声明。
+- **队友后续操作 / Handoff：** `git pull origin main` 后，用
+  `dueling_engine_aligned` 评测或观看。此目录仅用于推理，不能直接加
+  `--train 1`。历史 `dueling_ddqn_agent`、`dueling_hunt_center_04` 和其他冻结
+  版本未批量改写；如要在它们或你自己的新版本继续训练，应先移植以上三处
+  修复并运行引擎对照测试，不要只改奖励或直接拿旧模型目录继续训练。
+  箱子/对手仍按静态位置规划，动态堵路与安全回退仍是后续问题。
+- **相关记录 / Record：** 修复和 160 局实验提交 `efead4d`；完整原始成绩见
+  `experiments/records/engine_timing_ablation_20260916/`。本条为后续用户确认采用，
+  不覆盖上一条当时“尚未采用”的实验记录。
+
 ### Engine timing correction and frozen-weight objective-bias ablation
 
 - **Change:** Added the isolated `dueling_engine_aligned` inference candidate,

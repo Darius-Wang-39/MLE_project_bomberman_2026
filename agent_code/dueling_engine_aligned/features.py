@@ -125,6 +125,7 @@ class FeatureExtractor:
             position = tuple(game_state["self"][-1])
             schedule.append((self.blast_tiles(field, position), self.bomb_timer + 1, position))
 
+        # ENGINE-TIMING-FIX 2026-09-16 [1/3]: remove unsupported chain reactions.
         # GenericWorld.update_bombs only checks each bomb's own timer: this
         # course engine has no chain reactions, even inside another blast.
         return schedule
@@ -136,6 +137,7 @@ class FeatureExtractor:
         schedule: Sequence[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]],
         explosion_map: np.ndarray,
     ) -> bool:
+        # ENGINE-TIMING-FIX 2026-09-16 [2/3]: remove the extra flame step.
         # get_state_for_agent exports timer - 1. The engine advances existing
         # explosions before testing damage, so no extra future turn is added.
         if explosion_map[position] > 0 and time_step <= int(explosion_map[position]):
@@ -151,6 +153,7 @@ class FeatureExtractor:
         time_step: int,
         schedule: Sequence[Tuple[Set[Tuple[int, int]], int, Tuple[int, int]]],
     ) -> bool:
+        # ENGINE-TIMING-FIX 2026-09-16 [3/3]: include the detonation movement phase.
         # Movement resolves BEFORE bombs detonate, including the zero-timer turn.
         return any(position == bomb_position and time_step <= explosion_time for _, explosion_time, bomb_position in schedule)
 
