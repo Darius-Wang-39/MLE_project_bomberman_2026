@@ -71,6 +71,9 @@ def setup_training(self):
     self.loss_fn = nn.SmoothL1Loss(reduction="none")
     self.replay = PrioritizedReplayBuffer(REPLAY_CAPACITY)
     self.n_step_buffer = deque()
+    # TERMINAL-RECORD-FIX 2026-09-17: the engine reports a survivor's last
+    # action twice. Hold one callback until we know whether it is terminal.
+    self.pending_step = None
     self.replay_rng = np.random.default_rng()
     self.position_history = deque(maxlen=HUNT_HISTORY_LENGTH)
     self.history_round = None
@@ -266,6 +269,13 @@ def optimize_model(self):
     self.learner_updates += 1
 
 
+def _commit_step(self, old_game_state, action, new_game_state, events):
+    """Count, enqueue and learn from one real action exactly once."""
+    _record(self, old_game_state, action, new_game_state, events)
+    self.environment_steps += 1
+    optimize_model(self)
+
+
 def game_events_occurred(
     self,
     old_game_state: dict,
@@ -273,15 +283,30 @@ def game_events_occurred(
     new_game_state: dict,
     events: List[str],
 ):
-    _record(self, old_game_state, self_action, new_game_state, events)
-    self.environment_steps += 1
-    optimize_model(self)
+    if self.pending_step is not None:
+        _commit_step(self, *self.pending_step)
+    # Copy events: the engine appends SURVIVED_ROUND to the same list later.
+    self.pending_step = (old_game_state, self_action, new_game_state, list(events))
 
 
 def end_of_round(self, last_game_state: dict, last_action: str, events: List[str]):
-    _record(self, last_game_state, last_action, None, events)
-    self.environment_steps += 1
-    optimize_model(self)
+    pending = self.pending_step
+    self.pending_step = None
+    if pending is not None:
+        old_state, action, _, _ = pending
+        same_step = (
+            old_state["round"] == last_game_state["round"]
+            and old_state["step"] == last_game_state["step"]
+        )
+        if same_step:
+            if action != last_action:
+                raise ValueError("Terminal callback action differs from pending action")
+            # Survivor: replace the pending nonterminal observation, do not
+            # append a second action. End events already include step events.
+        else:
+            # Death: no ordinary callback is sent for the fatal action.
+            _commit_step(self, *pending)
+    _commit_step(self, last_game_state, last_action, None, list(events))
     checkpoint = {
         "policy_state": self.policy_net.state_dict(),
         "optimizer_state": self.optimizer.state_dict(),
