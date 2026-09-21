@@ -1,4 +1,4 @@
-"""Run the locked five-candidate benchmark used by notebook 09."""
+"""Run the locked benchmark and its two-candidate engine-aligned extension."""
 
 from __future__ import annotations
 
@@ -14,12 +14,16 @@ RESULT_ROOT = PROJECT_ROOT / "results" / "notebook09_formal_mixed_benchmark"
 REPORT_PATH = RESULT_ROOT / "report.json"
 CONFIG_PATH = PROJECT_ROOT / "experiments" / "configs" / "notebook09_formal_mixed_benchmark.json"
 
-CANDIDATES = (
+LEGACY_CANDIDATES = (
     "dueling_hunt_center_04",
     "hunt_center_04_mix_0800",
     "dueling_ddqn_agent",
     "frozen_sarsa_best",
     "frozen_linear_q_final",
+)
+CANDIDATES = LEGACY_CANDIDATES + (
+    "engine_aligned_0000",
+    "frozen_engine_aligned_0200",
 )
 OPPONENTS = (
     "external_feature_is_everything",
@@ -117,8 +121,15 @@ def run_or_reuse(candidate: str, seed: int, rounds: int, suite_protocol: dict) -
         if not sidecar.exists():
             raise FileNotFoundError(f"Result exists without provenance sidecar: {sidecar}")
         recorded = json.loads(sidecar.read_text(encoding="utf-8"))
-        expected_with_hash = {**expected, "stats_sha256": sha256(output)}
-        if recorded != expected_with_hash:
+        compatible_protocols = [suite_protocol]
+        if candidate in LEGACY_CANDIDATES:
+            legacy_protocol = {**suite_protocol, "candidates": list(LEGACY_CANDIDATES)}
+            compatible_protocols.append(legacy_protocol)
+        expected_variants = [
+            {**expected, "protocol": compatible_protocol, "stats_sha256": sha256(output)}
+            for compatible_protocol in compatible_protocols
+        ]
+        if recorded not in expected_variants:
             raise ValueError(f"Protocol or result drift: {sidecar}")
         print(f"REUSE {candidate} seed {seed}", flush=True)
         return {**expected, "status": "complete", "resumed": True}

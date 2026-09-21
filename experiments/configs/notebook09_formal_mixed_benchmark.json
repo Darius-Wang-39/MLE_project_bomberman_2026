@@ -20,7 +20,9 @@
     "hunt_center_04_mix_0800",
     "dueling_ddqn_agent",
     "frozen_sarsa_best",
-    "frozen_linear_q_final"
+    "frozen_linear_q_final",
+    "engine_aligned_0000",
+    "frozen_engine_aligned_0200"
   ],
   "opponents": [
     "external_feature_is_everything",
