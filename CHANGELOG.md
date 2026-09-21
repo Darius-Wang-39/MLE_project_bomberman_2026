@@ -148,6 +148,51 @@ Each entry records:
   `evaluation/summarize_timing_ablation.py`. The baseline engine commit is
   `d514b60`; the exact source/weight hashes are recorded in the protocol.
 
+## 2026-09-08
+
+### Internal agents versus fixed external benchmarks
+
+- **Change:** Added notebook 04 and a resumable tournament runner comparing
+  `dueling_ddqn_agent`, `dueling_hunt_center_04`, `frozen_ddqn_day7`, and
+  `hunt_center_04_mix_0800`, plus the external `deep_learning_killer` challenger,
+  against the fixed external line-up
+  `feature_is_everything + sarsa + q_learning`.
+- **Method:** Ran classic matches at a fixed seat order on seeds 63001–63003,
+  with 10 rounds per seed and no silenced agent errors. Stored each match as raw
+  JSON, generated a combined report and CSV tables, and executed the notebook to
+  embed tables, plots, and its data-derived conclusion. Added explicit
+  four-player score tables and both aggregate and per-seed margins, defined as
+  internal score minus the mean score of the three external agents.
+- **Result:** Across 30 rounds per internal model, `dueling_hunt_center_04`
+  ranked first internally at 3.30 score/round (seed SD 0.346), 0.367 kills,
+  0.167 suicides, 2.267 invalid actions, and 2.36 ms/action. The added
+  `hunt_center_04_mix_0800` scored 2.933 with a +0.167 external-average margin,
+  but only a 0.20 win rate and 9.40 invalid actions per round; it does not replace
+  the original model. The other scores remain 2.70 for `dueling_ddqn_agent` and
+  2.10 for `frozen_ddqn_day7`. All twelve matches completed, and the executed
+  notebook contains no error outputs. `external_deep_learning_killer` ranked
+  fourth at 2.533 score with 0.90 survival and only 1.00 invalid action per round;
+  its conservative safety did not displace the original hunt-center winner.
+- **Commit:** this commit
+
+### Isolated previous-cohort benchmark
+
+- **Change:** Added evaluation-only, file-level symbolic-link adapters for the
+  previous cohort's agents, using `external_*` names and a separate
+  `results/external_benchmark/` result tree. Training callbacks are excluded;
+  legacy pickle import aliases link only class-definition modules.
+- **Method:** Added a reproducible gated runner for 3-round smoke tests,
+  seed-61001 30-round screening, and five-seed confirmation. The runner first
+  performs a rule-based framework preflight so missing shared dependencies are
+  not misclassified as external-agent failures.
+- **Result:** Six agents passed smoke. `baseline` is absent upstream; `dqn` and
+  `dqn_5tile` cannot load their CUDA-serialized pickle models on the current CPU
+  environment. The 30-round screen ranked `feature_is_everything` (5.767),
+  `sarsa` (5.367), and `sarsa_lambda` (4.667) as the top three by mean score.
+  The first confirmation run (`feature_is_everything`, seed 62001) is saved and
+  the remaining confirmation matrix can be resumed. Summary tests pass 3/3.
+- **Commit:** this commit
+
 ## 2026-08-26
 
 ### Day 18 — senior target guidance and active opening recovery
@@ -521,6 +566,129 @@ Each entry records:
   learned bomb-and-escape behaviour in `classic` after replacing one-step credit
   assignment with five-step returns.
 - **Commit:** `8324e9d`
+
+## 2026-09-11
+
+### Independent PPO implementation and Task 1–4 curriculum
+
+- **Change:** Added `ppo_agent`, Actor-Critic/GAE/PPO tests, Task 1–4 frozen
+  checkpoints, raw evaluations, and `06_ppo_tasks1_4.ipynb`.
+- **Method:** Reused the current 22-feature DDQN encoding, safe mask and reward
+  shaping, while using independent on-policy masked PPO. Trained 480 curriculum
+  rounds and evaluated 360 held-out rounds, including the standard five-seed
+  Task-4 protocol.
+- **Result:** Task 1 reached 23.5 coins, Task 2 remained suicide-free, and Task
+  3 scored 4.3 with 100% wins against passive agents. Task-4 scores were 2.333
+  rule-based and 2.587 mixed, so this checkpoint is a functional baseline but
+  not a mature competition policy.
+- **Commit:** pending
+
+## 2026-09-11
+
+### Add frozen SARSA and linear-Q to notebook 03 comparison
+
+- **Change:** Extended notebook 03 from four DDQN hunt-center variants to six
+  frozen candidates by adding `frozen_sarsa_best` and
+  `frozen_linear_q_final`.
+- **Method:** Reused the original five seeds (32001–32005), both rule-based and
+  mixed lineups, and 30 rounds per seed; ran 600 new inference-only rounds and
+  re-executed the notebook. Kept the original DDQN selection rule scoped to the
+  three hunt-center ablations.
+- **Result:** Linear-Q/SARSA scored 3.067/3.020 against rule agents and
+  3.900/3.740 in mixed games, below all DDQN variants. The original 0.08 DDQN
+  recommendation remains unchanged.
+- **Commit:** pending
+
+## 2026-09-11
+
+### Final controlled linear-Q stop-line experiment
+
+- **Change:** Added `linear_q_final`, eight Task-4 interaction features, six
+  alpha/n-step branches, the selected frozen checkpoint, and notebook 06.
+- **Method:** Warm-started every branch from the same 61,973-update model,
+  trained each for 200 rule-agent rounds, evaluated all on the same 50-round
+  validation seed, then ran Task 1/2 regression and paired 100-round locked
+  tests for the closest candidate and original baseline.
+- **Result:** No candidate passed all gates. Alpha=0.003/n-step=8 led validation
+  at 3.32 score, 0.22 suicides and 64% survival. On locked evaluation it scored
+  2.98 versus baseline 3.02, while improving suicides 0.43→0.29 and survival
+  34%→62%. The declared stop line was triggered.
+- **Commit:** pending
+
+## 2026-09-11
+
+### Formal SARSA(lambda) sweep and low-alpha checkpoint selection
+
+- **Change:** Added configurable SARSA hyperparameters, explicit bomb-escape
+  shaping, lambda 0.4/0.7/0.9 training branches, two frozen selection stages,
+  and `frozen_sarsa_best`; extended notebook 05 with formal results.
+- **Method:** Continued all lambda branches from the same 73-episode model for
+  40 paired-seed rule-agent rounds, evaluated them on 20 unseen rounds, then
+  refined the selected lambda=0.4 branch for 40 rounds at alpha=0.001 and
+  compared both checkpoints on another unseen 20-round seed.
+- **Result:** Lambda=0.4 led the sweep at 3.8 mean score, 55% wins and 0.25
+  suicides/round. Low-alpha refinement retained 3.8 mean score on the final
+  selection seed while improving suicide rate from 0.50 to 0.35 and survival
+  from 0.50 to 0.65; stage 2 was promoted.
+- **Commit:** pending
+
+## 2026-09-11
+
+### SARSA(lambda) baseline and Tasks 1–4 debug curriculum
+
+- **Change:** Added `agent_code/sarsa-lambda`, focused SARSA tests, a trained
+  checkpoint, raw Task 1–4 results, and notebook 05.
+- **Method:** Used linear accumulating-trace SARSA with the existing
+  action-relative features/safety mask. Cached each nonterminal transition
+  until the behaviour policy selected its actual next action. Trained a
+  30/20/20-round coin/classic/opponent curriculum and evaluated on separate
+  fixed seeds.
+- **Result:** Eight focused tests and a three-round smoke run passed. Held-out
+  Task 1 collected 50/50 coins; Task 2 averaged 34.4 crates without suicide;
+  Task 3 won 10/10 against passive opponents; Task 4 exposed a 0.9 suicide rate
+  and 0.2 win rate against rule-based agents. All learned weights stayed finite.
+- **Commit:** pending
+
+## 2026-09-15
+
+### Controlled continuation notebook for hunt-center DDQN
+
+- **Change:** Added `notebooks/08_continue_training_dddqn.ipynb` for a
+  1000-round continuation from the frozen `dueling_hunt_center_04` checkpoint.
+- **Method:** Prespecified an exact 40/30/20/10 opponent mixture in randomized
+  20-round microbatches, isolated the writable training copy, froze checkpoints
+  every 200 rounds, and separated paired 120-round development evaluation from
+  a one-shot final holdout. Made preparation, training, and development cells
+  idempotent through protocol, code, raw-stat, checkpoint-metadata, model-hash,
+  and manifest validation before reusing existing artifacts. Converted every
+  notebook Markdown cell to English for the final report version.
+- **Result:** The notebook is reproducible and execution-gated; no training or
+  evaluation is repeated when complete matching results exist, inconsistent or
+  incomplete artifacts fail explicitly, and the original/configuration/0000
+  checkpoint artifacts are never overwritten by the training or evaluation cells.
+  The one-shot 120-round final holdout for the preselected 0800 checkpoint scored
+  3.583 with a 0.308 win rate, 0.150 suicides, and 5.150 invalid actions per round;
+  its tournament metrics did not replicate the development gain, so the notebook
+  records the decision to retain the original `dueling_hunt_center_04`.
+- **Commit:** pending
+
+### Formal mixed-opponent benchmark notebook
+
+- **Change:** Added notebook 09 and a dedicated resumable runner for five
+  candidate agents against `external_feature_is_everything`,
+  `external_deep_learning_killer`, and `rule_based_agent`.
+- **Method:** Locked five previously unused seeds (64001–64005), 30 rounds per
+  seed, fixed candidate/opponent slots, and 150 rounds per candidate. Each raw
+  result receives a full-protocol provenance sidecar and SHA-256; analysis uses
+  a paired seed-cluster bootstrap rather than treating all rounds as independent.
+- **Result:** All 750 rounds completed without agent failures. `dueling_ddqn_agent`
+  had the highest score point estimate at 2.907 versus 2.820 for
+  `dueling_hunt_center_04`, but the paired seed-cluster difference was only
+  +0.087 with 95% CI [-0.513, 0.660]. The 0800 continuation again showed high
+  invalid actions (8.407/round), while both linear candidates were clearly
+  weaker. The report retains `dueling_hunt_center_04` for submission because the
+  small DDQN point-estimate lead does not overturn the broader locked evidence.
+- **Commit:** pending
 
 ## Entry template
 
