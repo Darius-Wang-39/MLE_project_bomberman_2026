@@ -72,6 +72,9 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Generated notebook exports
+notebooks/*.html
+
 # macOS metadata
 .DS_Store
 
@@ -115,9 +118,19 @@ screenshots/*.webm
 replays/
 results/
 
+# Full isolated experiment sandboxes
+experiments/runs/
+
+# Local submission archives (publish separately as release artifacts)
+agent_code/*.zip
 
 # Local adapters generated from the separate previous-cohort checkout
 agent_code/external_*/
+
+# Local aliases generated for previous-cohort agents
+agent_code/dqn/
+agent_code/dqn_5tile/
+agent_code/feature_is_everything/
 
 # Local isolated submission smoke-test directories
 agent_code/submission_smoke_agent/
