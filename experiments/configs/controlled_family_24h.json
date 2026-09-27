@@ -1,0 +1,42 @@
+{
+  "experiment": "controlled_family_24h",
+  "models": [
+    "controlled_linear_q",
+    "controlled_sarsa_lambda",
+    "controlled_ppo",
+    "controlled_dddqn_nod4",
+    "controlled_dddqn_d4"
+  ],
+  "shared_representation": "17 action-relative features from linear_q_agent",
+  "shared_reward": "agent_code.controlled_common.reward.transition_reward",
+  "shared_safety_mask": true,
+  "pretrained_weights": false,
+  "task_specific_inference_biases": false,
+  "d4": {
+    "controlled_linear_q": "none; action-relative weights are symmetry-sharing by construction",
+    "controlled_sarsa_lambda": "none; action-relative weights are symmetry-sharing by construction",
+    "controlled_ppo": "none",
+    "controlled_dddqn_nod4": "identity transform only",
+    "controlled_dddqn_d4": "one uniformly sampled D4 transform per replay sample"
+  },
+  "phase_a": [
+    {"name": "a1_coin", "scenario": "coin-heaven", "rounds": 200, "opponents": []},
+    {"name": "a2_solo", "scenario": "classic", "rounds": 100, "opponents": []},
+    {"name": "a3_peaceful", "scenario": "classic", "rounds": 80, "opponents": ["peaceful_agent", "peaceful_agent", "peaceful_agent"]}
+  ],
+  "task4_branches": [25, 50, 100],
+  "task4_training_opponents": ["rule_based_agent", "rule_based_agent", "rule_based_agent"],
+  "training_seeds": [71001, 72001, 73001],
+  "tiers": {"1": 1, "2": 2, "3": 3},
+  "evaluation": {
+    "task4_curve_rounds": 20,
+    "capability_rounds": 10,
+    "mixed_generalization_tier3_only": true
+  },
+  "primary_contrasts": [
+    "controlled_dddqn_nod4 - controlled_ppo",
+    "controlled_dddqn_nod4 - controlled_linear_q",
+    "controlled_dddqn_nod4 - controlled_sarsa_lambda",
+    "controlled_dddqn_d4 - controlled_dddqn_nod4"
+  ]
+}

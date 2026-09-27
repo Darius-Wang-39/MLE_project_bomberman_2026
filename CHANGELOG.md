@@ -12,6 +12,34 @@ Each entry records:
 - **Result**: measurable outcome or current status.
 - **Commit**: the related Git commit, added after committing when practical.
 
+## 2026-09-27
+
+### Five-family equal-budget comparison and D4 ablation
+
+- **Change:** Added isolated controlled Linear Q, SARSA(lambda), PPO, DDDQN-no-D4,
+  and DDDQN-D4 agents plus a resumable three-tier training/evaluation runner.
+- **Method:** All five learners started from scratch and shared the original
+  17 action-relative features, safety mask, event reward, shaping, curriculum,
+  lineups and evaluation seeds. Three training seeds each received a 380-round
+  foundation curriculum and independent 25/50/100-round rule-agent branches.
+  The DDDQN pair used identical initial conditions and separate exploration,
+  replay and augmentation RNG streams; only replay-time D4 differed.
+- **Result:** At the equal-budget anchor, DDDQN-D4 led Task 2/3/4 with 111.77
+  crates, 2.07 kills and 3.67 score per round; DDDQN-no-D4 was second at
+  105.40/1.33/3.40. Naive 100-round rule continuation regressed both DDDQNs,
+  revealing forgetting rather than monotonic headroom. On the held-out mixed
+  lineup, their B100 scores were 5.05/4.10 versus at most 2.85 for the other
+  families. Mean action latency remained about 1 ms. Full results and the
+  report-ready interpretation are under `results/controlled_family_24h/`.
+- **Validation:** Completed 8,325 training and 2,400 evaluation rounds. Checked
+  all 90 training records, 165 evaluation records and 90 checkpoint hashes;
+  32 existing learner tests plus three controlled-protocol/D4 checks passed.
+- **Decision:** Retain DDDQN as the main development platform because it learned
+  the strongest shared-budget multi-task policy at modest absolute cost. Treat
+  D4 as a useful early-data aid, not a guarantee of stable long continuation;
+  future training should add rehearsal/retention and multi-task checkpoint gates.
+- **Commit:** pending
+
 ## 2026-09-17
 
 ### 预跑前最小修复：DDQN 回合末经验去重，不更换比赛模型
