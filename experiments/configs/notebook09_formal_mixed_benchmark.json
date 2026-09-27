@@ -22,7 +22,8 @@
     "frozen_sarsa_best",
     "frozen_linear_q_final",
     "engine_aligned_0000",
-    "frozen_engine_aligned_0200"
+    "frozen_engine_aligned_0200",
+    "dueling_hunt_center_12"
   ],
   "opponents": [
     "external_feature_is_everything",

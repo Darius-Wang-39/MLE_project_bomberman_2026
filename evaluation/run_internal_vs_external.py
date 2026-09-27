@@ -14,6 +14,7 @@ RESULT_ROOT = PROJECT_ROOT / "results" / "external_benchmark" / "internal_challe
 INTERNAL_AGENTS = (
     "dueling_ddqn_agent",
     "dueling_hunt_center_04",
+    "dueling_hunt_center_12",
     "engine_aligned_0000",
     "frozen_engine_aligned_0200",
     "frozen_ddqn_day7",

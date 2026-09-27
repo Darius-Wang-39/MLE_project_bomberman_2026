@@ -21,10 +21,11 @@ LEGACY_CANDIDATES = (
     "frozen_sarsa_best",
     "frozen_linear_q_final",
 )
-CANDIDATES = LEGACY_CANDIDATES + (
+PREVIOUS_CANDIDATES = LEGACY_CANDIDATES + (
     "engine_aligned_0000",
     "frozen_engine_aligned_0200",
 )
+CANDIDATES = PREVIOUS_CANDIDATES + ("dueling_hunt_center_12",)
 OPPONENTS = (
     "external_feature_is_everything",
     "external_deep_learning_killer",
@@ -122,6 +123,8 @@ def run_or_reuse(candidate: str, seed: int, rounds: int, suite_protocol: dict) -
             raise FileNotFoundError(f"Result exists without provenance sidecar: {sidecar}")
         recorded = json.loads(sidecar.read_text(encoding="utf-8"))
         compatible_protocols = [suite_protocol]
+        if candidate in PREVIOUS_CANDIDATES:
+            compatible_protocols.append({**suite_protocol, "candidates": list(PREVIOUS_CANDIDATES)})
         if candidate in LEGACY_CANDIDATES:
             legacy_protocol = {**suite_protocol, "candidates": list(LEGACY_CANDIDATES)}
             compatible_protocols.append(legacy_protocol)
